@@ -81,5 +81,5 @@ alias ll="ls -larth"  #All files, "long" with reverse time sorting and human rea
 alias ubuntuupdate="sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get dist-upgrade -y && sudo apt-get autoremove"  #Fully Update Ubuntu
 alias zshconfig="vim ~/.zshrc"  #One command to edit this file from anywhere
 alias sourcezsh="source ~/.zshrc"  #One command to source this file from anywhere (. .zshrc equivilent from bash) 
-
+#Random Comment
 # }} 
