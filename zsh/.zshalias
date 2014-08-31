@@ -1,0 +1,22 @@
+#{{ Custom Alias's and Override alias's
+
+alias ll="ls -larth"  #All files, "long" with reverse time sorting and human readable sizes
+
+alias ubuntuupdate="sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get dist-upgrade -y && sudo apt-get autoremove"  #Fully Update Ubuntu
+
+alias configzsh="vim ~/.zshrc"  #One command to edit this file from anywhere
+
+alias sourcezsh="source ~/.zshrc"  #One command to source this file from anywhere (. .zshrc equivilent from bash) 
+
+alias carter_laptop="ssh -t carter_laptop 'exec zsh'" #Pulls from ~/.ssh/config
+
+alias apt-get install="sudo apt-get install $@" ##Currently Not Working
+
+alias gs="git status"
+
+alias ga="git add ." #Add current dir to git queue
+
+alias gc="git commit -m" #Commits current queue to git. Requires you to type a commit message
+
+alias gp="git push" #Pushes current queue to git repo.
+
