@@ -5,6 +5,7 @@ colorscheme koehler	" Sets the colorscheme to koehler
 filetype indent on	" Activates indenting for files
 filetype plugin on	" Activates plugins for filetypes
 syntax on		    " Syntax highlighting
+set t_Co=256
 set backspace=2 	" Backspace in insert mode works like normal editor
 set autoindent      " Auto indenting
 set smartindent		" Smart indenting
@@ -27,7 +28,7 @@ set shiftwidth=4	" 1 tab = 4 spaces
 set tabstop=4		" Helps above
 set smarttab		" Uses 'smart' tabs
 set laststatus=2	" 'Always show the status line'
-set statusline=%F%m%r%h%w[%L][%{&ff}]%y[%p%%][%04l,%04v]
+set noshowmode      " Prevents the 'mode' from showing (this is because aireline does this for us) 
 
 """""""""""""""
 " Below is a bunch of plugin crap
@@ -35,6 +36,36 @@ set statusline=%F%m%r%h%w[%L][%{&ff}]%y[%p%%][%04l,%04v]
 " for example 'blint/vim-airline' is https://github.com/bling/vim-airline
 """""""""""""""
 call plug#begin('~/.vim/plugged') " Starts useing vim-plug https://github.com/junegunn/vim-plug
-Plug 'bling/vim-airline' " 
+Plug 'bling/vim-airline' " This is a bar that shows current mode as well as ton of useful info
+Plug 'scrooloose/nerdtree' " Tree file navigator
+
 
 call plug#end()     " Stops using vim-plug
+
+let g:airline_theme='luna' " This sets the teeme of airline
+    " The below sets NERDTree to Ctrl+N
+map <C-n> :NERDTreeToggle<CR>
+
+""""""""""""""
+" Fixes Powerline Unicode Issues
+""""""""""""""
+if !exists('g:airline_symbols')
+      let g:airline_symbols = {}
+  endif
+
+" unicode symbols
+let g:airline_left_sep = '»'
+let g:airline_left_sep = '▶'
+let g:airline_right_sep = '«'
+let g:airline_right_sep = '◀'
+let g:airline_symbols.linenr = '␊'
+let g:airline_symbols.linenr = '␤'
+let g:airline_symbols.linenr = '¶'
+let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.paste = 'ρ'
+let g:airline_symbols.paste = 'Þ'
+let g:airline_symbols.paste = '∥'
+let g:airline_symbols.whitespace = 'Ξ'
+let g:airline_powerline_fonts = 1
+
+
