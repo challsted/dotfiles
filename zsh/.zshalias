@@ -20,3 +20,4 @@ alias gc="git commit -m" #Commits current queue to git. Requires you to type a c
 
 alias gp="git push" #Pushes current queue to git repo.
 
+alias top="htop" #Allows for htop to run if i type top instead
