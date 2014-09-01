@@ -10,8 +10,6 @@ alias sourcezsh="source ~/.zshrc"  #One command to source this file from anywher
 
 alias carter_laptop="ssh -t carter_laptop 'exec zsh'" #Pulls from ~/.ssh/config
 
-alias apt-get install="sudo apt-get install $@" ##Currently Not Working
-
 alias gs="git status"
 
 alias ga="git add ." #Add current dir to git queue
