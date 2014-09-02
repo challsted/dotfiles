@@ -29,8 +29,8 @@ source $ZSH/oh-my-zsh.sh
 # User added source files
 #########################
 
-export GIT_DIR=RePlAcE/mydotfiles #This will be replace by sed in the install script, OR you can replce it with where you have created your git directory.
-export CUSTZSH=$GIT_DIR/zsh
+export DIR=RePlAcE/mydotfiles
+export CUSTZSH=$DIR/zsh
 source $CUSTZSH/.zshalias
 source $CUSTZSH/.zshkeybinds
 source $CUSTZSH/.zshprompt
