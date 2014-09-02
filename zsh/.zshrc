@@ -29,8 +29,8 @@ source $ZSH/oh-my-zsh.sh
 # User added source files
 #########################
 
-export DIR=RePlAcE
-export CUSTZSH=$DIR/zsh
+DIR=RePlAcE/mydotfiles
+CUSTZSH=$DIR/zsh
 source $CUSTZSH/.zshalias
 source $CUSTZSH/.zshkeybinds
 source $CUSTZSH/.zshprompt

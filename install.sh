@@ -62,12 +62,15 @@ git clone --quiet https://github.com/hackinginformation/mydotfiles.git
 
 printf "$(tput setaf 1)Doing some background work$(tput sgr0)\n"
 cd $HOME
-sed -i "s,RePlAcE,$GIT_DIRECTORY,g" "$GIT_DIRECTORY/mydotfiles/zsh/.zshrc"
-ln -sf $GIT_DIRECTORY/mydotfiles/zsh/.zshrc ~/.zshrc #Symlinks for the top zsh file ".zshrc"
+cp $GIT_DIRECTORY/mydotfiles/zsh/.zshrc .
+sed -i "s,RePlAcE,$GIT_DIRECTORY,g" "$HOME/.zshrc"
 ln -sf $GIT_DIRECTORY/mydotfiles/vim/.vimrc ~/.vimrc #Symlinks for the .vimrc file
 mkdir -p ~/.vim/autoload # Preps for vim-plug to be installed
 curl --silent -fLos ~/.vim/autoload/plug.vim \ 
     https://raw.githubusercontent.com/junegun/vim-plug/master/plug.vim #Installs vim-plug to install remaining plugins
+
+printf "$(tput setaf 1)You are about to be presented with a vim script updater$(tput sgr0)\n"
+printf "$(tput setaf 1)Please wait for it to complete, then run :q two to exit and continue$(tput sgr0)\n"
 vim -c :PlugInstall #Calls vim-plug to install plugins ###BROKEN
 
 printf "$(tput setaf 1)You must change your shell to ZSH (Z-Shell) now$(tput sgr0)\n"
