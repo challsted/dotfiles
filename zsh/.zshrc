@@ -29,7 +29,7 @@ source $ZSH/oh-my-zsh.sh
 # User added source files
 #########################
 
-export GIT_DIR=RePlAcE
+export GIT_DIR=RePlAcE #This will be replace by sed in the install script, OR you can replce it with where you have created your git directory.
 export CUSTZSH=$HOME/$GIT_DIR/zsh
 source $CUSTZSH/.zshalias
 source $CUSTZSH/.zshkeybinds
