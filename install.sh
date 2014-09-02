@@ -24,23 +24,6 @@ while true; do # This simply prompts the user if they want the script to install
     esac
 done
 
-#if [[ ! -d ~/git/ ]] || [[ ! -d ~/.git/ ]]; then
-#    while true; do
-#        read -e -p "${RED}Do you want a reguler folder for git or a hidden folder? (R/h)${NORMAL}\n" -i "R" rh
-#        case $rh in
-#            [Rr]* ) if [[ ! -d ~/git/ ]]; then 
-#                GIT_DIRECTORY=mkdir ~/git/ && cd ~/$GIT_DIRECTORY/
-#            fi; 
-#                printf "${RED}Ok, I have created $GIT_DIRECTORY for you${NORMAL}\n"; break;;
-#            [Hh]* ) if [[ ! -d ~/.git/ ]]; then
-#                GIT_DIRECTORY=mkdir ~/.git/ && cd ~/$GIT_DIRECTORY/
-#            fi;
-#                printf "${RED}Ok, I have created $GIT_DIRECTORY for you"; break;;
-#            * ) printf "${RED}You must answer with \"R\", \"H\", or the full word(s) enter will auto accept regular${NORMAL}\n";;
-#        esac
-#    done
-#fi
-
 if [[ ! -d ~/git/ ]] || [[ ! -d ~/.git/ ]]; then
     GIT_DIRECTORY="$HOME/git/"
         read -p "Do you want a regular folder for git or a hidden folder? (R/h)" rh
@@ -71,10 +54,8 @@ done
 
 printf "${RED}Creating symlinks for you${NORMAL}\n"
 cd ~
-ln -sfv ~/$GIT_DIRECTORY/mymotfiles/zsh/.zshrc ~/.zshrc
-ln -sfv ~/$GIT_DIRECTORY/mydotfiles/vim/.vimrc ~/.vimrc
-
-source ~.zshrc && source ~/.vimrc
+ln -sf $GIT_DIRECTORY/mydotfiles/zsh/.zshrc ~/.zshrc
+ln -sf $GIT_DIRECTORY/mydotfiles/vim/.vimrc ~/.vimrc
 
 printf "${RED}Please restart your shell, once you reopen, please enter option \"0\"${NORMAL}\n"
 printf "${RED}If you do not, it will overwrite your your .zshrc file with a default one${NORMAL}\n"
