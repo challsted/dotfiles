@@ -4,7 +4,7 @@
 ######################
 
 # Path to your oh-my-zsh installation.
-export ZSH=$HOME/mydotfiles/.oh-my-zsh
+export ZSH=$HOME/.oh-my-zsh
 
 # Uncomment the following line to enable command auto-correction.
 ENABLE_CORRECTION="true"
@@ -29,7 +29,7 @@ source $ZSH/oh-my-zsh.sh
 # User added source files
 #########################
 
-export DIR=RePlAcE/mydotfiles
+export DIR=/home/chase/git/mydotfiles
 export CUSTZSH=$DIR/zsh
 source $CUSTZSH/.zshalias
 source $CUSTZSH/.zshkeybinds
