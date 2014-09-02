@@ -4,7 +4,7 @@
 ##Filename: install.sh
 ##Author: HackingInformation
 ##Contact: https://github.com/hackinginformation
-##Version 0.4 (This might be incorrect, as i sometimes forget to update)
+##Version 0.6 (This might be incorrect, as i sometimes forget to update)
 #
 # An attempt at makeing an install for the files I upload
 # YOU WILL NEED TO CHMOD THIS FILE (chmod +x install.sh)
