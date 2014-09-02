@@ -24,21 +24,31 @@ while true; do # This simply prompts the user if they want the script to install
     esac
 done
 
+#if [[ ! -d ~/git/ ]] || [[ ! -d ~/.git/ ]]; then
+#    while true; do
+#        read -e -p "${RED}Do you want a reguler folder for git or a hidden folder? (R/h)${NORMAL}\n" -i "R" rh
+#        case $rh in
+#            [Rr]* ) if [[ ! -d ~/git/ ]]; then 
+#                GIT_DIRECTORY=mkdir ~/git/ && cd ~/$GIT_DIRECTORY/
+#            fi; 
+#                printf "${RED}Ok, I have created $GIT_DIRECTORY for you${NORMAL}\n"; break;;
+#            [Hh]* ) if [[ ! -d ~/.git/ ]]; then
+#                GIT_DIRECTORY=mkdir ~/.git/ && cd ~/$GIT_DIRECTORY/
+#            fi;
+#                printf "${RED}Ok, I have created $GIT_DIRECTORY for you"; break;;
+#            * ) printf "${RED}You must answer with \"R\", \"H\", or the full word(s) enter will auto accept regular${NORMAL}\n";;
+#        esac
+#    done
+#fi
+
 if [[ ! -d ~/git/ ]] || [[ ! -d ~/.git/ ]]; then
-    while true; do
-        read -e -p "${RED}Do you want a reguler folder for git or a hidden folder? (R/h)${NORMAL}\n" -i "R" rh
-        case $rh in
-            [Rr]* ) if [[ ! -d ~/git/ ]]; then 
-                GIT_DIRECTORY=mkdir ~/git/ && cd ~/$GIT_DIRECTORY/
-            fi; 
-                printf "${RED}Ok, I have created $GIT_DIRECTORY for you${NORMAL}\n"; break;;
-            [Hh]* ) if [[ ! -d ~/.git/ ]]; then
-                GIT_DIRECTORY=mkdir ~/.git/ && cd ~/$GIT_DIRECTORY/
-            fi;
-                printf "${RED}Ok, I have created $GIT_DIRECTORY for you"; break;;
-            * ) printf "${RED}You must answer with \"R\", \"H\", or the full word(s) enter will auto accept regular${NORMAL}\n";;
-        esac
-    done
+    GIT_DIRECTORY="$HOME/git/"
+        read -p "Do you want a regular folder for git or a hidden folder? (R/h)" rh
+        if [ $rh == "H" ] || [ $rh == "h" ]; then
+            GIT_DIRECTORY="$HOME/.git/"
+        fi
+    mkdir -p $GIT_DIRECTORY && cd $GIT_DIRECTORY && pwd
+    printf "Ok, I have created $GIT_DIRECTORY for you.\n"
 fi
 
 printf "${RED}Im about to install \"Oh-My-Zsh\", if you want to look into this go to their github${NORMAL}\n"
