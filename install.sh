@@ -1,13 +1,13 @@
-#!/usr/bin/bash
+#!/bin/bash
 #
 # An attempt at makeing an install for the files I upload
 # YOU WILL NEED TO CHMOD THIS FILE (chmod +x install.sh)
 
 cd ~
 
-printf "You need to install git, zsh, and vim, if you havnt already"
-printf "This will only work on ubuntu based OS's currently"
-printf "Select \"n\" if you are not useing an ubuntu based OS"
+printf "You need to install git, zsh, and vim, if you havnt already\n"
+printf "This will only work on ubuntu based OS's currently\n"
+printf "Select \"n\" if you are not useing an ubuntu based OS\n"
 while true; do # This simply prompts the user if they want the script to install git, zsh and vim
     read -e -p "Would you like me to install them for you? (Y/n)" -i "Y" yn
     case $yn in
@@ -35,15 +35,15 @@ if [[ ! -d ~/git/ ]] || [[ ! -d ~/.git/ ]]; then
     done
 fi
 
-printf "Im about to install \"Oh-My-Zsh\", if you want to look into this go to their github"
-printf "https://github.com/robbyrussell/oh-my-zsh"
-printf "Installing Oh-My-Zsh now!"
+printf "Im about to install \"Oh-My-Zsh\", if you want to look into this go to their github\n"
+printf "https://github.com/robbyrussell/oh-my-zsh\n"
+printf "Installing Oh-My-Zsh now!\n"
 wget --no-check-certificate http://install.ohmyz.sh -O - | sh
 
-printf "Cloneing my dotfiles repo now"
+printf "Cloneing my dotfiles repo now\n"
 git clone https://github.com/hackinginformation/mydotfiles.git
 
-printf "You must change your shell to ZSH (Z-Shell) now"
+printf "You must change your shell to ZSH (Z-Shell) now\n"
 while true; do 
     read -e -p "Would you like me to change this for you? (Y/n)" -i "Y" yn
     case $yn in
@@ -53,12 +53,13 @@ while true; do
     esac
 done
 
-printf "Creating symlinks for you"
+printf "Creating symlinks for you\n"
 cd ~
 ln -sfv ~/$GIT_DIRECTORY/mymotfiles/zsh/.zshrc ~/.zshrc
 ln -sfv ~/$GIT_DIRECTORY/mydotfiles/vim/.vimrc ~/.vimrc
 
 source ~.zshrc && source ~/.vimrc
 
-printf "Please restart your shell"
+printf "Please restart your shell, once you reopen, please enter option \"0\"\n"
+printf "If you do not, it will overwrite your your .zshrc file with a default one\n"
 exit
