@@ -62,7 +62,7 @@ git clone --quiet https://github.com/hackinginformation/mydotfiles.git
 
 printf "$(tput setaf 1)Doing some background work$(tput sgr0)\n"
 cd $HOME
-sed -i "s,GIT_DIR=RePlAcE,GIT_DIR=$GIT_DIRECTORY,g" "$GIT_DIRECTORY/mydotfiles/zsh/.zshrc"
+sed -i "s,RePlAcE,$GIT_DIRECTORY,g" "$GIT_DIRECTORY/mydotfiles/zsh/.zshrc"
 ln -sf $GIT_DIRECTORY/mydotfiles/zsh/.zshrc ~/.zshrc #Symlinks for the top zsh file ".zshrc"
 ln -sf $GIT_DIRECTORY/mydotfiles/vim/.vimrc ~/.vimrc #Symlinks for the .vimrc file
 mkdir -p ~/.vim/autoload # Preps for vim-plug to be installed
