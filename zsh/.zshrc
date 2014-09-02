@@ -29,7 +29,8 @@ source $ZSH/oh-my-zsh.sh
 # User added source files
 #########################
 
-export CUSTZSH=$HOME/$GIT_DIRECTORY/zsh
+export GIT_DIR=<replace>
+export CUSTZSH=$HOME/$GIT_DIR/zsh
 source $CUSTZSH/.zshalias
 source $CUSTZSH/.zshkeybinds
 source $CUSTZSH/.zshprompt
