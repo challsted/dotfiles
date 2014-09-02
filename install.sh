@@ -4,7 +4,7 @@
 ##Filename: install.sh
 ##Author: HackingInformation
 ##Contact: https://github.com/hackinginformation
-##Version 0.10 (This might be incorrect, as i sometimes forget to update)
+##Version 0.11 (This might be incorrect, as i sometimes forget to update)
 #
 # An attempt at makeing an install for the files I upload
 # YOU WILL NEED TO CHMOD THIS FILE (chmod +x install.sh)
@@ -34,7 +34,7 @@ printf "$(tput setaf 1)${BLUE}You need to install git, zsh, wget, curl and vim, 
 printf "$(tput setaf 1)This will only work on ubuntu based OS's currently$(tput sgr0)\n"
 printf "$(tput setaf 1)Select \"n\" if you are not useing an ubuntu based OS$(tput sgr0)\n"
 while true; do 
-    read -e -p "$(tput setaf 1)Would you like me to install them for you? (Y/n)$(tput sgr0)" -i "Y" yn
+    read -p "$(tput setaf 1)Would you like me to install them for you? (Y/n)$(tput sgr0)" -i "Y" yn
     case $yn in
         [Yy]* ) sudo apt-get -y install git zsh wget curl vim> /dev/null;
             printf "$(tput setaf 1)Ok I am installing git, zsh and vim for you$(tput sgr0)\n"; break;; 
@@ -66,13 +66,13 @@ sed -i "s,RePlAcE,$GIT_DIRECTORY,g" "$GIT_DIRECTORY/mydotfiles/zsh/.zshrc"
 ln -sf $GIT_DIRECTORY/mydotfiles/zsh/.zshrc ~/.zshrc #Symlinks for the top zsh file ".zshrc"
 ln -sf $GIT_DIRECTORY/mydotfiles/vim/.vimrc ~/.vimrc #Symlinks for the .vimrc file
 mkdir -p ~/.vim/autoload # Preps for vim-plug to be installed
-curl -fLos ~/.vim/autoload/plug.vim \ 
+curl --silent -fLos ~/.vim/autoload/plug.vim \ 
     https://raw.githubusercontent.com/junegun/vim-plug/master/plug.vim #Installs vim-plug to install remaining plugins
-#vim -c :PlugInstall #Calls vim-plug to install plugins ###BROKEN
+vim -c :PlugInstall #Calls vim-plug to install plugins ###BROKEN
 
 printf "$(tput setaf 1)You must change your shell to ZSH (Z-Shell) now$(tput sgr0)\n"
 while true; do 
-    read -e -p "$(tput setaf 1)Would you like me to change this for you? (Y/n)$(tput sgr0)" -i "Y" yn
+    read -p "$(tput setaf 1)Would you like me to change this for you? (Y/n)$(tput sgr0)" -i "Y" yn
     case $yn in
         [Yy]* ) chsh -s $(which zsh);
             printf "$(tput setaf 1)Your shell is now ZSH!\n"; break;;

@@ -29,7 +29,7 @@ source $ZSH/oh-my-zsh.sh
 # User added source files
 #########################
 
-export DIR=/home/chase/git/mydotfiles
+export DIR=RePlAcE
 export CUSTZSH=$DIR/zsh
 source $CUSTZSH/.zshalias
 source $CUSTZSH/.zshkeybinds
