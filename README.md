@@ -29,5 +29,15 @@ Currently I'm useing only (installed with the [install script](install.sh))
 
 & [vim-plug][plug] for the few vim plugins im using
 
+## Contact the author
+
+Twitter [@urlordandmaster][tweet1]
+Twitter [@hackinginfo][tweet2]
+IRC     irc.freenode.net##ChaseYourTail
+Blog    [masammich.wordpress.org][blog]
+
 [plug]:         https://github.com/junegunn/vim-plug
 [zsh]:          https://github.com/robbyrussell/oh-my-zsh
+[tweet1]:       https://twitter.com/urlordandmaster
+[tweet2]:       https://twitter.com/MaSammichs
+[blog]:         http://masammich.wordpress.com/
