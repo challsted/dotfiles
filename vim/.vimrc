@@ -1,34 +1,35 @@
 """""""""""""""
-" Stuff to make vim easier, all commented so remove what you dont like
+" Stuff to make vim easier, all commented so remove what you don't like
 """""""""""""""
-colorscheme koehler	" Sets the colorscheme to koehler
+
+syntax enable
+set background=dark
+color scheme solarized
+set t_Co=16
 filetype indent on	" Activates indenting for files
-filetype plugin on	" Activates plugins for filetypes
-syntax on		    " Syntax highlighting
-set t_Co=256
+filetype plugin on	" Activates plugins for file types
 set backspace=2 	" Backspace in insert mode works like normal editor
 set autoindent      " Auto indenting
 set smartindent		" Smart indenting
 set number          " Line numbers
-set nobackup        " Get rid of anoying ~file
+set nobackup        " Get rid of annoying ~file
 set nowb		    " Helps above
 set noswapfile		" Helps above
-set cursorline		" Show location of cursor useing a horizontal line
+set cursorline		" Show location of cursor using a horizontal line
 set wildmenu		" Shows auto completed menu's
 set wildmode=list:longest " Make 'wildmenu' behave a little nicer
 set ruler 		    " Shows current position
 set ignorecase		" Ignores case when searching '/searchparam'
 set smartcase		" Even with ignore case, still try to be smart about it
 set hlsearch		" Highlights search results
-set showmatch		" Shows matching bracket when hilighting with cursor
-set background=dark	" For dark xterm's
-set encoding=utf8	" Sets default encodeing to utf8, and en_US as default language
+set showmatch		" Shows matching bracket when highlighting with cursor
+set encoding=utf8	" Sets default encoding to utf8, and en_US as default language
 set expandtab		" Turns tabs into spaces
 set shiftwidth=4	" 1 tab = 4 spaces
 set tabstop=4		" Helps above
 set smarttab		" Uses 'smart' tabs
 set laststatus=2	" 'Always show the status line'
-set noshowmode      " Prevents the 'mode' from showing (this is because aireline does this for us) 
+set noshowmode      " Prevents the 'mode' from showing (this is because airline does this for us) 
 set spell spelllang=en_us " Turns on vim spell checker
 setlocal spell spelllang=en_us "Changes vim spell to only the local buffer
 
@@ -42,16 +43,16 @@ setlocal spell spelllang=en_us "Changes vim spell to only the local buffer
 """""""""""""""
 " Below is a bunch of plugin crap
 " The syntax is 'Plug' single quote name of author/vim-plugin single quote. So
-" for example 'blint/vim-airline' is https://github.com/bling/vim-airline
+" for example 'bling/vim-airline' is https://github.com/bling/vim-airline
 """""""""""""""
-call plug#begin('~/.vim/plugged') " Starts useing vim-plug https://github.com/junegunn/vim-plug
+call plug#begin('~/.vim/plugged') " Starts using vim-plug https://github.com/junegunn/vim-plug
 Plug 'bling/vim-airline' " This is a bar that shows current mode as well as ton of useful info
 Plug 'scrooloose/nerdtree' " Tree file navigator
-
+Plug 'altercation/vim-colors-solarized' " Solarized color scheme for vim
 
 call plug#end()     " Stops using vim-plug
 
-let g:airline_theme='luna' " This sets the teeme of airline
+let g:airline_theme='luna' " This sets the theme of airline
     " The below sets NERDTree to Ctrl+N
 map <C-n> :NERDTreeToggle<CR>
 
@@ -77,4 +78,7 @@ let g:airline_symbols.paste = '∥'
 let g:airline_symbols.whitespace = 'Ξ'
 let g:airline_powerline_fonts = 1
 
-
+" Fix solorized colors
+let g:solarized_termcolors=16
+let g:solarized_visibility = "high"
+let g:solarized_contrast = "high"

@@ -39,3 +39,7 @@ function mkdircd () {
    eval cd "\"\$$H\"";
 }
 
+#Attempts to set xterm to xterm-256 colors
+case "$TERM" in
+    xterm*) TERM=xterm-256color
+esac
