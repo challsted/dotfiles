@@ -13,11 +13,13 @@ Please note if you use anything here, its a work in progress, and i change stuff
 
 First install git, then run: 
 
-`git clone https://github.com/hackinginformation/mydotfiles.git`
+`git clone https://github.com/hackinginformation/dotfiles.git`
 
 If you want, I also have a inprogress installer that currently only works on ubuntu with bash running. 
 
-`wget -O - https://raw.githubusercontent.com/hackinginformation/mydotfiles/master/install.sh | sh`
+WARNING The WGET is currently unstable!
+
+`wget -O - https://raw.githubusercontent.com/hackinginformation/dotfiles/master/install.sh | sh`
 
 I plan to extend this to fedora and arch soon.
 
