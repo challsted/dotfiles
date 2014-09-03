@@ -2,10 +2,9 @@
 " Stuff to make vim easier, all commented so remove what you don't like
 """""""""""""""
 
-syntax enable
+set t_Co=256
+syntax on
 set background=dark
-color scheme solarized
-set t_Co=16
 filetype indent on	" Activates indenting for files
 filetype plugin on	" Activates plugins for file types
 set backspace=2 	" Backspace in insert mode works like normal editor
@@ -38,7 +37,8 @@ setlocal spell spelllang=en_us "Changes vim spell to only the local buffer
 """""""""""""""
 " Below is remaped keys
 """"""""""""""
-
+nnoremap <leader><space> :nohlsearch<CR>
+let mapleader=","       " leader is comma
 
 """""""""""""""
 " Below is a bunch of plugin crap
@@ -78,7 +78,7 @@ let g:airline_symbols.paste = '∥'
 let g:airline_symbols.whitespace = 'Ξ'
 let g:airline_powerline_fonts = 1
 
-" Fix solorized colors
-let g:solarized_termcolors=16
-let g:solarized_visibility = "high"
-let g:solarized_contrast = "high"
+" Fix solarized colors
+"let g:solarized_termcolors=16
+"let g:solarized_visibility = "high"
+"let g:solarized_contrast = "high"
