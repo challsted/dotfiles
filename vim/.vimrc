@@ -29,6 +29,15 @@ set tabstop=4		" Helps above
 set smarttab		" Uses 'smart' tabs
 set laststatus=2	" 'Always show the status line'
 set noshowmode      " Prevents the 'mode' from showing (this is because aireline does this for us) 
+set spell spelllang=en_us " Turns on vim spell checker
+setlocal spell spelllang=en_us "Changes vim spell to only the local buffer
+
+
+
+"""""""""""""""
+" Below is remaped keys
+""""""""""""""
+
 
 """""""""""""""
 " Below is a bunch of plugin crap
