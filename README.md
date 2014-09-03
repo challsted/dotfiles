@@ -35,7 +35,7 @@ Twitter [@urlordandmaster][tweet1]
 
 Twitter [@hackinginfo][tweet2]
 
-IRC     irc.freenode.net##ChaseYourTail
+IRC     irc.freenode.net ##ChaseYourTail
 
 Blog    [masammich.wordpress.org][blog]
 
