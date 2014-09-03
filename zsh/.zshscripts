@@ -8,7 +8,7 @@ insert_sudo () {
 	zle -N insert-sudo insert_sudo
 	bindkey "^[s" insert-sudo
 
-#Explode the following formats by typeing ex $1
+#Explode the following formats by typing ex $1
 ex () {
  if [ -f $1 ] ; then
   case $1 in
@@ -40,6 +40,7 @@ function mkdircd () {
 }
 
 #Attempts to set xterm to xterm-256 colors
+#This works for xfce4-terminal
 case "$TERM" in
     xterm*) TERM=xterm-256color
 esac
