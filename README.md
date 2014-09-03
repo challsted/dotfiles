@@ -23,7 +23,7 @@ I plan to extend this to fedora and arch soon.
 
 ## Plugins
 
-Currently I'm useing only (installed with the [install script][installscript])
+Currently I'm useing only (installed with the [install script](install.sh))
 
 [Oh-My-ZSH][zsh] for pieces of my config, but i might be removeing this soon as i replace parts of it
 
@@ -31,4 +31,3 @@ Currently I'm useing only (installed with the [install script][installscript])
 
 [plug]:         https://github.com/junegunn/vim-plug
 [zsh]:          https://github.com/robbyrussell/oh-my-zsh
-[installscript] install.sh
