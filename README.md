@@ -31,9 +31,9 @@ Currently I'm useing only (installed with the [install script](install.sh))
 
 ## Contact the author
 
-Twitter [@urlordandmaster][tweet1]
+Personal      Twitter [@urlordandmaster][tweet1]
 
-Twitter [@hackinginfo][tweet2]
+Professional  Twitter [@hackinginfo][tweet2]
 
 IRC     irc.freenode.net ##ChaseYourTail
 
