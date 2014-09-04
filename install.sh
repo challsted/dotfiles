@@ -54,12 +54,12 @@ printf "${WHITE}go to their github https://github.com/robbyrussell/oh-my-zsh${NO
 printf "${WHITE}Installing Oh-My-Zsh now!${NORMAL}\n"
 wget --no-check-certificate http://install.ohmyz.sh >/dev/null 2>&1 | sh 
 printf "${WHITE}Cloneing my dotfiles repo now${NORMAL}\n"
-git clone --quiet https://github.com/hackinginformation/mydotfiles.git
+git clone --quiet https://github.com/hackinginformation/dotfiles.git
 printf "${WHITE}Doing some background work${NORMAL}\n"
 cd $HOME
-cp $GIT_DIRECTORY/mydotfiles/zsh/.zshrc .
+cp $GIT_DIRECTORY/dotfiles/zsh/.zshrc .
 sed -i "s,RePlAcE,$GIT_DIRECTORY,g" "$HOME/.zshrc"
-ln -sf $GIT_DIRECTORY/mydotfiles/vim/.vimrc ~/.vimrc #Symlinks for the .vimrc file
+ln -sf $GIT_DIRECTORY/dotfiles/vim/.vimrc ~/.vimrc #Symlinks for the .vimrc file
 mkdir -p ~/.vim/autoload # Preps for vim-plug to be installed
 curl --silent -fLo ~/.vim/autoload/plug.vim \
         https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
