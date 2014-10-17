@@ -30,8 +30,6 @@ set smarttab		" Uses 'smart' tabs
 set laststatus=2	" Always show the status line
 set showtabline=2   " Always display the tabline, even if there is only 1 tab
 set noshowmode      " Prevents the 'mode' from showing (this is because airline does this for us) 
-set spell spelllang=en_us " Turns on vim spell checker
-setlocal spell spelllang=en_us "Changes vim spell to only the local buffer
 
 """""""""""""""
 " Below is remaped keys
