@@ -1,8 +1,10 @@
-####################
-# User configuration
-####################
+# To see the key combo you want to use just do:
+# cat > /dev/null
+# And press it
 
-### {{ Keybindings for VI mode
+#Below was copied during search to setup vi keys in zsh
+
+# Keybindings for VI mode
 case "$TERM" in
  *xterm*|screen-256color)
  # alt + arrows
@@ -76,4 +78,4 @@ case "$TERM" in
  bindkey -M vicmd '\e[6~' history-beginning-search-forward # PageDown
 ;;
 esac
-### }}
+

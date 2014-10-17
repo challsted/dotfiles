@@ -27,12 +27,11 @@ set expandtab		" Turns tabs into spaces
 set shiftwidth=4	" 1 tab = 4 spaces
 set tabstop=4		" Helps above
 set smarttab		" Uses 'smart' tabs
-set laststatus=2	" 'Always show the status line'
+set laststatus=2	" Always show the status line
+set showtabline=2   " Always display the tabline, even if there is only 1 tab
 set noshowmode      " Prevents the 'mode' from showing (this is because airline does this for us) 
 set spell spelllang=en_us " Turns on vim spell checker
 setlocal spell spelllang=en_us "Changes vim spell to only the local buffer
-
-
 
 """""""""""""""
 " Below is remaped keys
@@ -48,7 +47,8 @@ let mapleader=","       " leader is comma
 call plug#begin('~/.vim/plugged') " Starts using vim-plug https://github.com/junegunn/vim-plug
 Plug 'bling/vim-airline' " This is a bar that shows current mode as well as ton of useful info
 Plug 'scrooloose/nerdtree' " Tree file navigator
-Plug 'altercation/vim-colors-solarized' " Solarized color scheme for vim
+Plug 'tomasr/molokai' " Color scheme 'Molokai' for vim, since solarized is so touchy....
+Plug 'godlygeek/csapprox' " 
 
 call plug#end()     " Stops using vim-plug
 
@@ -78,7 +78,10 @@ let g:airline_symbols.paste = '∥'
 let g:airline_symbols.whitespace = 'Ξ'
 let g:airline_powerline_fonts = 1
 
-" Fix solarized colors
-"let g:solarized_termcolors=16
-"let g:solarized_visibility = "high"
-"let g:solarized_contrast = "high"
+"""""""""""""
+" End Powerline Symbol Fix
+"""""""""""""
+
+let g:molokai_original = 1 " Origional Monokai background
+let g:rehash256 = 1 " 'more like the gui 256 scheme'
+
