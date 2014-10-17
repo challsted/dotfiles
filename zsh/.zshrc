@@ -29,11 +29,10 @@ source $ZSH/oh-my-zsh.sh
 # User added source files
 #########################
 
-DIR=RePlAcE/mydotfiles
-CUSTZSH=$DIR/zsh
-source $CUSTZSH/.zshalias
-source $CUSTZSH/.zshkeybinds
-source $CUSTZSH/.zshprompt
-source $CUSTZSH/.zshscripts
-source $CUSTZSH/.zshsetopts
-source $CUSTZSH/.zshssh
+CUSTZSH=RePlAcE/mydotfiles/zsh
+source $CUSTZSH/.alias.zsh
+source $CUSTZSH/.keybind.zsh
+source $CUSTZSH/.prompt.zsh
+source $CUSTZSH/.script.zsh
+source $CUSTZSH/.opt.zsh
+source $CUSTZSH/.ssh.zsh
