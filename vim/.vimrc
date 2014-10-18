@@ -4,7 +4,8 @@
 
 set t_Co=256
 syntax on
-set background=dark
+colorscheme molokai
+highlight Normal ctermfg=grey ctermbg=black
 filetype indent on	" Activates indenting for files
 filetype plugin on	" Activates plugins for file types
 set backspace=2 	" Backspace in insert mode works like normal editor
