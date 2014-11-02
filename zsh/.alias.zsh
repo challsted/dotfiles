@@ -16,6 +16,8 @@ alias sourcezsh="source ~/.zshrc"  #One command to source the main config file f
 
 #SSH Stuff
 alias carter_laptop="ssh -t carter_laptop 'exec zsh'" #Pulls from ~/.ssh/config
+alias drop_roman="ssh drop_roman"
+alias chase_laptop="ssh chase_laptop"
 
 #GIT Stuff
 alias gs="git status"
@@ -36,3 +38,6 @@ export PATH=/home/chase/bin/:$PATH
 #Exercism Stuff
 alias exef="exercism fetch"
 alias exes="exercism submit $2"
+
+#Ruby Stuff
+alias be="bundle exec"

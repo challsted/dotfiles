@@ -11,6 +11,7 @@ filetype plugin on	" Activates plugins for file types
 set backspace=2 	" Backspace in insert mode works like normal editor
 set autoindent      " Auto indenting
 set smartindent		" Smart indenting
+set pastetoggle=<f5>
 set number          " Line numbers
 set nobackup        " Get rid of annoying ~file
 set nowb		    " Helps above
@@ -36,7 +37,7 @@ set noshowmode      " Prevents the 'mode' from showing (this is because airline 
 " Below is remaped keys
 """"""""""""""
 nnoremap <leader><space> :nohlsearch<CR>
-let mapleader=","       " leader is comma
+let mapleader=" "       " leader is comma
 
 """""""""""""""
 " Below is a bunch of plugin crap
@@ -83,4 +84,6 @@ let g:airline_powerline_fonts = 1
 
 let g:molokai_original = 1 " Origional Monokai background
 let g:rehash256 = 1 " 'more like the gui 256 scheme'
+
+
 
