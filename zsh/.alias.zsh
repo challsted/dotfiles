@@ -14,10 +14,14 @@ alias ubuntuupdate="sudo apt-get update && sudo apt-get upgrade -y && sudo apt-g
 alias configzsh="vim ~/.zshrc"  #One command to edit main config file from anywhere
 alias sourcezsh="source ~/.zshrc"  #One command to source the main config file from anywhere (. .zshrc equivilent from bash) 
 
-#SSH Stuff
-alias carter_laptop="ssh -t carter_laptop 'exec zsh'" #Pulls from ~/.ssh/config
+#SSH Stuff -- Pulls all of the alias from ~/.ssh/config
+#For safety reasons, im not putting that info here
+alias sshx="ssh -c arcfour,blowfish -XC" #Add a connection and a thing you want forwarded to user this
+alias carter_laptop="ssh -t carter_laptop 'exec zsh'" 
 alias drop_roman="ssh drop_roman"
 alias chase_laptop="ssh chase_laptop"
+alias chase_pi="ssh chase_pi"
+alias chase_xpi="ssh -c arcfour,blowfish -XC chase_pi" #Add a program after chase_xpi to have x11 forwarded accrost it
 
 #GIT Stuff
 alias gs="git status"
