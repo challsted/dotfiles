@@ -36,8 +36,9 @@ set noshowmode      " Prevents the 'mode' from showing (this is because airline 
 """""""""""""""
 " Below is remaped keys
 """"""""""""""
-nnoremap <leader><space> :nohlsearch<CR>
 let mapleader=" "       " leader is comma
+" Press Space to turn off highlighting and clear any message already displayed.
+nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
 
 """""""""""""""
 " Below is a bunch of plugin crap
