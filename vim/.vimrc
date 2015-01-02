@@ -50,6 +50,7 @@ Plug 'bling/vim-airline' " This is a bar that shows current mode as well as ton 
 Plug 'scrooloose/nerdtree' " Tree file navigator
 Plug 'tomasr/molokai' " Color scheme 'Molokai' for vim, since solarized is so touchy....
 Plug 'godlygeek/csapprox' " 
+Plug 'scrooloose/syntastic' " Automatic Syntax Checking
 
 call plug#end()     " Stops using vim-plug
 
@@ -86,5 +87,21 @@ let g:airline_powerline_fonts = 1
 let g:molokai_original = 1 " Origional Monokai background
 let g:rehash256 = 1 " 'more like the gui 256 scheme'
 
+"""""""""""""
+" Syntastic Plugin Checkers
+"""""""""""""
+
+" C++
+let g:syntastic_cpp_compiler = "g++" " Use g++ as compiler
+let g:syntastic_cpp_check_header = 1 " Allows syntastic to check header files
+let g:syntastic_cpp_compiler_options = ' -std=c++11 -Wall'
+" /C++
+let g:syntastic_check_on_open = 1 " Check on file open
+let g:syntastic_check_on_wq = 0 " Dont check on :wq
+let g:syntastic_enable_signs = 1 " Enable symbols listed below 
+let g:syntastic_error_symbol = "X"
+let g:syntastic_style_error_symbol = ">"
+let g:syntastic_warning_symbol = "!"
+let g:syntastic_style_warning_symbol = ">"
 
 
