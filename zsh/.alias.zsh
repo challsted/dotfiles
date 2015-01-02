@@ -45,3 +45,7 @@ alias exes="exercism submit $2"
 
 #Ruby Stuff
 alias be="bundle exec"
+
+#mps-youtube
+alias youtube="mpsyt"
+alias youtube-update="sudo pip install mps-youtube --upgrade"
