@@ -49,3 +49,6 @@ alias be="bundle exec"
 #mps-youtube
 alias youtube="mpsyt"
 alias youtube-update="sudo pip install mps-youtube --upgrade"
+
+#CairoDock fix
+alias killcairo="ps -ef | grep cairo | grep -v 'cairo-dock -o' | grep -v grep | awk '{print $2}' xargs kill`
