@@ -1,5 +1,5 @@
 "If viewing this file and it appears like with several '+-- X lines: ...' you
-"can expand them easily by hovering over them and typeing ', ' <leader><space>
+"can expand them easily by hovering over them and typeing ', ' or <leader><space>
 "or just 'za'
 
 "Colors {{{
@@ -56,7 +56,7 @@ set foldenable      " Enables Folding
 set foldlevelstart=10 " Opens the first 10 folds by default
 set foldnestmax=10  " 10 nested fold max
 set foldmethod=indent " Tells vim to fold based on indent level
-set modeline      " Turn ModeLine On
+set modeline        " Turn ModeLine On
 set modelines=1     " Checks last line for file specific commands via modeline
 " }}}
 " Key Remaps {{{
