@@ -29,10 +29,10 @@ source $ZSH/oh-my-zsh.sh
 # User added source files
 #########################
 
-CUSTZSH=RePlAcE/mydotfiles/zsh
+CUSTZSH=~/git/dotfiles/zsh # You might need to change this
 source $CUSTZSH/.alias.zsh
 source $CUSTZSH/.keybind.zsh
 source $CUSTZSH/.prompt.zsh
 source $CUSTZSH/.script.zsh
-source $CUSTZSH/.opt.zsh
+source $CUSTZSH/.opts.zsh
 source $CUSTZSH/.ssh.zsh
