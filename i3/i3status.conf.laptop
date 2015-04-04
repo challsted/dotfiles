@@ -12,8 +12,9 @@ general {
 }
 
 order += "wireless wlan0"
+order += "ethernet eth0"
+order += "ethernet eth1"
 order += "disk /"
-order += "battery 1"
 order += "load"
 order += "tztime local"
 
@@ -22,8 +23,14 @@ wireless wlan0 {
         format_down = "W: down"
 }
 
-battery 1 {
-        format = "%status %percentage %remaining"
+ethernet eth0 {
+    format_up = "E: %ip (%speed)"
+    format_down = "E: Down"
+}
+
+ethernet eth1 {
+    format_up = "E: %ip (%speed)"
+    format_down = "E: Down"
 }
 
 tztime local {
