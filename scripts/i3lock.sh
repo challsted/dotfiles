@@ -1,7 +1,7 @@
 #!/bin/sh
 
 lock() {
-    i3lock -i ~/Pictures/wallpaper/anime-bleach_271508.png -u -p default -n && killall i3-nagbar
+    i3lock -i ~/Pictures/wallpaper/anime-bleach_271508.png -u -p default n
 }
 
 case "$1" in
