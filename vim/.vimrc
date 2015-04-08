@@ -63,7 +63,7 @@ set modelines=1     " Checks last line for file specific commands via modeline
 let mapleader=","       " leader is comma
 " Press Space to turn off highlighting and clear any message already displayed.
 nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
-" Space open/closes folds
+" Leader-space open/closes folds
 nnoremap <leader><space> za
 " Highlights last inserted text from insert mode in visual mode
 nnoremap gV `[v`]
@@ -74,10 +74,11 @@ nnoremap gV `[v`]
 " VimPlug {{{
 call plug#begin('~/.vim/plugged') " Starts using vim-plug https://github.com/junegunn/vim-plug
 Plug 'bling/vim-airline' " This is a bar that shows current mode as well as ton of useful info
-Plug 'scrooloose/nerdtree' " Tree file navigator
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' } " Tree file navigator
 Plug 'tomasr/molokai' " Color scheme 'Molokai' for vim, since solarized is so touchy....
 Plug 'godlygeek/csapprox' " 
 Plug 'scrooloose/syntastic' " Automatic Syntax Checking
+Plug 'klen/python-mode', { 'for': 'python' } "Python edior on crack
 call plug#end()     " Stops using vim-plug
 " }}}
 let g:airline_theme='luna' " This sets the theme of airline
