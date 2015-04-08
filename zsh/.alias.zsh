@@ -3,12 +3,15 @@
 ###################
 
 #Directory Stuff
-alias ll="ls -larth"  #All files, "long" with reverse time sorting and human readable sizes
-alias lh="ls -d .*" # ONLY show hidden files/folders this is genius (stolen) 
+alias ll="ls -larth --colors=auto"  #All files, "long" with reverse time sorting and human readable sizes; added colros for terminals that dont auto do this
+alias lh="ls -d .* --color=auto" # ONLY show hidden files/folders this is genius (stolen); added colors for terminals that dont auto do this
 alias tree="ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'" #Stolen from the Internet, makes a tree out of current dirs 
 
 #OS Specific 
 alias ubuntuupdate="sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get dist-upgrade -y && sudo apt-get autoremove"  #Fully Update Ubuntu, assumes yes, except for auto-remove
+alias ubinstall="sudo apt-get install $2" #install stuff with 1 word prefix
+alias ubremove="sudo apt-get remove $2" #Remove stuff with 1 word prefix
+
 
 #ZSH Commands to make editing stuff easier
 alias configzsh="vim ~/.zshrc"  #One command to edit main config file from anywhere
@@ -26,8 +29,10 @@ alias chase_xpi="ssh -c arcfour,blowfish -XC chase_pi" #Add a program after chas
 #GIT Stuff
 alias gs="git status"
 alias ga="git add ." #Add current dir to git queue
+alias gA="git add -A" #Add everything, adds, deletes, changes to the git queue
 alias gc="git commit -m" #Commits current queue to git. Requires you to type a commit message
 alias gp="git push" #Pushes current queue to git repo.
+export GIT_EDITOR=vim #Export git commit message editor (if you dont use -m)
 
 #Application Stuff
 alias top="htop" #Allows for htop to run if i type top instead
@@ -52,3 +57,7 @@ alias youtube-update="sudo pip install mps-youtube --upgrade"
 
 #CairoDock fix
 alias killcairo="ps -ef | grep cairo | grep -v 'cairo-dock -o' | grep -v grep | awk '{print $2}' xargs kill"
+
+#Stupid Stuff
+alias doit="sudo !!"
+alias fucking="sudo "
