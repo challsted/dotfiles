@@ -32,9 +32,6 @@ ex () {
  fi
 }
 
-#Export git commit message editor
-export GIT_EDITOR=vim
-
 #Attempt at the ability to make a directory and imediatly cd into it!
 function mkdircd () {
   mkdir -p "$@" &&
