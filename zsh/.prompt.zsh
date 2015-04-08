@@ -2,9 +2,6 @@
 # User configuration
 ####################
 
-# result of last command displays either happy or sad face as a prompt
-smiley="%(?,%{$fg[green]%}☺%{$reset_color%},%{$fg[red]%}☹%{$reset_color%})"
-
 #Set line edit mode to vi, since vi plugin sucks, change settings to make it smoother and easier
 bindkey -v
 export KEYTIMEOUT=1
@@ -25,4 +22,4 @@ local git_branch='$(git_prompt_info)%{$reset_color%}'                #Shows the 
 local current_dir_2='%{$fg[blue]%}%~%{$reset_color%}'                #Differnt way to show the current dir
 PROMPT="╭─${user_host} ${current_dir} 
 ╰─%B$%b " #Insert Bold "$"
-RPROMPT="${smiley} ${git_branch}"
+RPROMPT="${git_branch}"
