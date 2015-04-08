@@ -21,18 +21,19 @@ order += "disk /"
 order += "load"
 #order += "cpu_temperature 0"
 order += "tztime local"
+order += "tztime time"
 
 wireless wlan0 {
-    format_up = "W: (%quality at %essid)"
-    format_down = "W: down"
+    format_up = " (%quality)"
+    format_down = " "
 }
 ethernet eth0 {
-    format_up = "E: %ip (%speed)"
-    format_down = "E: Down"
+    format_up = " (%speed)"
+    format_down = " Down"
 }
 ethernet eth1 {
-    format_up = "E: %ip (%speed)"
-    format_down = "E: Down"
+    format_up = " (%speed)"
+    format_down = " Down"
 }
 
 disk "/" {
@@ -46,21 +47,25 @@ disk "/mntsoft" {
 }
 
 tztime local {
-    format = "T: %Y-%m-%d %H:%M:%S"
+    format = " %m/%d/%Y"
 }
+tztime time {
+    format = " %H:%M:%S"
+}
+    
 
 load {
-    format = "L: %1min"
+    format = " %1min"
 }
 
 cpu_temperature 0 {
-    format = "T: %degrees F"
+    format = " %degrees F"
     path = "/sys/devices/platform/coretemp.0/temp1_input"
 }
 
 volume master {
-    format = "♪: %volume"
-    format_muted = "♪: muted (%volume)"
+    format = "  %volume"
+    format_muted = " (%volume)"
     device = "default"
     mixer = "Master"
     mixer_idx = 0
