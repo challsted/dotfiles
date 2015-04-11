@@ -11,6 +11,8 @@ source $ZSH/oh-my-zsh.sh
 #Researching how to make one of these for my own
 ZSH_THEME=baphomet
 
+#Theme looks for default_user, i need to set it up so that it can be several people, for now it will just be my 2 accounts
+DEFAULT_USER=chase || masammich
 # Uncomment the following line to enable command auto-correction.
 ENABLE_CORRECTION="true"
 
