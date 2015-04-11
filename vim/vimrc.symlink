@@ -1,12 +1,12 @@
 "If viewing this file and it appears like with several '+-- X lines: ...' you
 "can expand them easily by hovering over them and typeing ', ' or <leader><space>
 "or just 'za'
-
 "Colors {{{
 set t_Co=256        "Terminal Colors set to 256
 syntax on           "Creates better highlighting
 colorscheme molokai "Uses the very nice looking 'molokai' thee
 highlight Normal ctermfg=grey ctermbg=black
+set background=dark
 " }}}
 "Specific to a filetype {{{
 filetype indent on	" Activates indenting for files
@@ -41,6 +41,9 @@ set ruler 		    " Shows current position
 set noshowmode      " Prevents the 'mode' from showing (this is because airline does this for us) 
 set laststatus=2	" Always show the status line
 set lazyredraw      " Redraw the screen less, leading to faster response
+if has('mouse')
+    set mouse=a
+endif
 " }}}
 "Search Optomization {{{
 set ignorecase		" Ignores case when searching '/searchparam'
@@ -48,8 +51,8 @@ set smartcase		" Even with ignore case, still try to be smart about it
 set showmatch		" Shows matching bracket when highlighting with cursor
 " }}}
 "Core Settings {{{
-set pastetoggle=<f5> " Allows for the f5 key to be used for paste -- i dont remember why i have this here at the moment...
 set encoding=utf8	" Sets default encoding to utf8, and en_US as default language
+set autoread "Auto read a file when it is changed from the outside
 " }}}
 "Folding {{{
 set foldenable      " Enables Folding
@@ -67,6 +70,33 @@ nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
 nnoremap <leader><space> za
 " Highlights last inserted text from insert mode in visual mode
 nnoremap gV `[v`]
+" Remove line numbers with ,n add them again with ,n 
+nnoremap <silent> <leader>n :set invnumber<CR>
+" :W (Capitol W) saves the file with sudo, needed when editing some files
+command W w !sudo tee % > /dev/null
+" Quick saveing of files
+nnoremap <leader>w :w!<CR>
+"For lines longer then the screens width, treat them as seperate lines
+map j gj
+map k gk
+" Enables spell check, but only after pressing ,ss
+" Press ,ss again to disable
+" Cloned from github.com/amix
+map <leader>ss :setlocal invspell<CR>
+" For those of us who sometimes have to edit files in windows in non-vim,
+" remove the ^M at the end of line
+" Cloned from github.com/amix
+noremap <leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
+" }}}
+" Python Stuff {{{
+"Delete trailing white space on save, useful for Python
+"Cloned from github.com/amix
+func! DeleteTrailingWS()
+  exe "normal mz"
+    %s/\s\+$//ge
+      exe "normal `z"
+      endfunc
+      autocmd BufWrite *.py :call DeleteTrailingWS()
 " }}}
 " Plugin Stuff {{{ 
 " The syntax is 'Plug' single quote name of author/vim-plugin single quote. So
@@ -113,6 +143,8 @@ let g:rehash256 = 1 " 'more like the gui 256 scheme'
 let g:syntastic_cpp_compiler = "g++" " Use g++ as compiler
 let g:syntastic_cpp_check_header = 1 " Allows syntastic to check header files
 let g:syntastic_cpp_compiler_options = ' -std=c++11 -Wall'
+" }}}
+" Python {{{
 " }}}
 let g:syntastic_check_on_open = 1 " Check on file open
 let g:syntastic_check_on_wq = 0 " Dont check on :wq
