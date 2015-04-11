@@ -32,7 +32,13 @@ source $ZSH/oh-my-zsh.sh
 CUSTZSH=~/git/dotfiles/zsh # You might need to change this
 source $CUSTZSH/.alias.zsh
 source $CUSTZSH/.keybind.zsh
-source $CUSTZSH/.prompt.zsh
+#source $CUSTZSH/.prompt.zsh
 source $CUSTZSH/.script.zsh
 source $CUSTZSH/.opts.zsh
 source $CUSTZSH/.ssh.zsh
+
+if [[ -r ~/.local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh ]]; then
+        source ~/.local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
+fi
+
+ZSH_THEME=agnoster
