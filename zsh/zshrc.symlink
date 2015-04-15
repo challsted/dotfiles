@@ -29,3 +29,5 @@ source $CUSTZSH/.ssh.zsh
 #########################
 #source $CUSTZSH/.prompt.zsh
 source $CUSTZSH/.agnoster-fcamblor.zsh
+
+. ~/.local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
