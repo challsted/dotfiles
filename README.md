@@ -41,12 +41,12 @@ Once that is complete open your vimrc in vim:
 * **VIM WILL THROW AN ERROR** this is normal the first time. Just hit enter.
 * Once vim is up type `:PlugInstall`, this will cause a new pane to open in your vim window on the left, depending on your connection speed it will download a bunch of plugins from the internet and put them where they belong. 
 * One of the last plugins is called "molokai". At the moment there is a bug where molokai installs useing the "light" theme by default. It will cause your screen to go very bright and white. But we can fix this!
-* Type `:wq` then again `:wq` this will exit the new pane, then exit vim.
+* Type `:q` then `:wq` this will exit the new pane, then exit vim.
 * We need to symlink the molokai plugin into the colors directory which we need to create.
 
 **FIXING MOLOKAI**
 * `mkdir -p ~/.vim/colors/`
-* `ln -sf ~/.vim/plugged/molokai/molokai.vim ~/.vim/colors/molokai.vim`
+* `ln -sf ~/.vim/plugged/molokai/colors/molokai.vim ~/.vim/colors/molokai.vim`
 
 Now if we open any file in vim again, for example `vim ~/.vimrc` you will see that molokai works perfectly :D
 I have a plan to fork molokai and replace my call to my own molokai that dose not include the light version soon.
