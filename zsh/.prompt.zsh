@@ -1,6 +1,9 @@
-####################
-# User configuration
-####################
+#.prompt.zsh
+#Version 1.1 - Starting this number now, no idea how many modifications have gone into this...
+#Author: Hackinginfo
+#Source: https://github.com/hackinginformation/dotfiles
+#
+#Purpose: This file is to be source from the ~/.zshrc file and its purpose is to present the user with a nice looking custom prompt
 
 #Set line edit mode to vi, since vi plugin sucks, change settings to make it smoother and easier
 bindkey -v
@@ -15,9 +18,7 @@ function zle-line-init zle-keymap-select {
   zle reset-prompt
 } 
 
-##{{ Custom Prompt
 local user_host='%{$terminfo[bold]$fg[green]%}%n@%m%{$reset_color%}' #Shows User@Host
-local current_dir='%{$terminfo[bold]$fg[blue]%} %~%{$reset_color%}'  #Shows current directory, bold, 
 local git_branch='$(git_prompt_info)%{$reset_color%}'                #Shows the current gitbranch from the builtin
 local current_dir_2='%{$fg[blue]%}%~%{$reset_color%}'                #Differnt way to show the current dir
 PROMPT="╭─${user_host} ${current_dir} 
