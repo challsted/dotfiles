@@ -3,81 +3,54 @@
 #
 ##Filename: install.sh
 ##Author: HackingInformation
-##Contact: https://github.com/hackinginformation
-##Version 1.1.1 - Trying to fix issue with wget/curl
-#
-# An attempt at makeing an install for the files I upload
-# YOU WILL NEED TO CHMOD THIS FILE (chmod +x install.sh)
-#
-##################################
-#An attempt at makeing colors easy
-##################################
-BLACK=$(tput setaf 0)
-RED=$(tput setaf 1)
-GREEN=$(tput setaf 2)
-YELLOW=$(tput setaf 3)
-LIME_YELLOW=$(tput setaf 190)
-POWDER_BLUE=$(tput setaf 153)
-BLUE=$(tput setaf 4)
-MAGENTA=$(tput setaf 5)
-CYAN=$(tput setaf 6)
-WHITE=$(tput setaf 7)
-BRIGHT=$(tput bold)
-NORMAL=$(tput sgr 0)
-BLINK=$(tput blink)
-REVERSE=$(tput smso)
-UNDERLINE=$(tput smul)
-cd ~
-printf "${WHITE}You need to install git, zsh, wget, curl and vim, if you havnt already${NORMAL}\n"
-printf "${WHITE}This will only work on ubuntu based OS's currently${NORMAL}\n"
-printf "${WHITE}Select \"n\" if you are not useing an ubuntu based OS${NORMAL}\n"
-while true; do 
-    read -p "${CYAN}Would you like me to install them for you? (Y/n)${NORMAL}" yn
-    case $yn in
-        [Yy]* ) printf "${CYAN}Ok I am installing git, zsh and vim for you${NORMAL}\n";
-            sudo apt-get -y install git zsh wget curl vim > /dev/null; break;;
-        [Nn]* ) printf "${BLUE}Ok, skipping the installs${NORMAL}\n"; break;;
-        "" ) sudo apt-get -y install git zsh wget curl vim > /dev/null; break;;
-        * ) printf "${RED}Please answer \"y\"es or \"n\"o${NORMAL}\n";; 
-    esac
-done
-GIT_DIRECTORY="$HOME/git"
-read -p "${CYAN}Do you want a regular folder for git or a hidden folder? (R/h)${NORMAL}" rh
-    if [[ "$rh" == "H" ]] || [[ "$rh" == "h" ]]; then
-        GIT_DIRECTORY="$HOME/.git"
-    fi    
-        mkdir -p $GIT_DIRECTORY;
-        printf "${CYAN} Ok, I have created $GIT_DIRECTORY for you${NORMAL}\n";
-        cd $GIT_DIRECTORY;
-printf "${WHITE}Im about to install \"Oh-My-Zsh\", if you want to look into this${NORMAL}\n"
-printf "${WHITE}go to their github https://github.com/robbyrussell/oh-my-zsh${NORMAL}\n"
-printf "${WHITE}Installing Oh-My-Zsh now!${NORMAL}\n"
-wget --no-check-certificate http://install.ohmyz.sh >/dev/null 2>&1 | sh 
-printf "${WHITE}Cloneing my dotfiles repo now${NORMAL}\n"
+##Contact: https://github.com/hackinginformation/dotfiles
+##Version 2.0.0 - Rewriting the whole script to be automated and possibly work on arch
+##Notes: 
+#Need to add pushd/popd to allow user to run this script from anywhere but everything still work as expected. 
+#Need to check what package management tool is installed, (which apt-get) and if it exists install with it. This will allow for debian, mint, fedora, rhel, centos, and many others to be used simply by adding this and "yum" as options!
+
+
+
+#Detect OS, based on OS install needed componets
+USROS=`lsb_release -si`
+if [[ $USROS == 'Ubuntu' ]]; then
+    INSTALLER="sudo apt-get update && sudo apt-get -y install git zsh wget curl vim > /dev/null"
+elif [[ $USROS == 'Arch_Linux' ]]; then
+    INSTALLER="sudo pacman --no-confirm -Syu git zsh wget curl vim > /dev/null" #This is NOT tested
+else
+    printf "Your not running Ubuntu or Arch, this script currently dosn't support you...\n  \
+        you can still install the packages manually: \n \
+        git zsh wget curl vim"
+    exit 2
+fi
+
+#Setup Git Folder and install OMZsh and VimPlug
+mkdir -p ~/git/ && cd ~/git
+curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 git clone --quiet https://github.com/hackinginformation/dotfiles.git
-printf "${WHITE}Doing some background work${NORMAL}\n"
-cd $HOME
-cp $GIT_DIRECTORY/dotfiles/zsh/.zshrc .
-sed -i "s,RePlAcE,$GIT_DIRECTORY,g" "$HOME/.zshrc"
-ln -sf $GIT_DIRECTORY/dotfiles/vim/.vimrc ~/.vimrc #Symlinks for the .vimrc file
-mkdir -p ~/.vim/autoload # Preps for vim-plug to be installed
-curl --silent -fLo ~/.vim/autoload/plug.vim \
-        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-printf "${WHITE}You are about to be presented with a vim script updater${NORMAL}\n"
-printf "${WHITE}Please wait for it to complete, then run \":q\" TWO TIMES to exit and continue${NORMAL}\n"
-vim -c :PlugInstall #Calls vim-plug to install plugins
-printf "${WHITE}You must change your shell to ZSH (Z-Shell) now${NORMAL}\n"
-while true; do 
-    read -p "${CYAN}Would you like me to change this for you? (Y/n)${NORMAL}" yn
-    case $yn in
-        [Yy]* ) chsh -s $(which zsh);
-            printf "${CYAN}Your shell is now ZSH!\n"; break;;
-        [Nn]* ) printf "${BLUE}Ok, I am not setting zsh as your shell${NORMAL}\n"; break;;
-        "" ) chsh -s $(which zsh);
-            printf "${CYAN}Your shell is now ZSH!\n"; break;;
-        * ) printf "${RED}Please answer \"y\"es or \"n\"o${NORMAL}\n";;
-    esac
-done
-printf "${WHITE}Please restart your shell, once you reopen, please enter option \"0\"${NORMAL}\n"
-printf "${WHITE}If you do not, it will overwrite your your .zshrc file with a default one${NORMAL}\n"
-exit
+cd
+
+#Pre-Symlink molokai to prevent the issue with it assuming a light background
+mkdir -p ~/.vim/colors && ln -sf ~/.vim/plugged/molokai/colors/molokai.vim
+
+#Checks if an existing .zshrc exists, if so it backes it up first
+if [[ -e ~/.zshrc ]]; then
+    mv ~/.zshrc ~/.zshrc.backup-pre-script && ln -sf ~/git/dotfiles/zsh/zshrc.symlink ~/.zshrc 
+else
+    ln -sf ~/git/dotfiles/zsh/zshrc.symlink ~/.zshrc
+fi
+
+#Checks if an existing .vimrc exists, if so it backes it up first
+if [[ -e ~/.vimrc ]]; then
+    mv ~/.vimrc ~/.vimrc.backup-pre-script && ln -sf ~/git/dotfiles/vim/vimrc.symlink ~/.vimrc
+else
+    ln -sf ~/git/dotfiles/vim/vimrc.symlink ~/.vimrc
+fi
+
+#Calls vim-plug to install plugins, and quites both windows
+vim ~/.vimrc -c 'PlugInstall | q | q' 
+
+#Change login shell to zsh
+sudo chsh -s $(which zsh) 
+exit 0
