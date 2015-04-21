@@ -1,6 +1,9 @@
-####################
-# User configuration
-####################
+#.script.zsh
+#Version 1.1 - Starting this number now, no idea how many modifications have gone into this...
+#Author: Hackinginfo
+#Source: https://github.com/hackinginformation/dotfiles
+#
+#Purpose: This file is to be source from the ~/.zshrc file and its purpose is for small functions and other clutter cluter you dont play with often
 
 # Alt-S inserts "sudo " at the start of the line
 insert_sudo () {
@@ -33,7 +36,7 @@ ex () {
 }
 
 #Attempt at the ability to make a directory and imediatly cd into it!
-function mkdircd () {
+function mkcd () {
   mkdir -p "$@" &&
    eval cd "\"\$$H\"";
 }
@@ -54,3 +57,11 @@ path() {
         sub(\"/local\", \"$fg_no_bold[yellow]/local$reset_color\"); \
         print }"
 }
+
+# Preferred editor if im ssh'd to somewhere
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='vim'
+fi
+
+#Export ssh keys
+export SSH_KEY_PATH="~/.ssh/"

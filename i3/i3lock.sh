@@ -1,0 +1,1 @@
+/home/masammich/git/dotfiles/scripts/i3lock.sh

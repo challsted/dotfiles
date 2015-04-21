@@ -1,5 +1,5 @@
-# Preforms several checks to make sure the user is
-#  Running Linux, and then checks what OS the user is using.
+#Need to add this functionality into the install script
+
 if [[ $(uname) = 'Linux' ]]; then
     IS_LINUX=1
 fi

@@ -74,7 +74,7 @@ nnoremap gV `[v`]
 nnoremap <silent> <leader>n :set invnumber<CR>
 " :W (Capitol W) saves the file with sudo, needed when editing some files
 command W w !sudo tee % > /dev/null
-" Quick saveing of files
+" Quick saving of files
 nnoremap <leader>w :w!<CR>
 "For lines longer then the screens width, treat them as seperate lines
 map j gj
