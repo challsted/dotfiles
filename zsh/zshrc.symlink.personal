@@ -2,11 +2,11 @@
 #This file is intended to be symlinked to the home dir like this:
 ##ln -s $path/to/this/zshrc.symlink ~/.zshrc
 #
-#Version 1.0 - Starting this number now, no idea how many modifications have gone into this...
+#Version 1.1
 #Author: Hackinginfo
 #Source: https://github.com/hackinginformation/dotfiles
 #
-#Purpose: This file is intended to be a single file put into the home directory that loads all of the other files, it also uses a differnt theme then the non ...personal one
+#Purpose: This file is intended to be a single file put into the home directory that loads all of the other files, it is currently only ment for the author to use, but after experimentation is complete, this can be used by others. Please use at your own descression if you use this before its ready. 
 
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
@@ -28,11 +28,11 @@ source $CUSTZSH/.alias.zsh      #A place for you to keep all of your shell alias
 source $CUSTZSH/.keybind.zsh    #This is mainly being used for vim keybinds
 source $CUSTZSH/.script.zsh     #Lots of functions and extra little stuff you use often but dont often touch
 source $CUSTZSH/.opts.zsh       #Options! Lots of them! (OMZsh)
-source $CUSTZSH/.agnoster-fcamblor.zsh
-#source $CUSTZSH/.prompt.zsh
+source $CUSTZSH/.agnoster-fcamblor.zsh #Agnoster's better looking version (mainly for git)
+#source $CUSTZSH/.prompt.zsh    #Keeping this here so i can switch back if needed
 
 #Currently only works on my desktop, need to make this work a little better...
-if -f [ ~/.local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh ]
+if [ -f ~/.local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh ]
 then 
     . ~/.local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh 
 fi
