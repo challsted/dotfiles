@@ -31,4 +31,16 @@ source $CUSTZSH/.opts.zsh       #Options! Lots of them! (OMZsh)
 source $CUSTZSH/.agnoster-fcamblor.zsh
 #source $CUSTZSH/.prompt.zsh
 
-. ~/.local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
+#Currently only works on my desktop, need to make this work a little better...
+if -f [ ~/.local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh ]
+then 
+    . ~/.local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh 
+fi
+
+#This sets the keyboard layout to QWERTY, 
+#but after pressing the Scroll Lock key 
+#it toggles the keyboard layout to be Dvoark
+#It also turns the CAPS LOCK Key into a Control Key
+#It Also turns on/off the Scroll Lock LED
+#Off = QWERTY On=Dvorak
+setxkbmap -layout "us,us" -variant ",dvorak" -option "grp:rctrl_rshift_toggle,grp_led:scroll,caps:ctrl_modifier"
