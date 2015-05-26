@@ -17,7 +17,7 @@ COMPLETION_WAITING_DOTS="true"
 # The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
 HIST_STAMPS="mm/dd/yyyy"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*) 
-plugins=(git command-not-found sudo vi-mode web-search wd colored-man colorize cp emoji-clock lol nyan rand-quote)
+plugins=(git command-not-found sudo vi-mode web-search wd colored-man colorize cp osx tmux)
 
 #########################
 # User added source files
@@ -28,8 +28,7 @@ source $CUSTZSH/.alias.zsh      #A place for you to keep all of your shell alias
 source $CUSTZSH/.keybind.zsh    #This is mainly being used for vim keybinds
 source $CUSTZSH/.script.zsh     #Lots of functions and extra little stuff you use often but dont often touch
 source $CUSTZSH/.opts.zsh       #Options! Lots of them! (OMZsh)
-source $CUSTZSH/.agnoster-fcamblor.zsh #Agnoster's better looking version (mainly for git)
-#source $CUSTZSH/.prompt.zsh    #Keeping this here so i can switch back if needed
+source $CUSTZSH/.prompt.zsh    #Keeping this here so i can switch back if needed
 
 #Currently only works on my desktop, need to make this work a little better...
 if [ -f ~/.local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh ]
@@ -37,10 +36,15 @@ then
     . ~/.local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh 
 fi
 
-#This sets the keyboard layout to QWERTY, 
-#but after pressing the Scroll Lock key 
-#it toggles the keyboard layout to be Dvoark
-#It also turns the CAPS LOCK Key into a Control Key
-#It Also turns on/off the Scroll Lock LED
-#Off = QWERTY On=Dvorak
-setxkbmap -layout "us,us" -variant ",dvorak" -option "grp:rctrl_rshift_toggle,grp_led:scroll,caps:ctrl_modifier"
+#Adds auto completion to tmuxinator
+if [ -f ~/git/dotfiles/zsh/tmuxinator.zsh ]
+then
+    . ~/git/dotfiles/zsh/tmuxinator.zsh
+fi
+
+#This sets the keyboard layout to QWERTY, but after pressing the Scroll Lock key it toggles the keyboard layout to be Dvoark It also turns the CAPS LOCK Key into a Control Key
+#It Also turns on/off the Scroll Lock LED Off = QWERTY On=Dvorak
+if type setxkbmap > /dev/null;
+then 
+    setxkbmap -layout "us,us" -variant ",dvorak" -option "grp:rctrl_rshift_toggle,grp_led:scroll,caps:ctrl_modifier"
+fi

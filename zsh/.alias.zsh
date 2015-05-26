@@ -9,8 +9,8 @@
 ###################
 
 #Directory Stuff
-alias ll="ls -larth --color=auto"  #All files, "long" with reverse time sorting and human readable sizes; added colros for terminals that dont auto do this
-alias lh="ls -d .* --color=auto" # ONLY show hidden files/folders this is genius (stolen); added colors for terminals that dont auto do this
+alias ll="ls -larth"  #All files, "long" with reverse time sorting and human readable sizes; added colros for terminals that dont auto do this
+alias lh="ls -d .*" # ONLY show hidden files/folders this is genius (stolen); added colors for terminals that dont auto do this
 alias tree="ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'" #Stolen from the Internet, makes a tree out of current dirs 
 
 #OS Specific 

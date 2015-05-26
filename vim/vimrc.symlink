@@ -8,20 +8,21 @@ colorscheme molokai "Uses the very nice looking 'molokai' thee
 highlight Normal ctermfg=grey ctermbg=black
 set background=dark
 " }}}
-"Specific to a filetype {{{
-filetype indent on	" Activates indenting for files
-filetype plugin on	" Activates plugins for file types
-" }}}
 "Spaceing, Tab Key, and Indention {{{
 set autoindent      " Auto indenting
 set smartindent		" Smarter indenting
+set backspace=2 	" Backspace in insert mode works like normal editor
 set expandtab		" 1 tab = 4 spaces
 set shiftwidth=4	" 1 tab = 4 spaces
 set tabstop=4		" Backspace over a full tab if tab is expanded to tabstop or expandtab
 set softtabstop=4   " Backspace over a full tab if tab is expanded to tabstop or expandtab
 set smarttab		" Uses 'smart' tabs
 set showtabline=2   " Always display the tabline, even if there is only 1 tab
-set backspace=2 	" Backspace in insert mode works like normal editor
+"Specific to a filetype {{{
+filetype indent on	" Activates indenting for files
+filetype plugin on	" Activates plugins for file types
+autocmd Filetype puppet setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
+" }}}
 " }}}
 "Writeing and backing up files {{{
 set nobackup        " Get rid of annoying ~file
@@ -35,7 +36,7 @@ set hlsearch		" Highlights search results
 set incsearch       " Search characters as you type them
 " }}}
 "Layout of the actual editor {{{
-set number          " Line numbers
+set number          " Dosnt Show Line Number by default <Leader>n shows them
 set cursorline		" Show location of cursor using a horizontal line
 set ruler 		    " Shows current position
 set noshowmode      " Prevents the 'mode' from showing (this is because airline does this for us) 
@@ -63,30 +64,58 @@ set modeline        " Turn ModeLine On
 set modelines=1     " Checks last line for file specific commands via modeline
 " }}}
 " Key Remaps {{{
-let mapleader=","       " leader is comma
+" Leader is comma
+let mapleader=","
+
 " Press Space to turn off highlighting and clear any message already displayed.
 nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
+
 " Leader-space open/closes folds
 nnoremap <leader><space> za
+
 " Highlights last inserted text from insert mode in visual mode
 nnoremap gV `[v`]
+
 " Remove line numbers with ,n add them again with ,n 
 nnoremap <silent> <leader>n :set invnumber<CR>
+
 " :W (Capitol W) saves the file with sudo, needed when editing some files
 command W w !sudo tee % > /dev/null
+
 " Quick saving of files
 nnoremap <leader>w :w!<CR>
+
 "For lines longer then the screens width, treat them as seperate lines
 map j gj
 map k gk
+
 " Enables spell check, but only after pressing ,ss
 " Press ,ss again to disable
 " Cloned from github.com/amix
 map <leader>ss :setlocal invspell<CR>
+
 " For those of us who sometimes have to edit files in windows in non-vim,
 " remove the ^M at the end of line
 " Cloned from github.com/amix
 noremap <leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
+
+" Map <F1> to <Esc> everywhere
+map <F1> <Esc>
+imap <F1> <Esc>
+vmap <F1> <Esc>
+nmap <F1> <Esc>
+
+" Fix Common Spelling mistake of typeing q: instead of :q
+nnoremap q: iq<Esc>
+
+" Y yanks to end of line
+nnoremap Y y$
+
+" Run the entire file through the indent filter with <Leader>=
+noremap <silent> <Leader>= :call Preserve("normal gg=G")<CR>
+
+" Toggle paste mode with <Leader>p (need to turn it back off agian though!)
+nnoremap <Leader>p :set invpaste paste?<CR>
 " }}}
 " Python Stuff {{{
 "Delete trailing white space on save, useful for Python
@@ -109,6 +138,8 @@ Plug 'tomasr/molokai' " Color scheme 'Molokai' for vim, since solarized is so to
 Plug 'godlygeek/csapprox' " 
 Plug 'scrooloose/syntastic' " Automatic Syntax Checking
 Plug 'klen/python-mode', { 'for': 'python' } "Python edior on crack
+Plug 'puppetlabs/puppet-syntax-vim', { 'for': 'puppet' } "Puppet Syntax Highlighting
+Plug 'rodjek/puppet-lint', { 'for': 'puppet' } "Puppet Linter - experimental if it will install this way or not
 call plug#end()     " Stops using vim-plug
 " }}}
 let g:airline_theme='luna' " This sets the theme of airline
@@ -145,6 +176,9 @@ let g:syntastic_cpp_check_header = 1 " Allows syntastic to check header files
 let g:syntastic_cpp_compiler_options = ' -std=c++11 -Wall'
 " }}}
 " Python {{{
+" }}}
+" Puppet {{{
+
 " }}}
 let g:syntastic_check_on_open = 1 " Check on file open
 let g:syntastic_check_on_wq = 0 " Dont check on :wq

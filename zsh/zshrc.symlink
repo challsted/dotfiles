@@ -29,3 +29,5 @@ source $CUSTZSH/.script.zsh     #Lots of functions and extra little stuff you us
 source $CUSTZSH/.opts.zsh       #Options! Lots of them! (OMZsh)
 source $CUSTZSH/.prompt.zsh     #The Prompt on the left side of your screen comes from here
 
+#ZSH_THEME="agnoster"
+#. {repository_root}/powerline/bindings/zsh/powerline.zsh
