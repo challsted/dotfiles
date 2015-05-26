@@ -1,12 +1,34 @@
 "If viewing this file and it appears like with several '+-- X lines: ...' you
 "can expand them easily by hovering over them and typeing ', ' or <leader><space>
 "or just 'za'
-"Colors {{{
+" Looks, Layout and Folding {{{
 set t_Co=256        "Terminal Colors set to 256
 syntax on           "Creates better highlighting
 colorscheme molokai "Uses the very nice looking 'molokai' thee
 highlight Normal ctermfg=grey ctermbg=black
 set background=dark
+"Layout of the actual editor {{{
+set number          " Dosnt Show Line Number by default <Leader>n shows them
+set cursorline		" Show location of cursor using a horizontal line
+set ruler 		    " Shows current position
+set noshowmode      " Prevents the 'mode' from showing (this is because airline does this for us) 
+set laststatus=2	" Always show the status line
+set lazyredraw      " Redraw the screen less, leading to faster response
+set encoding=utf8	" Sets default encoding to utf8, and en_US as default language
+set autoread        " Auto read a file when it is changed from the outside
+set showmatch		" Shows matching bracket when highlighting with cursor
+if has('mouse')
+    set mouse=a
+endif
+" }}}
+"Folding {{{
+set foldenable      " Enables Folding
+set foldlevelstart=10 " Opens the first 10 folds by default
+set foldnestmax=10  " 10 nested fold max
+set foldmethod=indent " Tells vim to fold based on indent level
+set modeline        " Turn ModeLine On
+set modelines=1     " Checks last line for file specific commands via modeline
+" }}}
 " }}}
 "Spaceing, Tab Key, and Indention {{{
 set autoindent      " Auto indenting
@@ -22,6 +44,7 @@ set showtabline=2   " Always display the tabline, even if there is only 1 tab
 filetype indent on	" Activates indenting for files
 filetype plugin on	" Activates plugins for file types
 autocmd Filetype puppet setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
+autocmd Filetype yaml setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 " }}}
 " }}}
 "Writeing and backing up files {{{
@@ -34,38 +57,15 @@ set wildmenu		" Shows auto completed menu's
 set wildmode=list:longest " Make 'wildmenu' behave a little nicer
 set hlsearch		" Highlights search results
 set incsearch       " Search characters as you type them
-" }}}
-"Layout of the actual editor {{{
-set number          " Dosnt Show Line Number by default <Leader>n shows them
-set cursorline		" Show location of cursor using a horizontal line
-set ruler 		    " Shows current position
-set noshowmode      " Prevents the 'mode' from showing (this is because airline does this for us) 
-set laststatus=2	" Always show the status line
-set lazyredraw      " Redraw the screen less, leading to faster response
-if has('mouse')
-    set mouse=a
-endif
-" }}}
-"Search Optomization {{{
-set ignorecase		" Ignores case when searching '/searchparam'
+set ignorecase		" Ignores case when searching 
 set smartcase		" Even with ignore case, still try to be smart about it
-set showmatch		" Shows matching bracket when highlighting with cursor
-" }}}
-"Core Settings {{{
-set encoding=utf8	" Sets default encoding to utf8, and en_US as default language
-set autoread "Auto read a file when it is changed from the outside
-" }}}
-"Folding {{{
-set foldenable      " Enables Folding
-set foldlevelstart=10 " Opens the first 10 folds by default
-set foldnestmax=10  " 10 nested fold max
-set foldmethod=indent " Tells vim to fold based on indent level
-set modeline        " Turn ModeLine On
-set modelines=1     " Checks last line for file specific commands via modeline
 " }}}
 " Key Remaps {{{
 " Leader is comma
 let mapleader=","
+
+" The below sets NERDTree to Ctrl+N
+map <C-n> :NERDTreeToggle<CR>
 
 " Press Space to turn off highlighting and clear any message already displayed.
 nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
@@ -117,9 +117,8 @@ noremap <silent> <Leader>= :call Preserve("normal gg=G")<CR>
 " Toggle paste mode with <Leader>p (need to turn it back off agian though!)
 nnoremap <Leader>p :set invpaste paste?<CR>
 " }}}
-" Python Stuff {{{
+" Vim Functions Stuff {{{
 "Delete trailing white space on save, useful for Python
-"Cloned from github.com/amix
 func! DeleteTrailingWS()
   exe "normal mz"
     %s/\s\+$//ge
@@ -128,25 +127,23 @@ func! DeleteTrailingWS()
       autocmd BufWrite *.py :call DeleteTrailingWS()
 " }}}
 " Plugin Stuff {{{ 
+" VimPlug {{{
 " The syntax is 'Plug' single quote name of author/vim-plugin single quote. So
 " for example 'bling/vim-airline' is https://github.com/bling/vim-airline
-" VimPlug {{{
-call plug#begin('~/.vim/plugged') " Starts using vim-plug https://github.com/junegunn/vim-plug
-Plug 'bling/vim-airline' " This is a bar that shows current mode as well as ton of useful info
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' } " Tree file navigator
-Plug 'tomasr/molokai' " Color scheme 'Molokai' for vim, since solarized is so touchy....
-Plug 'godlygeek/csapprox' " 
-Plug 'scrooloose/syntastic' " Automatic Syntax Checking
-Plug 'klen/python-mode', { 'for': 'python' } "Python edior on crack
-Plug 'puppetlabs/puppet-syntax-vim', { 'for': 'puppet' } "Puppet Syntax Highlighting
-Plug 'rodjek/puppet-lint', { 'for': 'puppet' } "Puppet Linter - experimental if it will install this way or not
-call plug#end()     " Stops using vim-plug
+call plug#begin('~/.vim/plugged')   " Starts using vim-plug https://github.com/junegunn/vim-plug
+Plug 'bling/vim-airline'            " This is a bar that shows current mode as well as ton of useful info
+Plug 'tomasr/molokai'               " Color scheme 'Molokai' for vim, since solarized is so touchy....
+Plug 'godlygeek/csapprox'           " Makes GVim Color Schemes work in Terminal Vim
+Plug 'scrooloose/syntastic'         " Automatic Syntax Checking
+Plug 'klen/python-mode', { 'for': 'python' }                "Python edior on crack
+Plug 'puppetlabs/puppet-syntax-vim', { 'for': 'puppet' }    "Puppet Syntax Highlighting
+Plug 'rodjek/puppet-lint', { 'for': 'puppet' }              "Puppet Linter - experimental if it will install this way or not
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }      " Tree file navigator
+call plug#end()                     " Stops using vim-plug
 " }}}
+" Powerline Specific Settings {{{
 let g:airline_theme='luna' " This sets the theme of airline
-    " The below sets NERDTree to Ctrl+N
-map <C-n> :NERDTreeToggle<CR>
-" }}}
-" Fixes Powerline Unicode Issues {{{
+
 if !exists('g:airline_symbols')
       let g:airline_symbols = {}
   endif
@@ -166,20 +163,9 @@ let g:airline_symbols.whitespace = 'Ξ'
 let g:airline_powerline_fonts = 1
 " }}}
 " Molokai Specific Settings {{{
-let g:molokai_original = 1 " Origional Monokai background
-let g:rehash256 = 1 " 'more like the gui 256 scheme'
+let g:rehash256 = 1 " More like the gui 256 scheme'
 " }}}
-" Syntastic Plugin Checkers {{{
-" C++ {{{
-let g:syntastic_cpp_compiler = "g++" " Use g++ as compiler
-let g:syntastic_cpp_check_header = 1 " Allows syntastic to check header files
-let g:syntastic_cpp_compiler_options = ' -std=c++11 -Wall'
-" }}}
-" Python {{{
-" }}}
-" Puppet {{{
-
-" }}}
+" Syntastic Specific Settings {{{
 let g:syntastic_check_on_open = 1 " Check on file open
 let g:syntastic_check_on_wq = 0 " Dont check on :wq
 let g:syntastic_enable_signs = 1 " Enable symbols listed below 
@@ -187,6 +173,20 @@ let g:syntastic_error_symbol = "X"
 let g:syntastic_style_error_symbol = ">"
 let g:syntastic_warning_symbol = "!"
 let g:syntastic_style_warning_symbol = ">"
+
+" Specific for C++ {{{
+let g:syntastic_cpp_compiler = "g++" " Use g++ as compiler
+let g:syntastic_cpp_check_header = 1 " Allows syntastic to check header files
+let g:syntastic_cpp_compiler_options = ' -std=c++11 -Wall'
+
+" }}}
+" Specific for  Python {{{
+
+" }}}
+" Specific for Puppet {{{
+
+" }}}
+" }}}
 " }}}
 " Do not edit below line unless you know what your doing
 " vim: set foldmethod=marker foldlevel=0 :
