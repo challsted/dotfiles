@@ -135,13 +135,13 @@ Plug 'bling/vim-airline'            " This is a bar that shows current mode as w
 Plug 'tomasr/molokai'               " Color scheme 'Molokai' for vim, since solarized is so touchy....
 Plug 'godlygeek/csapprox'           " Makes GVim Color Schemes work in Terminal Vim
 Plug 'godlygeek/tabular'            " Awesome plugin for alligining text
-Plug 'scrooloose/syntastic'         " Automatic Syntax Checking
 Plug 'tpope/vim-fugitive'           " TPope's Git integration into vim
 Plug 'tpope/vim-surround'           " Helps surrounding code and text with other code and text
-Plug 'klen/python-mode', { 'for': 'python' }                " Python edior on crack
+Plug 'scrooloose/syntastic'         " Automatic Syntax Checking
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }      " Tree file navigator
 Plug 'puppetlabs/puppet-syntax-vim', { 'for': 'puppet' }    " Puppet Syntax Highlighting
 Plug 'rodjek/vim-puppet', { 'for': 'puppet' }               " Helps Vim Play Nice with Puppet
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }      " Tree file navigator
+Plug 'klen/python-mode', { 'for': 'python' }                " Python edior on crack
 call plug#end()                     " Stops using vim-plug
 " }}}
 " Powerline Specific Settings {{{
