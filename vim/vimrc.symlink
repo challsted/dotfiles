@@ -134,10 +134,13 @@ call plug#begin('~/.vim/plugged')   " Starts using vim-plug https://github.com/j
 Plug 'bling/vim-airline'            " This is a bar that shows current mode as well as ton of useful info
 Plug 'tomasr/molokai'               " Color scheme 'Molokai' for vim, since solarized is so touchy....
 Plug 'godlygeek/csapprox'           " Makes GVim Color Schemes work in Terminal Vim
+Plug 'godlygeek/tabular'            " Awesome plugin for alligining text
 Plug 'scrooloose/syntastic'         " Automatic Syntax Checking
-Plug 'klen/python-mode', { 'for': 'python' }                "Python edior on crack
-Plug 'puppetlabs/puppet-syntax-vim', { 'for': 'puppet' }    "Puppet Syntax Highlighting
-Plug 'rodjek/puppet-lint', { 'for': 'puppet' }              "Puppet Linter - experimental if it will install this way or not
+Plug 'tpope/vim-fugitive'           " TPope's Git integration into vim
+Plug 'tpope/vim-surround'           " Helps surrounding code and text with other code and text
+Plug 'klen/python-mode', { 'for': 'python' }                " Python edior on crack
+Plug 'puppetlabs/puppet-syntax-vim', { 'for': 'puppet' }    " Puppet Syntax Highlighting
+Plug 'rodjek/vim-puppet', { 'for': 'puppet' }               " Helps Vim Play Nice with Puppet
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }      " Tree file navigator
 call plug#end()                     " Stops using vim-plug
 " }}}
@@ -169,10 +172,15 @@ let g:rehash256 = 1 " More like the gui 256 scheme'
 let g:syntastic_check_on_open = 1 " Check on file open
 let g:syntastic_check_on_wq = 0 " Dont check on :wq
 let g:syntastic_enable_signs = 1 " Enable symbols listed below 
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_error_symbol = "X"
 let g:syntastic_style_error_symbol = ">"
 let g:syntastic_warning_symbol = "!"
 let g:syntastic_style_warning_symbol = ">"
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
 
 " Specific for C++ {{{
 let g:syntastic_cpp_compiler = "g++" " Use g++ as compiler
@@ -181,10 +189,11 @@ let g:syntastic_cpp_compiler_options = ' -std=c++11 -Wall'
 
 " }}}
 " Specific for  Python {{{
-
+let g:pymode_lint_write = 0 " This stops both python-mode and syntastic from both checking the file on write
+let g:syntastic_python_checkers = ["python"]
 " }}}
 " Specific for Puppet {{{
-
+let g:syntastic_puppet_checkers = ["puppetlint"]
 " }}}
 " }}}
 " }}}
