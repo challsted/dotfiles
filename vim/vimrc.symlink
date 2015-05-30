@@ -1,27 +1,51 @@
 "If viewing this file and it appears like with several '+-- X lines: ...' you
 "can expand them easily by hovering over them and typeing ', ' or <leader><space>
 "or just 'za'
-"Colors {{{
+" Looks, Layout and Folding {{{
 set t_Co=256        "Terminal Colors set to 256
 syntax on           "Creates better highlighting
 colorscheme molokai "Uses the very nice looking 'molokai' thee
 highlight Normal ctermfg=grey ctermbg=black
 set background=dark
+"Layout of the actual editor {{{
+set number          " Dosnt Show Line Number by default <Leader>n shows them
+set cursorline		" Show location of cursor using a horizontal line
+set ruler 		    " Shows current position
+set noshowmode      " Prevents the 'mode' from showing (this is because airline does this for us) 
+set laststatus=2	" Always show the status line
+set lazyredraw      " Redraw the screen less, leading to faster response
+set encoding=utf8	" Sets default encoding to utf8, and en_US as default language
+set autoread        " Auto read a file when it is changed from the outside
+set showmatch		" Shows matching bracket when highlighting with cursor
+if has('mouse')
+    set mouse=a
+endif
 " }}}
-"Specific to a filetype {{{
-filetype indent on	" Activates indenting for files
-filetype plugin on	" Activates plugins for file types
+"Folding {{{
+set foldenable      " Enables Folding
+set foldlevelstart=10 " Opens the first 10 folds by default
+set foldnestmax=10  " 10 nested fold max
+set foldmethod=indent " Tells vim to fold based on indent level
+set modeline        " Turn ModeLine On
+set modelines=1     " Checks last line for file specific commands via modeline
+" }}}
 " }}}
 "Spaceing, Tab Key, and Indention {{{
 set autoindent      " Auto indenting
 set smartindent		" Smarter indenting
+set backspace=2 	" Backspace in insert mode works like normal editor
 set expandtab		" 1 tab = 4 spaces
 set shiftwidth=4	" 1 tab = 4 spaces
 set tabstop=4		" Backspace over a full tab if tab is expanded to tabstop or expandtab
 set softtabstop=4   " Backspace over a full tab if tab is expanded to tabstop or expandtab
 set smarttab		" Uses 'smart' tabs
 set showtabline=2   " Always display the tabline, even if there is only 1 tab
-set backspace=2 	" Backspace in insert mode works like normal editor
+"Specific to a filetype {{{
+filetype indent on	" Activates indenting for files
+filetype plugin on	" Activates plugins for file types
+autocmd Filetype puppet setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
+autocmd Filetype yaml setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
+" }}}
 " }}}
 "Writeing and backing up files {{{
 set nobackup        " Get rid of annoying ~file
@@ -33,64 +57,68 @@ set wildmenu		" Shows auto completed menu's
 set wildmode=list:longest " Make 'wildmenu' behave a little nicer
 set hlsearch		" Highlights search results
 set incsearch       " Search characters as you type them
-" }}}
-"Layout of the actual editor {{{
-set number          " Line numbers
-set cursorline		" Show location of cursor using a horizontal line
-set ruler 		    " Shows current position
-set noshowmode      " Prevents the 'mode' from showing (this is because airline does this for us) 
-set laststatus=2	" Always show the status line
-set lazyredraw      " Redraw the screen less, leading to faster response
-if has('mouse')
-    set mouse=a
-endif
-" }}}
-"Search Optomization {{{
-set ignorecase		" Ignores case when searching '/searchparam'
+set ignorecase		" Ignores case when searching 
 set smartcase		" Even with ignore case, still try to be smart about it
-set showmatch		" Shows matching bracket when highlighting with cursor
-" }}}
-"Core Settings {{{
-set encoding=utf8	" Sets default encoding to utf8, and en_US as default language
-set autoread "Auto read a file when it is changed from the outside
-" }}}
-"Folding {{{
-set foldenable      " Enables Folding
-set foldlevelstart=10 " Opens the first 10 folds by default
-set foldnestmax=10  " 10 nested fold max
-set foldmethod=indent " Tells vim to fold based on indent level
-set modeline        " Turn ModeLine On
-set modelines=1     " Checks last line for file specific commands via modeline
 " }}}
 " Key Remaps {{{
-let mapleader=","       " leader is comma
+" Leader is comma
+let mapleader=","
+
+" The below sets NERDTree to Ctrl+N
+map <C-n> :NERDTreeToggle<CR>
+
 " Press Space to turn off highlighting and clear any message already displayed.
 nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
+
 " Leader-space open/closes folds
 nnoremap <leader><space> za
+
 " Highlights last inserted text from insert mode in visual mode
 nnoremap gV `[v`]
+
 " Remove line numbers with ,n add them again with ,n 
 nnoremap <silent> <leader>n :set invnumber<CR>
+
 " :W (Capitol W) saves the file with sudo, needed when editing some files
 command W w !sudo tee % > /dev/null
+
 " Quick saving of files
 nnoremap <leader>w :w!<CR>
+
 "For lines longer then the screens width, treat them as seperate lines
 map j gj
 map k gk
+
 " Enables spell check, but only after pressing ,ss
 " Press ,ss again to disable
 " Cloned from github.com/amix
 map <leader>ss :setlocal invspell<CR>
+
 " For those of us who sometimes have to edit files in windows in non-vim,
 " remove the ^M at the end of line
 " Cloned from github.com/amix
 noremap <leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
+
+" Map <F1> to <Esc> everywhere
+map <F1> <Esc>
+imap <F1> <Esc>
+vmap <F1> <Esc>
+nmap <F1> <Esc>
+
+" Fix Common Spelling mistake of typeing q: instead of :q
+nnoremap q: iq<Esc>
+
+" Y yanks to end of line
+nnoremap Y y$
+
+" Run the entire file through the indent filter with <Leader>=
+noremap <silent> <Leader>= :call Preserve("normal gg=G")<CR>
+
+" Toggle paste mode with <Leader>p (need to turn it back off agian though!)
+nnoremap <Leader>p :set invpaste paste?<CR>
 " }}}
-" Python Stuff {{{
+" Vim Functions Stuff {{{
 "Delete trailing white space on save, useful for Python
-"Cloned from github.com/amix
 func! DeleteTrailingWS()
   exe "normal mz"
     %s/\s\+$//ge
@@ -99,23 +127,26 @@ func! DeleteTrailingWS()
       autocmd BufWrite *.py :call DeleteTrailingWS()
 " }}}
 " Plugin Stuff {{{ 
+" VimPlug {{{
 " The syntax is 'Plug' single quote name of author/vim-plugin single quote. So
 " for example 'bling/vim-airline' is https://github.com/bling/vim-airline
-" VimPlug {{{
-call plug#begin('~/.vim/plugged') " Starts using vim-plug https://github.com/junegunn/vim-plug
-Plug 'bling/vim-airline' " This is a bar that shows current mode as well as ton of useful info
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' } " Tree file navigator
-Plug 'tomasr/molokai' " Color scheme 'Molokai' for vim, since solarized is so touchy....
-Plug 'godlygeek/csapprox' " 
-Plug 'scrooloose/syntastic' " Automatic Syntax Checking
-Plug 'klen/python-mode', { 'for': 'python' } "Python edior on crack
-call plug#end()     " Stops using vim-plug
+call plug#begin('~/.vim/plugged')   " Starts using vim-plug https://github.com/junegunn/vim-plug
+Plug 'bling/vim-airline'            " This is a bar that shows current mode as well as ton of useful info
+Plug 'tomasr/molokai'               " Color scheme 'Molokai' for vim, since solarized is so touchy....
+Plug 'godlygeek/csapprox'           " Makes GVim Color Schemes work in Terminal Vim
+Plug 'godlygeek/tabular'            " Awesome plugin for alligining text
+Plug 'tpope/vim-fugitive'           " TPope's Git integration into vim
+Plug 'tpope/vim-surround'           " Helps surrounding code and text with other code and text
+Plug 'scrooloose/syntastic'         " Automatic Syntax Checking
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }      " Tree file navigator
+Plug 'puppetlabs/puppet-syntax-vim', { 'for': 'puppet' }    " Puppet Syntax Highlighting
+Plug 'rodjek/vim-puppet', { 'for': 'puppet' }               " Helps Vim Play Nice with Puppet
+Plug 'klen/python-mode', { 'for': 'python' }                " Python edior on crack
+call plug#end()                     " Stops using vim-plug
 " }}}
+" Powerline Specific Settings {{{
 let g:airline_theme='luna' " This sets the theme of airline
-    " The below sets NERDTree to Ctrl+N
-map <C-n> :NERDTreeToggle<CR>
-" }}}
-" Fixes Powerline Unicode Issues {{{
+
 if !exists('g:airline_symbols')
       let g:airline_symbols = {}
   endif
@@ -135,24 +166,36 @@ let g:airline_symbols.whitespace = 'Ξ'
 let g:airline_powerline_fonts = 1
 " }}}
 " Molokai Specific Settings {{{
-let g:molokai_original = 1 " Origional Monokai background
-let g:rehash256 = 1 " 'more like the gui 256 scheme'
+let g:rehash256 = 1 " More like the gui 256 scheme'
 " }}}
-" Syntastic Plugin Checkers {{{
-" C++ {{{
-let g:syntastic_cpp_compiler = "g++" " Use g++ as compiler
-let g:syntastic_cpp_check_header = 1 " Allows syntastic to check header files
-let g:syntastic_cpp_compiler_options = ' -std=c++11 -Wall'
-" }}}
-" Python {{{
-" }}}
+" Syntastic Specific Settings {{{
 let g:syntastic_check_on_open = 1 " Check on file open
 let g:syntastic_check_on_wq = 0 " Dont check on :wq
 let g:syntastic_enable_signs = 1 " Enable symbols listed below 
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_error_symbol = "X"
 let g:syntastic_style_error_symbol = ">"
 let g:syntastic_warning_symbol = "!"
 let g:syntastic_style_warning_symbol = ">"
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+" Specific for C++ {{{
+let g:syntastic_cpp_compiler = "g++" " Use g++ as compiler
+let g:syntastic_cpp_check_header = 1 " Allows syntastic to check header files
+let g:syntastic_cpp_compiler_options = ' -std=c++11 -Wall'
+
+" }}}
+" Specific for  Python {{{
+let g:pymode_lint_write = 0 " This stops both python-mode and syntastic from both checking the file on write
+let g:syntastic_python_checkers = ["python"]
+" }}}
+" Specific for Puppet {{{
+let g:syntastic_puppet_checkers = ["puppetlint"]
+" }}}
+" }}}
 " }}}
 " Do not edit below line unless you know what your doing
 " vim: set foldmethod=marker foldlevel=0 :
