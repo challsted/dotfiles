@@ -36,12 +36,6 @@ then
     . ~/.local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
 fi
 
-#Adds auto completion to tmuxinator
-if [ -f ~/git/dotfiles/zsh/tmuxinator.zsh ]
-then
-    . ~/git/dotfiles/zsh/tmuxinator.zsh
-fi
-
 #This sets the keyboard layout to QWERTY, but after pressing the Scroll Lock key it toggles the keyboard layout to be Dvoark It also turns the CAPS LOCK Key into a Control Key
 #It Also turns on/off the Scroll Lock LED Off = QWERTY On=Dvorak
 if type setxkbmap > /dev/null;
