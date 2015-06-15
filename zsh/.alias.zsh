@@ -18,7 +18,6 @@ alias ubuntuupdate="sudo apt-get update && sudo apt-get upgrade -y && sudo apt-g
 alias ubinstall="sudo apt-get install $2" #install stuff with 1 word prefix
 alias ubremove="sudo apt-get remove $2" #Remove stuff with 1 word prefix
 
-
 #ZSH Commands to make editing stuff easier
 alias configzsh="vim ~/.zshrc"  #One command to edit main config file from anywhere
 alias sourcezsh="source ~/.zshrc"  #One command to source the main config file from anywhere (. .zshrc equivilent from bash) 
@@ -48,7 +47,7 @@ alias nvim="nocorrect nvim" #This is to prevent auto correction of nvim to vim
 alias tmux="TERM=screen-256color-bce tmux"
 
 #Add Custom bin dir
-export PATH=/home/chase/bin/:$PATH
+export PATH=$HOME/bin/:$PATH
 
 #Exercism Stuff
 alias exef="exercism fetch"
