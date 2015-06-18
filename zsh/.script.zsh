@@ -65,3 +65,4 @@ fi
 
 #Export ssh keys
 export SSH_KEY_PATH="~/.ssh/"
+export EDITOR=vim

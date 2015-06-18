@@ -133,6 +133,8 @@ func! DeleteTrailingWS()
 call plug#begin('~/.vim/plugged')   " Starts using vim-plug https://github.com/junegunn/vim-plug
 Plug 'bling/vim-airline'            " This is a bar that shows current mode as well as ton of useful info
 Plug 'tomasr/molokai'               " Color scheme 'Molokai' for vim, since solarized is so touchy....
+Plug 'aserebryakov/filestyle'       " Highlights tab and space combos, and trailing spaces
+Plug 'Lokaltog/vim-easymotion'      " \ss causes triggers easy motion
 Plug 'godlygeek/csapprox'           " Makes GVim Color Schemes work in Terminal Vim
 Plug 'godlygeek/tabular'            " Awesome plugin for alligining text
 Plug 'tpope/vim-fugitive'           " TPope's Git integration into vim

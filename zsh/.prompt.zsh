@@ -18,9 +18,11 @@ function zle-line-init zle-keymap-select {
   zle reset-prompt
 } 
 
-local host='%{$terminfo[bold]$fg[green]%}%m%{$reset_color%}' #Shows Host
-local git_branch='$(git_prompt_info)%{$reset_color%}'                #Shows the current gitbranch from the builtin
-local current_dir_2='%{$fg[red]%}%~%{$reset_color%}'                #Differnt way to show the current dir
+local user_host='%{$terminfo[bold]$fg[green]%n@%m%{$reset_color%}'      #Shows user@host
+local host='%{$terminfo[bold]$fg[green]%}%m%{$reset_color%}'            #Shows Host
+local curernt_dir='%{$terminfo[bold]$fg[blue]%} %~%{$reset_color%}'     #Shows someshit!
+local git_branch='$(git_prompt_info)%{$reset_color%}'                   #Shows the current gitbranch from the builtin
+local current_dir_2='%{$fg[blue]%}%~%{$reset_color%}'                   #Differnt way to show the current dir
 PROMPT="╭─${host} ${current_dir_2} 
 ╰─%B$%b " #Insert Bold "$"
 RPROMPT="${git_branch}"
