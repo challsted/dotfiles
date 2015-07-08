@@ -54,7 +54,7 @@ Once that is complete open your vimrc in vim:
 Now if we open any file in vim again, for example `vim ~/.vimrc` you will see that molokai works perfectly :D
 I have a plan to fork molokai and replace my call to my own molokai that dose not include the light version soon.
 
-**Installing TMux**
+**TMUX**
 If you have `tmux` installed (bonus if its higher then 1.9!), and you want to use my tmux config, then you will need to copy my tmux.conf.
 * `ln -sf ~/git/dotfiles/tmux/tmux.config ~/.tmux.conf`
 * Open a new tmux session for validation (if you dont already have one open)
