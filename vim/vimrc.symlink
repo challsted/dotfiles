@@ -8,7 +8,8 @@ colorscheme molokai "Uses the very nice looking 'molokai' thee
 highlight Normal ctermfg=grey ctermbg=black
 set background=dark
 "Layout of the actual editor {{{
-set number          " Dosnt Show Line Number by default <Leader>n shows them
+set relativenumber  " Show Relative Number on non-selected lines
+set number          " Show Highlighted Line number in relation to file
 set cursorline		" Show location of cursor using a horizontal line
 set ruler 		    " Shows current position
 set noshowmode      " Prevents the 'mode' from showing (this is because airline does this for us) 
