@@ -28,14 +28,14 @@ If you want to make a folder first you can do this:
 If you created the folder make sure you cd into it, then run the next command
 * `git clone https://github.com/hackinginformation/dotfiles.git`
 
-**ZSH**
+[**ZSH**][ZSH_WIKI]
 If you have `zsh` installed, and you have already downloaded [Oh-My-Zsh][zsh] from above. You will need to run this to use my config:
 * `ln -sf ~/git/dotfiles/zsh/zshrc.symlink ~/.zshrc` 
 * If you didnt use the ~/git folder, or you used a different one then you need to update this line, you will also need to open the ~/.zshrc and edit line number 32 to your correct path.
 Once that is complete, you will need to run:
 * `source ~/.zshrc` and your complete! Your zsh will change and you'll notice a few new features.
 
-**VIM**
+[**VIM**][VIM_WIKI]
 If you have `vim` installed, and you have already downloaded [vim-plug][plug] from above. You will need to run this to use my config:
 * `ln -sf ~/git/dotfiles/vim/vimrc.symlink ~/.vimrc` 
 * If you didnt use the ~/git folder, or you used a different one then you need to update this line
@@ -83,3 +83,6 @@ My Blog    [masammich's][blog]
 [tweet]:        https://twitter.com/MaSammchs
 [blog]:         http://masammich.technoanomaly.com/
 [TMUX_WIKI]:    ../../wiki/TMux
+[VIM_WIKI]:     ../../wiki/VIM
+[ZSH_WIKI]:     ../../wiki/ZSH
+[I3_WIKI]:      ../../wiki/i3
