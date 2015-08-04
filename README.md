@@ -82,4 +82,4 @@ My Blog    [masammich's][blog]
 [tpm]:          https://github.com/tmux-plugins/tpm
 [tweet]:        https://twitter.com/MaSammchs
 [blog]:         http://masammich.technoanomaly.com/
-[TMUX_WIKI]:    https://github.com/hackinginformation/dotfiles/wiki
+[TMUX_WIKI]:    ../../wiki/TMux
