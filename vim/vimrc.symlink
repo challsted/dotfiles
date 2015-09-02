@@ -10,14 +10,14 @@ set background=dark
 "Layout of the actual editor {{{
 set relativenumber  " Show Relative Number on non-selected lines
 set number          " Show Highlighted Line number in relation to file
-set cursorline		" Show location of cursor using a horizontal line
-set ruler 		    " Shows current position
+set cursorline      " Show location of cursor using a horizontal line
+set ruler           " Shows current position
 set noshowmode      " Prevents the 'mode' from showing (this is because airline does this for us) 
-set laststatus=2	" Always show the status line
+set laststatus=2    " Always show the status line
 set lazyredraw      " Redraw the screen less, leading to faster response
-set encoding=utf8	" Sets default encoding to utf8, and en_US as default language
+set encoding=utf8   " Sets default encoding to utf8, and en_US as default language
 set autoread        " Auto read a file when it is changed from the outside
-set showmatch		" Shows matching bracket when highlighting with cursor
+set showmatch       " Shows matching bracket when highlighting with cursor
 if has('mouse')
     set mouse=a
 endif
@@ -33,33 +33,33 @@ set modelines=1     " Checks last line for file specific commands via modeline
 " }}}
 "Spaceing, Tab Key, and Indention {{{
 set autoindent      " Auto indenting
-set smartindent		" Smarter indenting
-set backspace=2 	" Backspace in insert mode works like normal editor
-set expandtab		" 1 tab = 4 spaces
-set shiftwidth=4	" 1 tab = 4 spaces
-set tabstop=4		" Backspace over a full tab if tab is expanded to tabstop or expandtab
+set smartindent     " Smarter indenting
+set backspace=2     " Backspace in insert mode works like normal editor
+set expandtab       " 1 tab = 4 spaces
+set shiftwidth=4    " 1 tab = 4 spaces
+set tabstop=4       " Backspace over a full tab if tab is expanded to tabstop or expandtab
 set softtabstop=4   " Backspace over a full tab if tab is expanded to tabstop or expandtab
-set smarttab		" Uses 'smart' tabs
+set smarttab        " Uses 'smart' tabs
 set showtabline=2   " Always display the tabline, even if there is only 1 tab
 "Specific to a filetype {{{
-filetype indent on	" Activates indenting for files
-filetype plugin on	" Activates plugins for file types
+filetype indent on  " Activates indenting for files
+filetype plugin on  " Activates plugins for file types
 autocmd Filetype puppet setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 autocmd Filetype yaml setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 " }}}
 " }}}
 "Writeing and backing up files {{{
 set nobackup        " Get rid of annoying ~file
-set nowb		    " Helps above
-set noswapfile		" Helps above
+set nowb            " Helps above
+set noswapfile      " Helps above
 " }}}
 "Menu and Search {{{
-set wildmenu		" Shows auto completed menu's
+set wildmenu        " Shows auto completed menu's
 set wildmode=list:longest " Make 'wildmenu' behave a little nicer
-set hlsearch		" Highlights search results
+set hlsearch        " Highlights search results
 set incsearch       " Search characters as you type them
-set ignorecase		" Ignores case when searching 
-set smartcase		" Even with ignore case, still try to be smart about it
+set ignorecase      " Ignores case when searching 
+set smartcase       " Even with ignore case, still try to be smart about it
 " }}}
 " Key Remaps {{{
 " Leader is comma
