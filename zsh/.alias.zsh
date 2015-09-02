@@ -36,7 +36,11 @@ alias gs="git status"
 alias ga="git add ." #Add current dir to git queue
 alias gA="git add -A" #Add everything, adds, deletes, changes to the git queue
 alias gc="git commit -m" #Commits current queue to git. Requires you to type a commit message
-alias gp="git push" #Pushes current queue to git repo.
+alias gp="git pull" #Pulls the updates from remote to local
+alias gP="git push origin" #Pushs to remote branch (given after gP) ex. gP master will git push origin master
+alias co="git checkout" #Checks out a branch given after co
+alias cod="git checkout development" #Checks out the development branch
+alias cop="git checkout puppetdev" #Checks out the puppetdev branch
 export GIT_EDITOR=vim #Export git commit message editor (if you dont use -m)
 
 #Application Stuff
