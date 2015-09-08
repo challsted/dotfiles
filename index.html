@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-dark.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <title>Dotfiles by hackinginformation</title>
+  </head>
+
+  <body>
+
+    <header>
+      <div class="container">
+        <h1>Dotfiles</h1>
+        <h2>My personal Vim, ZSH, i3, tmux &amp; more dotfiles for fun, shareing, and learning</h2>
+
+        <section id="downloads">
+          <a href="https://github.com/hackinginformation/dotfiles/zipball/master" class="btn">Download as .zip</a>
+          <a href="https://github.com/hackinginformation/dotfiles/tarball/master" class="btn">Download as .tar.gz</a>
+          <a href="https://github.com/hackinginformation/dotfiles" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+        </section>
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
+        <h1>
+<a id="what-this-is-for" class="anchor" href="#what-this-is-for" aria-hidden="true"><span class="octicon octicon-link"></span></a>What this is for</h1>
+
+<p>Just a place for me to share my current "dot files" with everyone and a easy way to make sure i stay in sync accrost multiple devices.
+Feel free to take any or all of them, tweek them to your desire and distribute them! 
+If you do something new with one of them, and you think someone else might benefit from it, please push it back to me! I will happily give you credit for what you commited back.</p>
+
+<p><strong>Please</strong> </p>
+
+<ul>
+<li>Feel free to clone this to your local machine!</li>
+</ul>
+
+<h2>
+<a id="other-downloads-you-will-need" class="anchor" href="#other-downloads-you-will-need" aria-hidden="true"><span class="octicon octicon-link"></span></a>Other Downloads you will need</h2>
+
+<p>If you want to use ZSH you will need to download <a href="https://github.com/robbyrussell/oh-my-zsh">Oh-My-ZSH</a> for pieces of my config</p>
+
+<p>If you are using vim, please download <a href="https://github.com/junegunn/vim-plug">vim-plug</a> by following the instructions on his github.</p>
+
+<p><a href="https://github.com/tmux-plugins/tpm">TMux Plugin Manager</a> is needed if you want to use my TMux Files. You dont NEED it, but you'll want it and once you realise what it offers, its very very helpful. Requires that your 'tmux' version is 1.9 or higher.  </p>
+
+<h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<p>You will need git installed, and if you want to use these you will also need <code>vim</code>, <code>zsh</code>, <code>curl</code>(and/or <code>wget</code>) as well as if your useing the i3 or awesome files, youll need those.
+So, if your on ubuntu, you could copy this (does not include Window Managers)</p>
+
+<ul>
+<li><code>sudo apt-get install git vim zsh curl wget tmux</code></li>
+</ul>
+
+<p>Now you will need to clone my repository, I suggest that you put it inside of a folder under your home directory, i personally use a folder called "git" but this is up to you, and optional.
+If you want to make a folder first you can do this:</p>
+
+<ul>
+<li><code>mkdir -p ~/git &amp;&amp; cd ~/git</code></li>
+</ul>
+
+<p>If you created the folder make sure you cd into it, then run the next command</p>
+
+<ul>
+<li><code>git clone https://github.com/hackinginformation/dotfiles.git</code></li>
+</ul>
+
+<p><a href="../../wiki/ZSH"><strong>ZSH</strong></a>
+If you have <code>zsh</code> installed, and you have already downloaded <a href="https://github.com/robbyrussell/oh-my-zsh">Oh-My-Zsh</a> from above. You will need to run this to use my config:</p>
+
+<ul>
+<li>
+<code>ln -sf ~/git/dotfiles/zsh/zshrc.symlink ~/.zshrc</code> </li>
+<li>If you didnt use the ~/git folder, or you used a different one then you need to update this line, you will also need to open the ~/.zshrc and edit line number 32 to your correct path.
+Once that is complete, you will need to run:</li>
+<li>
+<code>source ~/.zshrc</code> and your complete! Your zsh will change and you'll notice a few new features.</li>
+</ul>
+
+<p><a href="../../wiki/VIM"><strong>VIM</strong></a>
+If you have <code>vim</code> installed, and you have already downloaded <a href="https://github.com/junegunn/vim-plug">vim-plug</a> from above. You will need to run this to use my config:</p>
+
+<ul>
+<li>
+<code>ln -sf ~/git/dotfiles/vim/vimrc.symlink ~/.vimrc</code> </li>
+<li>If you didnt use the ~/git folder, or you used a different one then you need to update this line
+Once that is complete open your vimrc in vim:</li>
+<li><code>vim ~/.vimrc</code></li>
+<li>
+<strong>VIM WILL THROW AN ERROR</strong> this is normal the first time. Just hit enter.</li>
+<li>Once vim is up type <code>:PlugInstall</code>, this will cause a new pane to open in your vim window on the left, depending on your connection speed it will download a bunch of plugins from the internet and put them where they belong. </li>
+<li>One of the last plugins is called "molokai". At the moment there is a bug where molokai installs using the "light" theme by default. It will cause your screen to go very bright and white. But we can fix this!</li>
+<li>Type <code>:q</code> then <code>:wq</code> this will exit the new pane, then exit vim.</li>
+<li>We need to symlink the molokai plugin into the colors directory which we need to create.</li>
+</ul>
+
+<p><strong>FIXING MOLOKAI</strong></p>
+
+<ul>
+<li><code>mkdir -p ~/.vim/colors/</code></li>
+<li><code>ln -sf ~/.vim/plugged/molokai/colors/molokai.vim ~/.vim/colors/molokai.vim</code></li>
+</ul>
+
+<p>Now if we open any file in vim again, for example <code>vim ~/.vimrc</code> you will see that molokai works perfectly :D
+I have a plan to fork molokai and replace my call to my own molokai that dose not include the light version soon.</p>
+
+<p><a href="../../wiki/TMux"><strong>TMUX</strong></a>
+If you have <code>tmux</code> installed (bonus if its higher then 1.9!), and you want to use my tmux config, then you will need to copy my tmux.conf.</p>
+
+<ul>
+<li><code>ln -sf ~/git/dotfiles/tmux/tmux.config ~/.tmux.conf</code></li>
+<li>Open a new tmux session for validation (if you dont already have one open)
+
+<ul>
+<li>(for example) <code>tmux new -s random</code>
+</li>
+</ul>
+</li>
+</ul>
+
+<p>If you want to use <a href="https://github.com/tmux-plugins/tpm">TMux Plugin Manager</a>(I suggest it, but nothing "requires" it then added functionality)</p>
+
+<ul>
+<li>Download <a href="https://github.com/tmux-plugins/tpm">TPM</a> from its site, as of right now the command do that is
+
+<ul>
+<li>git clone <a href="https://github.com/tmux-plugins/tpm">https://github.com/tmux-plugins/tpm</a> ~/.tmux/plugins/tpm</li>
+<li>This will drop it directly into the folder it needs to go, if you have issues, please consult the original GH! </li>
+</ul>
+</li>
+<li>Open a new tmux session (if your not already in one)
+
+<ul>
+<li>(for example) <code>tmux new -s random</code>
+</li>
+</ul>
+</li>
+<li>Once inside a tmux session, press <code>$PREFIX + I</code>
+
+<ul>
+<li>If your using my tmux.conf then this will be <code>Ctrl+A</code> (Release the keys) <code>Shift i</code>
+
+<ul>
+<li>This will cause the screen to change, you'll see an attempt to download plugins (if you have internet access and access to connect to GH then you should be ok)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+<h2>
+<a id="contact-the-author" class="anchor" href="#contact-the-author" aria-hidden="true"><span class="octicon octicon-link"></span></a>Contact the author</h2>
+
+<p>Professional  Twitter <a href="https://twitter.com/MaSammchs">@hackinginfo</a></p>
+
+<p>My Blog    <a href="http://masammich.technoanomaly.com/">masammich's</a></p>
+      </section>
+    </div>
+
+    
+  </body>
+</html>
