@@ -2,11 +2,13 @@
 #This file is intended to be symlinked to the home dir like this:
 ##ln -s $path/to/this/zshrc.symlink ~/.zshrc
 #
-#Version 1.1
+#Version 1.2
 #Author: Hackinginfo
 #Source: https://github.com/hackinginformation/dotfiles
 #
-#Purpose: This file is intended to be a single file put into the home directory that loads all of the other files, it is currently only ment for the author to use, but after experimentation is complete, this can be used by others. Please use at your own descression if you use this before its ready.
+#Purpose: This file is intended to be a single file put into the home directory that loads all of the other files, 
+#IF YOU CHOOSE TO USE THIS FILE, I suggest you delete everything from the if statement below
+## Unless you happen to also be playing with Powerline in your ZSH and want a quick easy way to switch between QWERTY and DVORAK
 
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
@@ -38,7 +40,8 @@ then
     . ~/.local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
 fi
 
-#This sets the keyboard layout to QWERTY, but after pressing the Scroll Lock key it toggles the keyboard layout to be Dvoark It also turns the CAPS LOCK Key into a Control Key
+#This sets the keyboard layout to QWERTY, but after pressing the right control and the right shift (at the same time) key it toggles the keyboard layout to be Dvoark 
+#It also turns the CAPS LOCK Key into a Control Key
 #It Also turns on/off the Scroll Lock LED Off = QWERTY On=Dvorak
 if type setxkbmap > /dev/null;
 then
