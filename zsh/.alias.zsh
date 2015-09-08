@@ -1,5 +1,5 @@
 #.alias.zsh
-#Version 1.1 - Starting this number now, no idea how many modifications have gone into this...
+#Version 1.2
 #Author: Hackinginfo
 #Source: https://github.com/hackinginformation/dotfiles
 #
@@ -22,14 +22,8 @@ alias ubremove="sudo apt-get remove $2" #Remove stuff with 1 word prefix
 alias configzsh="vim ~/.zshrc"  #One command to edit main config file from anywhere
 alias sourcezsh="source ~/.zshrc"  #One command to source the main config file from anywhere (. .zshrc equivilent from bash) 
 
-#SSH Stuff -- Pulls all of the alias from ~/.ssh/config
-#For safety reasons, im not putting that info here
+#SSH Stuff
 alias sshx="ssh -c arcfour,blowfish -XC" #Add a connection and a thing you want forwarded to user this
-alias carter_laptop="ssh -t carter_laptop 'exec zsh'" 
-alias drop_roman="ssh drop_roman"
-alias chase_laptop="ssh chase_laptop"
-alias chase_pi="ssh chase_pi"
-alias chase_xpi="ssh -c arcfour,blowfish -XC chase_pi" #Add a program after chase_xpi to have x11 forwarded accrost it
 
 #GIT Stuff
 alias gs="git status"
@@ -53,20 +47,9 @@ alias tmux="TERM=screen-256color-bce tmux"
 #Add Custom bin dir
 export PATH=$HOME/bin/:$PATH
 
-#Exercism Stuff
-alias exef="exercism fetch"
-alias exes="exercism submit $2"
-
-#Ruby Stuff
-alias be="bundle exec"
-
 #mps-youtube
 alias youtube="mpsyt"
 alias youtube-update="sudo pip install mps-youtube --upgrade"
 
-#CairoDock fix
-alias killcairo="ps -ef | grep cairo | grep -v 'cairo-dock -o' | grep -v grep | awk '{print $2}' xargs kill"
-
 #Stupid Stuff
 alias doit="sudo !!"
-alias fucking="sudo "
