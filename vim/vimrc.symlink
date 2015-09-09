@@ -8,7 +8,9 @@ colorscheme molokai "Uses the very nice looking 'molokai' thee
 highlight Normal ctermfg=grey ctermbg=black
 set background=dark
 "Layout of the actual editor {{{
-set relativenumber  " Show Relative Number on non-selected lines
+if v:version > 703  " If your using VIM 7.4 then:
+    set relativenumber  " Show Relative Number on non-selected lines
+endif
 set number          " Show Highlighted Line number in relation to file
 set cursorline      " Show location of cursor using a horizontal line
 set ruler           " Shows current position
@@ -77,8 +79,12 @@ nnoremap <leader><space> za
 " Highlights last inserted text from insert mode in visual mode
 nnoremap gV `[v`]
 
-" Remove line numbers with ,n add them again with ,n 
-nnoremap <silent> <leader>n :set invnumber<CR>
+" Inteligently Remove line numbers (both kinds) with ,n add them again with ,n
+if &relativenumber  " Hacky way of finding out if you have set 'relative number', if so turn it off with ,n
+  nnoremap <silent> <leader>n :set invnumber <bar> :set invrelativenumber<CR>
+else  
+  nnoremap <silent> <leader>n :set invnumber<CR>
+endif
 
 " :W (Capitol W) saves the file with sudo, needed when editing some files
 command W w !sudo tee % > /dev/null
@@ -109,14 +115,18 @@ nmap <F1> <Esc>
 " Fix Common Spelling mistake of typeing q: instead of :q
 nnoremap q: iq<Esc>
 
-" Y yanks to end of line
-nnoremap Y y$
+" ,y yanks to end of line
+nnoremap <leader>y y$
 
 " Run the entire file through the indent filter with <Leader>=
 noremap <silent> <Leader>= :call Preserve("normal gg=G")<CR>
 
 " Toggle paste mode with <Leader>p (need to turn it back off agian though!)
-nnoremap <Leader>p :set invpaste paste?<CR>
+nnoremap <leader>p :set invpaste paste?<CR>
+
+" Delete (not cut) selection
+nnoremap <leader>d "_d
+vnoremap <leader>d "_d
 " }}}
 " Vim Functions Stuff {{{
 "Delete trailing white space on save, useful for Python
