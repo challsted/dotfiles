@@ -1,0 +1,191 @@
+#.tmux.conf
+#This file is intended to be symlinked to the home dir like this:
+#ln -s $path/to/this/tmux.conf ~/.tmux.conf
+#
+#Version 1.5
+#Author: HackingInfo
+#Source: https://github.com/hackinginformation/dotfiles
+#
+#Purpose: This file is intended to be a single file dropped into the home dir for tmux users
+
+#####
+# Change Some Defaults
+#####
+
+# Change the Prefix to ^a
+set -g prefix C-a
+
+# Changes the shell inside of tmux, ONLY 1 should be uncommented at a time
+# If you need to know which shell, type "which $SHELL" or "which zsh" or "which bash"
+set -g default-shell /bin/zsh
+#set -g default-shell /usr/bin/zsh
+#set -g default-shell /bin/bash
+#set -g default-shell /usr/bin/bash
+
+# Set TMux to utf-8
+set -g utf8
+setw -g utf8 on
+
+# Set Tmux to display in 256 Colors
+set -g default-terminal "screen-256color"
+set -g terminal-overrides "xterm:colors=256"
+
+# Change the history to 10,000
+set -g history-limit 10000
+
+# Make Messages Stay on the screen longer (2 seconds)
+set -g display-time 2000
+
+# Make Panes and Windows function a little better (mainly needed for some plugins)
+set -g base-index 1
+set -g pane-base-index 1
+
+#####
+# Enable some things that are not on by default
+#####
+
+# Turn on Mouse Operations
+set -g mode-mouse on
+set -g mouse-resize-pane on
+set -g mouse-select-pane on
+set -g mouse-select-window on
+
+# Do NOT Automaticly Set Window Title
+setw -g automatic-rename off
+set -g allow-rename off
+
+# No Bells, but still tell me with an icon if something is going on
+setw -g monitor-activity off
+set -g visual-activity on
+
+# $PREFIX s enables syncronize-panes toggling
+bind s setw synchronize-panes on \; display-message "Sync on"    # Uppercase Turns Sync on
+bind S setw synchronize-panes off \; display-message "Sync off"  # Lowercase Turns Sync off
+
+# $PREFIX X closes a window
+bind X confirm kill-window
+
+# Reloads the tmux config file, and prints a message
+bind r source-file ~/.tmux.conf \; display-message "Config reloaded..."
+
+#Move Windows with Arrows
+bind S-Up swap-window -t -1    # Swap window Left 1
+bind S-Down swap-window -t +1  # Swap window Right 1
+bind S-Left select-window -t -1  # Move Window Left 1
+bind S-Right select-window -t +1 # Move Window Right 1
+
+#Move Panes with Arrows
+### Need to research this part
+#bind Up
+#bind Down
+#bind Left
+
+#####
+# Resize
+#####
+
+bind -r ^ resize-pane -U 5 # Resize Pane by a lot 
+bind -r + resize-pane -U 1 # Resize Pane by a little with the rest
+bind -r - resize-pane -D 1
+bind -r < resize-pane -L 1
+bind -r > resize-pane -R 1
+
+#####
+# VI Move and Conversion
+#####
+
+set -g status-keys vi
+setw -g mode-keys vi # Similar to set -o vi for ksh/bash
+bind-key -t vi-copy 'v' begin-selection # v starts selecting thigns
+bind-key -t vi-copy 'y' copy-selection  # y yanks(copys) selected text
+
+# Unbind old keys, rebind functionality to new key
+unbind-key %
+unbind-key '"'
+bind V split-window -v # Prefix s splits selected window horizontally
+bind v split-window -h # Prefix v splits selected window vertically
+
+# Switch Panes with hjkl
+bind h select-pane -L
+bind j select-pane -D
+bind k select-pane -U
+bind l select-pane -R
+
+#####
+# Status Bar
+# To Find all the colors, paste this into a terminal
+#  for i in {0..255} ; do
+#      printf "\x1b[38;5;${i}mcolour${i}\n"
+#  done
+# #S = Local Session
+# #I = Window Indicator
+# #W = Window Name
+# #F = Window Decoration (*, -, Z, M, !..)
+# #P = Active Pane
+#####
+
+# Status Bar
+set -g status-utf8 on
+set -g status-fg colour201 #
+set -g status-bg colour233 #Solid Black, matches the background of terminal or "transparent"
+# Left Bar
+set -g status-left ' #S:#I:#P '
+set -g status-left-length 15
+set -g status-left-fg colour46  #Green
+set -g status-left-bg colour233 #Transparent
+# Window List
+# First is Number left of window name, then window name, then anything that comes after window name (Such as Z, *, or -)
+set -g window-status-format "#[fg=colour46] #I #[fg=colour201]#W#[fg=colour202]#F "
+# Same as above, but with a background to highlight the selected window
+set -g window-status-current-format "#[fg=colour46,bg=colour235] #I #[fg=colour201]#W#[fg=colour202]#F "
+set -g window-status-separator ":"
+set -g status-justify centre
+# Right Bar
+#set -g status-right 'CPU:#{cpu_percentage} | Batt:#{battery_percentage} | %a %h-%d %H:%M'
+set -g status-right '%a %h-%d %H:%M'
+set -g status-right-length 40 
+
+#####
+# Panes
+####
+set-option -g pane-border-fg green
+set-option -g pane-border-bg black
+ 
+set-option -g pane-active-border-fg green
+set-option -g pane-active-border-bg green
+
+#####
+# Tmux Plugin Manager (TPM) 
+#
+# Tmux - TPM
+# Prefix + I = Install
+# Prefix + U = Update
+# Prefix + u = Uninstll Unused
+#####
+
+#List of Plugins
+set -g @tpm_plugins '         \
+  tmux-plugins/tpm            \
+  tmux-plugins/tmux-battery   \
+  tmux-plugins/tmux-cpu       \
+  tmux-plugins/tmux-yank      \
+  tmux-plugins/tmux-sidebar   \
+  davidscholberg/tmux-cluster \
+'
+
+# Tmux - Yank
+set -g @yank_selection 'clipboard'
+
+# Tmux - Sidebar
+set -g @sidebar-tree 't'                #Prefix t Pop Open Tree
+set -g @sidebar-tree 'T'                #Prefix T Pop Open Tree and Focus Tree 
+set -g @sidebar-tree-command 'tree -C'  #Attempt to "Colorize" Tree
+
+#Tmux-Cluster
+#Uncomment if you want to set it to something non-default, set to default to prevent accidents
+#set -g @tmux_cluster_prompt_key C
+
+#Initializes Tmux Plugin Manager
+#KEEP THIS AT THE VERY BOTTOM
+
+run-shell '~/.tmux/plugins/tpm/tpm'
