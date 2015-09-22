@@ -53,3 +53,6 @@ alias youtube-update="sudo pip install mps-youtube --upgrade"
 
 #Stupid Stuff
 alias doit="sudo !!"
+
+#Pull everything down!!!
+alias pullall="for REPO in "`find ~/git -maxdepth 0 -type d`"; do (cd "$REPO"; git pull); done;"
