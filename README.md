@@ -1,11 +1,9 @@
 # What this is for
 
-Just a place for me to share my current "dot files" with everyone and a easy way to make sure i stay in sync accrost multiple devices.
-Feel free to take any or all of them, tweek them to your desire and distribute them! 
-If you do something new with one of them, and you think someone else might benefit from it, please push it back to me! I will happily give you credit for what you commited back.
-
-**Please** 
-* Feel free to clone this to your local machine!
+Just a place for me to share my current "dot files" with everyone and a easy way to make sure i stay in sync accrost multiple devices.  
+Feel free to take any or all of them, tweek them to your desire and distribute them!  
+I also have a "[templates_dotfiles][template_dotfiles]" repo if you want to use that, these files have no plugins, and a lot less "personalized" stuff in them, they are designed to be used a templates, but nothing stopps you from useing them just as they are :D  
+If you do something new with one of them, and you think someone else might benefit from it, please push it back to me! I will happily give you credit for what you commited back.  
 
 ## Other Downloads you will need
 
@@ -13,7 +11,7 @@ If you want to use ZSH you will need to download [Oh-My-ZSH][zsh] for pieces of 
 
 If you are using vim, please download [vim-plug][plug] by following the instructions on his github.
 
-[TMux Plugin Manager][tpm] is needed if you want to use my TMux Files. You dont NEED it, but you'll want it and once you realise what it offers, its very very helpful. Requires that your 'tmux' version is 1.9 or higher.  
+[TMux Plugin Manager][tpm] is needed if you want to use my TMux Files. You dont NEED it, but you'll want it and once you realise what it offers, its very very helpful. Requires that your 'tmux' version is 1.9 or higher.
 
 ## Installation
 
@@ -30,14 +28,14 @@ If you created the folder make sure you cd into it, then run the next command
 
 [**ZSH**][ZSH_WIKI]
 If you have `zsh` installed, and you have already downloaded [Oh-My-Zsh][zsh] from above. You will need to run this to use my config:
-* `ln -sf ~/git/dotfiles/zsh/zshrc.symlink ~/.zshrc` 
+* `ln -sf ~/git/dotfiles/zsh/zshrc.symlink ~/.zshrc`
 * If you didnt use the ~/git folder, or you used a different one then you need to update this line, you will also need to open the ~/.zshrc and edit line number 32 to your correct path.
 Once that is complete, you will need to run:
 * `source ~/.zshrc` and your complete! Your zsh will change and you'll notice a few new features.
 
 [**VIM**][VIM_WIKI]
 If you have `vim` installed, and you have already downloaded [vim-plug][plug] from above. You will need to run this to use my config:
-* `ln -sf ~/git/dotfiles/vim/vimrc.symlink ~/.vimrc` 
+* `ln -sf ~/git/dotfiles/vim/vimrc.symlink ~/.vimrc`
 * If you didnt use the ~/git folder, or you used a different one then you need to update this line
 Once that is complete open your vimrc in vim:
 * `vim ~/.vimrc`
@@ -86,3 +84,12 @@ My Blog    [masammich's][blog]
 [VIM_WIKI]:     ../../wiki/VIM
 [ZSH_WIKI]:     ../../wiki/ZSH
 [I3_WIKI]:      ../../wiki/i3
+[template_dotfiles]: https://github.com/hackinginformation/template_dotfiles
+
+TODO:  
+* Add how to get agnoster to work
+  * Include Powerline Setup and Install
+  * Include on Mac how the shell font needs to be changed
+* Add how to use custom prompts
+  * Create a custom prompt!!! Agnoster alone isnt what I want!!
+* Remove non-personalized stuff from files! 
