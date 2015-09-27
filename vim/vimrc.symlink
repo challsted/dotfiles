@@ -156,7 +156,7 @@ Plug 'puppetlabs/puppet-syntax-vim', { 'for': 'puppet' }    " Puppet Syntax High
 Plug 'rodjek/vim-puppet', { 'for': 'puppet' }               " Helps Vim Play Nice with Puppet
 Plug 'rodjek/puppet-lint', { 'for': 'puppet' }              " Suggested by PuppetLabs as a linter
 Plug 'klen/python-mode', { 'for': 'python' }                " Python edior on crack
-Plug 'tmux-plugins/vim-tmux', { 'for': 'tmux' }             " A syntax highlighter for tmux! :D
+Plug 'tmux-plugins/vim-tmux'        " A syntax highlighter for tmux! :D
 Plug 'tmux-pugins/vim-tmux-focus-events', { 'for': 'tmux' } " Improves features while inside of vim
 call plug#end()                     " Stops using vim-plug
 " }}}
