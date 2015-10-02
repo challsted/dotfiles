@@ -23,6 +23,11 @@ set showmatch       " Shows matching bracket when highlighting with cursor
 if has('mouse')
     set mouse=a
 endif
+if has('unnamedplus')
+    set clipboard^=unnamedplus
+else
+    set clipboard&=unnaed
+endif
 " }}}
 "Folding {{{
 set foldenable      " Enables Folding
