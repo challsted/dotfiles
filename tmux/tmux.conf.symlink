@@ -126,13 +126,13 @@ bind l select-pane -R
 
 # Status Bar
 set -g status-utf8 on
-set -g status-fg colour201 #
-set -g status-bg colour233 #Solid Black, matches the background of terminal or "transparent"
+set -g status-fg "#[colour201]" #
+set -g status-bg "#[colour233]" #Solid Black, matches the background of terminal or "transparent"
 # Left Bar
 set -g status-left ' #S:#I:#P '
 set -g status-left-length 15
-set -g status-left-fg colour46  #Green
-set -g status-left-bg colour233 #Transparent
+set -g status-left-fg "#[colour46]"  #Green
+set -g status-left-bg "#[colour233]" #Transparent
 # Window List
 # First is Number left of window name, then window name, then anything that comes after window name (Such as Z, *, or -)
 set -g window-status-format "#[fg=colour46] #I #[fg=colour201]#W#[fg=colour202]#F "
