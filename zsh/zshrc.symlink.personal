@@ -48,3 +48,4 @@ if type setxkbmap > /dev/null;
 then
     setxkbmap -layout "us,us" -variant ",dvorak" -option "grp:rctrl_rshift_toggle,grp_led:scroll,caps:ctrl_modifier"
 fi
+export PATH="$(ruby -e 'print Gem.user_dir')/bin:$HOME/bin:$PATH"
