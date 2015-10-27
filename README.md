@@ -52,6 +52,12 @@ Once that is complete open your vimrc in vim:
 Now if we open any file in vim again, for example `vim ~/.vimrc` you will see that molokai works perfectly :D
 I have a plan to fork molokai and replace my call to my own molokai that dose not include the light version soon.
 
+[**NVim**]
+Following everything above except the .vimrc symlink, you will need to make the following additional changes:  
+* `mkdir -p ${XDG_CONFIG_HOME:=$HOME/.config}`
+* `ln -s ~/.vim $XDG_CONFIG_HOME/nvim`
+* `ln -s ~/git/dotfiles/nvim/nvimrc.symlink $XDG_CONFIG_HOME/nvim/init.vim`
+
 [**TMUX**][TMUX_WIKI]
 If you have `tmux` installed (bonus if its higher then 1.9!), and you want to use my tmux config, then you will need to copy my tmux.conf.
 * `ln -sf ~/git/dotfiles/tmux/tmux.config ~/.tmux.conf`
