@@ -2,7 +2,6 @@
 #This file is intended to be symlinked to the home dir like this:
 #ln -s $path/to/this/tmux.conf ~/.tmux.conf
 #
-#Version 1.5
 #Author: HackingInfo
 #Source: https://github.com/hackinginformation/dotfiles
 #
@@ -45,10 +44,7 @@ set -g pane-base-index 1
 #####
 
 # Turn on Mouse Operations
-set -g mode-mouse on
-set -g mouse-resize-pane on
-set -g mouse-select-pane on
-set -g mouse-select-window on
+set -g mouse
 
 # Do NOT Automaticly Set Window Title
 setw -g automatic-rename off
