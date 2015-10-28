@@ -7,10 +7,9 @@ syntax on           "Creates better highlighting
 colorscheme molokai "Uses the very nice looking 'molokai' thee
 highlight Normal ctermfg=grey ctermbg=black
 set background=dark
+set clipboard+=unnamedplus
 "Layout of the actual editor {{{
-if v:version > 703  " If your using VIM 7.4 then:
-    set relativenumber  " Show Relative Number on non-selected lines
-endif
+set relativenumber  " Show Relative Number on non-selected lines
 set number          " Show Highlighted Line number in relation to file
 set cursorline      " Show location of cursor using a horizontal line
 set ruler           " Shows current position
@@ -69,11 +68,7 @@ nnoremap <leader><space> za
 nnoremap gV `[v`]
 
 " Inteligently Remove line numbers (both kinds) with ,n add them again with ,n
-if &relativenumber  " Hacky way of finding out if you have set 'relative number', if so turn it off with ,n
-  nnoremap <silent> <leader>n :set invnumber <bar> :set invrelativenumber<CR>
-else  
-  nnoremap <silent> <leader>n :set invnumber<CR>
-endif
+nnoremap <silent> <leader>n :set invnumber <bar> :set invrelativenumber<CR>
 
 " :W (Capitol W) saves the file with sudo, needed when editing some files
 command W w !sudo tee % > /dev/null
