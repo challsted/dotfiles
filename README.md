@@ -60,7 +60,11 @@ Following everything above except the .vimrc symlink, you will need to make the 
 
 [**TMUX**][TMUX_WIKI]
 If you have `tmux` installed (bonus if its higher then 1.9!), and you want to use my tmux config, then you will need to copy my tmux.conf.
-* `ln -sf ~/git/dotfiles/tmux/tmux.config ~/.tmux.conf`
+* If your using 2.0 or older then you'll need to use the "PRE" file
+  * `ln -sf ~/git/dotfiles/tmux/tmux.conf.symlink.PRE ~/.tmux.conf`
+* If your using the latest and greatest (2.1+)
+  * `ln -sf ~/git/dotfiles/tmux/tmux.conf.symlink ~/.tmux.conf`
+
 * Open a new tmux session for validation (if you dont already have one open)
   * (for example) `tmux new -s random`
 
