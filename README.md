@@ -84,9 +84,9 @@ If you want to use [TMux Plugin Manager][tpm](I suggest it, but nothing "require
 As mentioned above, this section is expirimental and subject to change  
 This is being preformed fully on Arch Linux right now, not sure what extras are needed on other disros.  
 * Packages to install
-  * mutt - the base package
-  * cyrus-sasl - needed for Gmail SMTP
-* ln -s ~/git/dotfiles/mutt ~/.mutt
+  * `mutt` - the base package
+  * `cyrus-sasl` - needed for Gmail SMTP
+* `ln -s ~/git/dotfiles/mutt ~/.mutt`
   * Yes, symlink the whole directory!! 
 
 ## Contact the author
