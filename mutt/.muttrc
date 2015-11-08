@@ -1,9 +1,9 @@
-set imap_user = 'chase.hallsted@gmail.com'
-set imap_pass = ''
-set realname = "Chase Hallsted"
+set imap_user = 'chase.hallsted@gmail.com' # Gmail Required Full Email
+set imap_pass = SECRET                     # Prompt me for my password
+set realname = "Chase Hallsted"            # Your Real Name
 
 ##REMOTE GMAIL FOLDERS
-set folder = "imaps://imap.gmail.com:993"
+set folder = "imaps://chase.hallsted@imap.gmail.com:993"
 set spoolfile = "+INBOX"
 set postponed ="+[Google Mail]/Drafts"
 set trash = "+[Google Mail]/Trash"
