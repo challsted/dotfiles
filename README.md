@@ -13,6 +13,8 @@ If you are using vim, please download [vim-plug][plug] by following the instruct
 
 [TMux Plugin Manager][tpm] is needed if you want to use my TMux Files. You dont NEED it, but you'll want it and once you realise what it offers, its very very helpful. Requires that your 'tmux' version is 1.9 or higher.
 
+**Warning Expirimental** I am playing around with mutt again, the files here are not fully functioning and possibly will change. Documenting now more for my self then others.
+
 ## Installation
 
 You will need git installed, and if you want to use these you will also need `vim`, `zsh`, `curl`(and/or `wget`) as well as if your useing the i3 or awesome files, youll need those.
@@ -26,14 +28,14 @@ If you want to make a folder first you can do this:
 If you created the folder make sure you cd into it, then run the next command
 * `git clone https://github.com/hackinginformation/dotfiles.git`
 
-[**ZSH**][ZSH_WIKI]
+[**ZSH**][ZSH_WIKI]  
 If you have `zsh` installed, and you have already downloaded [Oh-My-Zsh][zsh] from above. You will need to run this to use my config:
 * `ln -sf ~/git/dotfiles/zsh/zshrc.symlink ~/.zshrc`
 * If you didnt use the ~/git folder, or you used a different one then you need to update this line, you will also need to open the ~/.zshrc and edit line number 32 to your correct path.
 Once that is complete, you will need to run:
 * `source ~/.zshrc` and your complete! Your zsh will change and you'll notice a few new features.
 
-[**VIM**][VIM_WIKI]
+[**VIM**][VIM_WIKI]  
 If you have `vim` installed, and you have already downloaded [vim-plug][plug] from above. You will need to run this to use my config:
 * `ln -sf ~/git/dotfiles/vim/vimrc.symlink ~/.vimrc`
 * If you didnt use the ~/git folder, or you used a different one then you need to update this line
@@ -52,13 +54,13 @@ Once that is complete open your vimrc in vim:
 Now if we open any file in vim again, for example `vim ~/.vimrc` you will see that molokai works perfectly :D
 I have a plan to fork molokai and replace my call to my own molokai that dose not include the light version soon.
 
-[**NVim**]
+[**NVim**][NVIM_WIKI]  
 Following everything above except the .vimrc symlink, you will need to make the following additional changes:  
 * `mkdir -p ${XDG_CONFIG_HOME:=$HOME/.config}`
 * `ln -s ~/.vim $XDG_CONFIG_HOME/nvim`
 * `ln -s ~/git/dotfiles/nvim/nvimrc.symlink $XDG_CONFIG_HOME/nvim/init.vim`
 
-[**TMUX**][TMUX_WIKI]
+[**TMUX**][TMUX_WIKI]  
 If you have `tmux` installed (bonus if its higher then 1.9!), and you want to use my tmux config, then you will need to copy my tmux.conf.
 * If your using 2.0 or older then you'll need to use the "PRE" file
   * `ln -sf ~/git/dotfiles/tmux/tmux.conf.symlink.PRE ~/.tmux.conf`
@@ -78,6 +80,15 @@ If you want to use [TMux Plugin Manager][tpm](I suggest it, but nothing "require
   * If your using my tmux.conf then this will be `Ctrl+A` (Release the keys) `Shift i`
     * This will cause the screen to change, you'll see an attempt to download plugins (if you have internet access and access to connect to GH then you should be ok)
 
+[**Mutt**][MUTT_WIKI]  
+As mentioned above, this section is expirimental and subject to change  
+This is being preformed fully on Arch Linux right now, not sure what extras are needed on other disros.  
+* Packages to install
+  * mutt - the base package
+  * cyrus-sasl - needed for Gmail SMTP
+* ln -s ~/git/dotfiles/mutt ~/.mutt
+  * Yes, symlink the whole directory!! 
+
 ## Contact the author
 
 Professional  Twitter [@hackinginfo][tweet]
@@ -94,6 +105,8 @@ My Blog    [masammich's][blog]
 [VIM_WIKI]:     ../../wiki/VIM
 [ZSH_WIKI]:     ../../wiki/ZSH
 [I3_WIKI]:      ../../wiki/i3
+[NVIM_WIKI]:    ../../wiki/NVim
+[MUTT_WIKI]:    ../../wiki/Mutt
 [template_dotfiles]: https://github.com/hackinginformation/template_dotfiles
 
 TODO:  
