@@ -1,46 +1,68 @@
-set imap_user = 'chase.hallsted@gmail.com' # Gmail Required Full Email
-set imap_pass = SECRET                     # Prompt me for my password
-set realname = "Chase Hallsted"            # Your Real Name
+# ~* Mutt Run Commands *~ #
 
-##REMOTE GMAIL FOLDERS
-set folder = "imaps://chase.hallsted@imap.gmail.com:993"
-set spoolfile = "+INBOX"
-set postponed ="+[Google Mail]/Drafts"
-set trash = "+[Google Mail]/Trash"
+#Global Variables
+set my_pass = SECRET
+set my_user = 'chase.hallsted@gmail.com'
 
-##SMTP Settings to sent email
-set smtp_url = "smtp://chase.hallsted@smtp.gmail.com:587/"
-set smtp_pass = ""
+#Basics per account
+set imap_user = $my_user        # Gmail Required Full Email
+set imap_pass = $my_pass        # Prompt me for my password
+set realname = "Chase Hallsted" # Your Real Name
 
-##LOCAL FOLDERS FOR CACHED HEADERS AND CERTIFICATES
-set header_cache =~/.mutt/cache/headers
-set message_cachedir =~/.mutt/cache/bodies
-set certificate_file =~/.mutt/certificates
+# Remote Gmail (Recieve)
+set folder = "imaps://chase.hallsted@imap.gmail.com:993" # Needs to be uniqueper account, or remove userid if only using 1 account
+set spoolfile = "+INBOX"               # Where to check for mail
+set postponed ="+[Google Mail]/Drafts" # Where to store saved emails
+set trash = "+[Google Mail]/Trash"     # TODO: Need to set this up...
 
-##SECURING
-set move = yes #Stop asking to "move read messages to mbox"!
-set imap_keepalive = 900
+#SMTP Settings to sent email (Send)
+set smtp_url  = "smtp://chase.hallsted@smtp.gmail.com:587/"
+#set smtp_pass = ""       # Not sure i need a password to send
+#set record    = "+Sent"  # I should only need this for non-gmail
+set from      = $my_user # Set who to appear "as"
+set use_from  = yes      # Use from?
 
-##Sort by newest conversation first.
+#Local folders and files
+set header_cache     =~/.mutt/cache/headers # Store headers locally
+set message_cachedir =~/.mutt/cache/bodies  # Store messages locally
+set certificate_file =~/.mutt/certificates  # Store certificates
+set alias_file       = ~/.mutt/alias        # Local Alises
+set mailcap_path     = ~/.mutt/mailcap      # Entries for filetypes
+#set tmpdir           = ~/.mutt/temp        # Temp files
+set signature        = ~/.mutt/sig          # Signature file
+
+#Random stuff for now
+set move = yes           # Stop asking to "move read messages to mbox"!
+set imap_keepalive = 900 # How often to send a hello packet
+set mail_check = 120     # How often to check for new mail
+
+#TLS/SSL Stuff
+set ssl_force_tls=yes
+set ssl_starttls=yes
+set ssl_use_sslv2=no
+set ssl_use_sslv3=no
+set ssl_use_tlsv1=no
+set ssl_use_tlsv1_1=no
+set ssl_use_tlsv1_2=yes
+set ssl_verify_dates=yes
+set ssl_verify_host=yes
+
+#Sort by newest conversation first.
 set sort = reverse-threads
 set sort_aux = last-date-received
 
-##Set editor to create new email
+#Set editor to create new email
 set editor='vim'
 
+#MAILBOXES - Regularly checked folders
 mailboxes = "INBOX"
 
-##Color scheme
+#Color scheme
 color hdrdefault white black    #fg bg
 color header green black From
 color quoted cyan black
 color signature red black
 
-# Paths
-set alias_file       = ~/.mutt/alias         # where to store aliases
-set mailcap_path     = ~/.mutt/mailcap       # entries for filetypes
-#set tmpdir           = ~/.mutt/temp          # where to keep temp files
-set signature        = ~/.mutt/sig           # my signature file
 
 # Sidebar Patch
 #set sidebar_delim   = ' │'
