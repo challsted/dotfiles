@@ -2,24 +2,73 @@
 
 #Global Variables
 set my_user = 'chase.hallsted@gmail.com'
+set my_msmtp_pass = `gpg -d passwords.gpg`
+
+# Following Guide on https://help.ubuntu.com/community/MuttAndGmail
+set realname  = "Chase Hallsted"   # Your Real Name
+set from      = $my_user # Set who to appear "as"
+set use_from  = yes      # Use from?
+set sendmail  =      /usr/bin/msmtp # Use msmtp and not sendmail
+set spoolfile = "+INBOX"               # Where to check for mail
+set envelope_from = "yes" #
+
+#Folders
+set folder    = "~/Mail"  # Mailboxes in here
+set record    = "+Sent"   # Sent Messages
+set postponed = "+Drafts" # Draft Messages
+set move      = no        # Dont move mail from the spool
+
+#MAILBOXES - Regularly checked folders
+mailboxes = ! +Fetchmail +slrn +mutt
+set sort_browser = alpha # Sort mailboes by alphabetical
+
+# Order of Headers - and what to show
+hdr_order Date: From: User-Agent: X-Mailer \
+          To: Cc: Subject
+ignore *
+unignore Date: From: User-Agent: X-Mailer \
+         To: Cc: Subject
+
+#Set editor to create new email
+set editor='nvim' # Set neovim to edit text
+set edit_headers  # We can see the headers as we edit
+
+# Aliases
+set sort_alias=alias # Sort Aliases in alphabetical order (by  name)
+macro index,pager I '<shell-escape> fetchmail -v<enter>'
+
+#Extra Stuff
+set markers
+set smart_wrap
+set pager_context=5
+set status_on_top
+push <show-version>
+
+
+
+
+
+
+
+
+
+
+
+
 
 #Basics per account
 set imap_user = $my_user          # Gmail Required Full Email
 set imap_pass = $my_main_password # Set inside encrypted password.gpg
-set realname = "Chase Hallsted"   # Your Real Name
 
 # Remote Gmail (Recieve)
-set folder = "imaps://chase.hallsted@imap.gmail.com:993" # Needs to be uniqueper account, or remove userid if only using 1 account
-set spoolfile = "+INBOX"               # Where to check for mail
-set postponed ="+[Google Mail]/Drafts" # Where to store saved emails
-set trash = "+[Google Mail]/Trash"     # TODO: Need to set this up...
+#set folder = "imaps://chase.hallsted@imap.gmail.com:993" # Needs to be uniqueper account, or remove userid if only using 1 account
+#set postponed ="+[Google Mail]/Drafts" # Where to store saved emails
+#set trash = "+[Google Mail]/Trash"     # TODO: Need to set this up...
 
 #SMTP Settings to sent email (Send)
-set smtp_url  = "smtp://chase.hallsted@smtp.gmail.com:587/"
-set smtp_pass = $my_main_password # Set insie encrypted password.gpg
+set smtp_url  = "smtps://chase.hallsted@smtp.gmail.com:587/"
+set smtp_pass = $my_msmtp_password # Set insie encrypted password.gpg
 #set record    = "+Sent"  # I should only need this for non-gmail
-set from      = $my_user # Set who to appear "as"
-set use_from  = yes      # Use from?
 
 #Local folders and files
 set header_cache     =~/.mutt/cache/headers # Store headers locally
@@ -31,9 +80,9 @@ set mailcap_path     = ~/.mutt/mailcap      # Entries for filetypes
 set signature        = ~/.mutt/sig          # Signature file
 
 #Random stuff for now
-set move = yes           # Stop asking to "move read messages to mbox"!
+set move =           yes # Stop asking to "move read messages to mbox"!
 set imap_keepalive = 900 # How often to send a hello packet
-set mail_check = 120     # How often to check for new mail
+set mail_check =     120 # How often to check for new mail
 
 #TLS/SSL Stuff
 set ssl_force_tls=yes
@@ -50,11 +99,6 @@ set ssl_verify_host=yes
 set sort = reverse-threads
 set sort_aux = last-date-received
 
-#Set editor to create new email
-set editor='vim'
-
-#MAILBOXES - Regularly checked folders
-mailboxes = "INBOX"
 
 #Color scheme
 color hdrdefault white black    #fg bg
@@ -87,10 +131,6 @@ set quit
 
 #Page view settings
 set pager="builtin"
-set pager_context=5
-ignore * #first, ignore all headers
-unignore From To Reply-To Subject X-Mailer Cc Date  #Now show only what I want
-hdr_order From: Date: To: Cc: Subject
 set tilde #Pads the end of emails with tilde like vim does
 
 set fast_reply #Doesn't produce too many prompts when replying
