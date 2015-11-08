@@ -1,0 +1,9 @@
+# Environment variable assignments
+PATH=/bin:/usr/bin:/usr/local/bin
+VERBOSE=off
+MAILDIR=$HOME/Mail
+LOGFILE=$HOME/.procmaillog
+# Recipes
+:O:
+* ^TOmutt-user
+mutt
