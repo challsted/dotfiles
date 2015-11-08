@@ -1,13 +1,12 @@
 # ~* Mutt Run Commands *~ #
 
 #Global Variables
-set my_pass = SECRET
 set my_user = 'chase.hallsted@gmail.com'
 
 #Basics per account
-set imap_user = $my_user        # Gmail Required Full Email
-set imap_pass = $my_pass        # Prompt me for my password
-set realname = "Chase Hallsted" # Your Real Name
+set imap_user = $my_user          # Gmail Required Full Email
+set imap_pass = $my_main_password # Set inside encrypted password.gpg
+set realname = "Chase Hallsted"   # Your Real Name
 
 # Remote Gmail (Recieve)
 set folder = "imaps://chase.hallsted@imap.gmail.com:993" # Needs to be uniqueper account, or remove userid if only using 1 account
@@ -17,7 +16,7 @@ set trash = "+[Google Mail]/Trash"     # TODO: Need to set this up...
 
 #SMTP Settings to sent email (Send)
 set smtp_url  = "smtp://chase.hallsted@smtp.gmail.com:587/"
-#set smtp_pass = ""       # Not sure i need a password to send
+set smtp_pass = $my_main_password # Set insie encrypted password.gpg
 #set record    = "+Sent"  # I should only need this for non-gmail
 set from      = $my_user # Set who to appear "as"
 set use_from  = yes      # Use from?
@@ -63,25 +62,24 @@ color header green black From
 color quoted cyan black
 color signature red black
 
-
-# Sidebar Patch
-#set sidebar_delim   = ' │'
-set sidebar_visible = no
-set sidebar_width   = 24
-color sidebar_new color221 black #color233
-
-set sidebar_delim='|'
-set sidebar_sort=yes
-mailboxes =inbox =[Google Mail]/Drafts
-bind index CP sidebar-prev
-bind index CN sidebar-next
-bind index CO sidebar-open
-bind pager CP sidebar-prev
-bind pager CN sidebar-next
-bind pager CO sidebar-open
-macro index b '<enter-command>toggle sidebar_visible<enter>'
-macro pager b '<enter-command>toggle sidebar_visible<enter>'
-bind index B bounce-message
+## Sidebar Patch
+##set sidebar_delim   = ' │'
+#set sidebar_visible = no
+#set sidebar_width   = 24
+#color sidebar_new color221 black #color233
+#
+#set sidebar_delim='|'
+#set sidebar_sort=yes
+#mailboxes =inbox =[Google Mail]/Drafts
+#bind index CP sidebar-prev
+#bind index CN sidebar-next
+#bind index CO sidebar-open
+#bind pager CP sidebar-prev
+#bind pager CN sidebar-next
+#bind pager CO sidebar-open
+#macro index b '<enter-command>toggle sidebar_visible<enter>'
+#macro pager b '<enter-command>toggle sidebar_visible<enter>'
+#bind index B bounce-message
 
 #Don't ask, just do
 set delete
@@ -96,3 +94,7 @@ hdr_order From: Date: To: Cc: Subject
 set tilde #Pads the end of emails with tilde like vim does
 
 set fast_reply #Doesn't produce too many prompts when replying
+
+#GPG File
+## Needs to be sourced BEFORE account specific files are sourced
+source "gpg2 -dq $HOME/git/dotfiles/mutt/passwords.gpg |"
