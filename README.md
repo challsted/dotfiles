@@ -42,7 +42,7 @@ If you have `vim` installed, and you have already downloaded [vim-plug][plug] fr
 Once that is complete open your vimrc in vim:
 * `vim ~/.vimrc`
 * **VIM WILL THROW AN ERROR** this is normal the first time. Just hit enter.
-* Once vim is up type `:PlugInstall`, this will cause a new pane to open in your vim window on the left, depending on your connection speed it will download a bunch of plugins from the internet and put them where they belong. 
+* Once vim is up type `:PlugInstall`, this will cause a new pane to open in your vim window on the left, depending on your connection speed it will download a bunch of plugins from the internet and put them where they belong.
 * One of the last plugins is called "molokai". At the moment there is a bug where molokai installs using the "light" theme by default. It will cause your screen to go very bright and white. But we can fix this!
 * Type `:q` then `:wq` this will exit the new pane, then exit vim.
 * We need to symlink the molokai plugin into the colors directory which we need to create.
@@ -73,7 +73,7 @@ If you have `tmux` installed (bonus if its higher then 1.9!), and you want to us
 If you want to use [TMux Plugin Manager][tpm](I suggest it, but nothing "requires" it then added functionality)
 * Download [TPM][tpm] from its site, as of right now the command do that is
   * git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-  * This will drop it directly into the folder it needs to go, if you have issues, please consult the original GH! 
+  * This will drop it directly into the folder it needs to go, if you have issues, please consult the original GH!
 * Open a new tmux session (if your not already in one)
   * (for example) `tmux new -s random`
 * Once inside a tmux session, press `$PREFIX + I`
@@ -87,7 +87,10 @@ This is being preformed fully on Arch Linux right now, not sure what extras are 
   * `mutt` - the base package
   * `cyrus-sasl` - needed for Gmail SMTP
 * `ln -s ~/git/dotfiles/mutt ~/.mutt`
-  * Yes, symlink the whole directory!! 
+  * Yes, symlink the whole directory!!
+* ln -s ~/git/dotfiles/MAIL/procmailrc ~/.procmailrc
+* ln -s ~/git/dotfiles/MAIL/msmtprc.. ~/.msmtprc
+* ln -s ~/git/dotfiles/MAIL/fetchmailrc ~/.fetchmailrc
 
 ## Contact the author
 
@@ -115,4 +118,4 @@ TODO:
   * Include on Mac how the shell font needs to be changed
 * Add how to use custom prompts
   * Create a custom prompt!!! Agnoster alone isnt what I want!!
-* Remove non-personalized stuff from files! 
+* Remove non-personalized stuff from files!

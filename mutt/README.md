@@ -36,6 +36,6 @@ This is to log any extra things i had to do other then simply install listed pac
   * GMail:<tab key>SuperSecretPassword
   * :wq
 * `gpg -e -r 'Name' passwords
-* `shred passwords`
+* `shred -xu ~/git/dotfiles/mutt/passwords` because gpg made a file called passwords.gpg
 * Where passwords are requested insert this:
   * `"gpg -d ~/git/dotfiles/mutt/password.gpg | awk '/GMail:/ {print $2}'"`
