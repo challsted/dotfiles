@@ -184,13 +184,13 @@ autocmd BufWrite *.py :call DeleteTrailingWS()
 " Plugin Stuff {{{
 " VimPlug {{{
 " Autoinstall vim-plug {{{
-let s:plugins=$VIMDATA . '/plugged'
-let s:plugin_manager=$VIMHOME . '/autoload/plug.vim'
+let s:plugins=$XDG_CONFIG_HOME . '/plugged'
+let s:plugin_manager=$XDG_CONFIG_HOME . '/autoload/plug.vim'
 let s:plugin_url='https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-if empty(glob(s:plugin_manager))
+if empty(glob('~/.config/nvim/autoload/plug.vim'))
     echo 'vim-plug not found. Installing...'
     if executable('curl')
-        silent exec '!curl -fLo ' . s:plugin_manager . ' --create-dirs ' .
+        silent exec '!curl -fLo  ~/.config/nvim/autoload/plug.vim --create-dirs ' .
                     \ s:plugin_url
     else
         echom 'Could not download vim-plug. No plugins were installed.'
