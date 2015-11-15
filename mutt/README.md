@@ -5,6 +5,7 @@ All of the information found in this file will probably be ported to the wiki
 This is to log any extra things i had to do other then simply install listed packages
 
 * touch /var/spool/mail/$USER (chase in my case)
+* mkdir ~/git/dotfiles/mutt/temp
 * Enable "Access for less secure apps" which is off by default
   * https://www.google.com/settings/security/lesssecureapps
 
@@ -39,3 +40,10 @@ This is to log any extra things i had to do other then simply install listed pac
 * `shred -xu ~/git/dotfiles/mutt/passwords` because gpg made a file called passwords.gpg
 * Where passwords are requested insert this:
   * `"gpg -d ~/git/dotfiles/mutt/password.gpg | awk '/GMail:/ {print $2}'"`
+
+# Patches that will need to be added/I plan on adding
+* planned - sidebar
+* planned - trash folder
+
+#Issues
+* Color scheme is not working? Not sure where im supposed to see it at still
