@@ -7,7 +7,7 @@ syntax on           "Creates better highlighting
 colorscheme molokai "Uses the very nice looking 'molokai' thee
 highlight Normal ctermfg=grey ctermbg=black
 set background=dark
-set clipboard+=unnamedplus
+set clipboard=unnamed,unnamedplus
 "Layout of the actual editor {{{
 set relativenumber  " Show Relative Number on non-selected lines
 set number          " Show Highlighted Line number in relation to file
@@ -42,9 +42,9 @@ autocmd Filetype yaml setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 " }}}
 " }}}
 "Writeing and backing up files {{{
-set nobackup        " Get rid of annoying ~file
-set nowb            " Helps above
-set noswapfile      " Helps above
+set backupdir=~/.config/nvim/backup// " Backup files
+set directory=~/.config/nvim/swap//   " Swap Files
+set undodir=~/.config/nvim/undo//     " Undo files
 " }}}
 "Menu and Search {{{
 set wildmode=list:longest " Make 'wildmenu' behave a little nicer
@@ -111,21 +111,100 @@ nnoremap <leader>p :set invpaste paste?<CR>
 " Delete (not cut) selection
 nnoremap <leader>d "_d
 vnoremap <leader>d "_d
+
+" Create Space above or below current line!
+" g<Shift>o (gO) to create line ABOVE cursor
+nmap gO O<ESC>j
+" g<Ctrl>o (gC-o) to create line BELOW cursor (ctrl b/c its right below shift
+nmap g<C-O> o<ESC>k
+
+" Create pairs like in modern IDEs skipping { due to manual folding use
+imap <leader>' ''<ESC>i
+imap <leader>" ""<ESC>i
+imap <leader>( ()<ESC>i
+imap <leader>[ []<ESC>i
+
+" Delete surrounding characters {{{
+" ds<char> only deltes
+" cs<char> deletes and puts you into insert mode
+noremap ds{ F{xf}x
+noremap cs{ F{xf}xi
+noremap ds" F"x,x
+noremap cs" F"x,xi
+noremap ds' F'x,x
+noremap cs' F'x,xi
+noremap ds( F(xf)x
+noremap cs( F(xf)xi
+noremap ds) F(xf)x
+noremap cs) F(xf)xi
 " }}}
-" Vim Functions Stuff {{{
+" Arrow Key Remaps {{{
+" Move current line up or down 1 line
+noremap <up> ddkP
+noremap <down> ddp
+noremap <left> <Nop>
+noremap <right> <Nop>
+inoremap <up> <Nop>
+inoremap <down> <Nop>
+inoremap <left> <Nop>
+inoremap <right> <Nop>
+vnoremap <up> <Nop>
+vnoremap <down> <Nop>
+vnoremap <left> <Nop>
+vnoremap <right> <Nop>
+" }}}
+" }}}
+" NVim Functions Stuff {{{
+" OS Detection {{{
+let s:has_arch = 0
+let s:has_ubuntu = 0
+let s:has_mac = 0
+if has('unix')
+    let s:uname = system('uname -s')
+    if s:uname =~? 'Darwin'
+        let s:has_mac = 1
+    else
+        let s:issue = system('cat /etc/issue')
+        if s:issue =~? 'Arch Linux'
+            let s:has_arch = 1
+        elseif s:issue =~? 'Ubuntu'
+            let s:has_ubuntu = 1
+        endif
+    endif
+endif
+" }}}
 "Delete trailing white space on save, useful for Python
 func! DeleteTrailingWS()
-  exe "normal mz"
+    exe "normal mz"
     %s/\s\+$//ge
-      exe "normal `z"
-      endfunc
-      autocmd BufWrite *.py :call DeleteTrailingWS()
+    exe "normal `z"
+endfunc
+autocmd BufWrite *.py :call DeleteTrailingWS()
 " }}}
-" Plugin Stuff {{{ 
+" Plugin Stuff {{{
 " VimPlug {{{
+" Autoinstall vim-plug {{{
+let s:plugins=$VIMDATA . '/plugged'
+let s:plugin_manager=$VIMHOME . '/autoload/plug.vim'
+let s:plugin_url='https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+if empty(glob(s:plugin_manager))
+    echo 'vim-plug not found. Installing...'
+    if executable('curl')
+        silent exec '!curl -fLo ' . s:plugin_manager . ' --create-dirs ' .
+                    \ s:plugin_url
+    else
+        echom 'Could not download vim-plug. No plugins were installed.'
+        finish
+    endif
+    augroup vimplug
+        autocmd!
+        autocmd VimEnter * PlugInstall
+    augroup END
+endif
+" }}}
 " The syntax is 'Plug' single quote name of author/vim-plugin single quote. So
 " for example 'bling/vim-airline' is https://github.com/bling/vim-airline
-call plug#begin('~/.vim/plugged')   " Starts using vim-plug https://github.com/junegunn/vim-plug
+call plug#begin('~/.nvim/plugged')   " Starts using vim-plug https://github.com/junegunn/vim-plug
 Plug 'bling/vim-airline'            " This is a bar that shows current mode as well as ton of useful info
 Plug 'tomasr/molokai'               " Color scheme 'Molokai' for vim, since solarized is so touchy....
 Plug 'aserebryakov/filestyle'       " Highlights tab and space combos, and trailing spaces
@@ -134,14 +213,14 @@ Plug 'godlygeek/csapprox'           " Makes GVim Color Schemes work in Terminal 
 Plug 'godlygeek/tabular'            " Awesome plugin for alligining text
 Plug 'tpope/vim-fugitive'           " TPope's Git integration into vim
 Plug 'tpope/vim-surround'           " Helps surrounding code and text with other code and text
-Plug 'scrooloose/syntastic'         " Automatic Syntax Checking
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }      " Tree file navigator
 Plug 'puppetlabs/puppet-syntax-vim', { 'for': 'puppet' }    " Puppet Syntax Highlighting
 Plug 'rodjek/vim-puppet', { 'for': 'puppet' }               " Helps Vim Play Nice with Puppet
 Plug 'rodjek/puppet-lint', { 'for': 'puppet' }              " Suggested by PuppetLabs as a linter
 Plug 'klen/python-mode', { 'for': 'python' }                " Python edior on crack
 Plug 'tmux-plugins/vim-tmux'        " A syntax highlighter for tmux! :D
-Plug 'tmux-pugins/vim-tmux-focus-events', { 'for': 'tmux' } " Improves features while inside of vim
+Plug 'benekastah/neomake'           " Syntax Checker to replace Syntastic for neovim
+Plug 'elzr/vim-json', { 'for': 'json' } " JSON Hilight and indent plugin
 call plug#end()                     " Stops using vim-plug
 " }}}
 " Powerline Specific Settings {{{
@@ -164,6 +243,41 @@ let g:airline_symbols.paste = 'Þ'
 let g:airline_symbols.paste = '∥'
 let g:airline_symbols.whitespace = 'Ξ'
 let g:airline_powerline_fonts = 1
+" }}}
+" Neomake Specific Settings  {{{
+augroup neomake_after_save
+    autocmd!
+    autocmd BufReadPost,BufWritePost *
+                \ Neomake | if has('nvim') | Neomake! | endif
+augroup END
+let g:neomake_verbose = 0
+let g:neomake_error_sign = {
+            \ 'text': '>>',
+            \ 'texthl': 'ErrorMsg',
+            \ }
+let g:neomake_warning_sign = {
+            \ 'text': '>>',
+            \ 'texthl': 'ErrorMsg',
+            \ }
+" }}}
+" PLUGIN Markdown Preview {{{
+if has('nvim') && executable('cargo')
+    function! g:BuildComposer(info)
+        if a:info.status !=# 'unchanged' || a:info.force
+            !cargo build --release
+            UpdateRemovePlugins
+        endif
+    endfunction
+
+    Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
+    let g:markdown_composer_syntax_theme='hybrid'
+elseif executable('npm')
+    Plug 'euclio/vim-instant-markdown', {
+                \ 'for': 'markdown',
+                \ 'do': 'npm install euclio/vim-instant-markdown-d'
+                \}
+endif
+
 " }}}
 " Molokai Specific Settings {{{
 let g:rehash256 = 1 " More like the gui 256 scheme'
