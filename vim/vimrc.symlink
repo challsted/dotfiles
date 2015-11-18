@@ -219,4 +219,5 @@ let g:syntastic_puppet_checkers = ["puppetlint"]
 " }}}
 " }}}
 " Do not edit below line unless you know what your doing
+echom ">^.^<"
 " vim: set foldmethod=marker foldlevel=0 :
