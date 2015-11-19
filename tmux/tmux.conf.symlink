@@ -44,7 +44,15 @@ set -g pane-base-index 1
 #####
 
 # Turn on Mouse Operations
-set -g mouse
+set-option -g -q mode-mouse on
+
+# Enable mousewheel to act as a scroll back, also allows for "full screen" apps to accept keys instead of tmux
+bind-key -T root WheelUpPane if-shell -F -t = "#{alternate_on}" "send-keys -M" "select-pane -t =; copy-mode -e; send-keys -M"
+bind-key -T root WheelDownPane if-shell -F -t = "#{alternate_on}" "send-keys -M" "select-pane -t =; send-keys -M"
+
+# Allow highlight and paste like in Putty
+bind-key -t vi-copy WheelUpPane halfpage-up
+bind-key -t vi-copy WheelDownPane halfpage-down
 
 # Do NOT Automaticly Set Window Title
 setw -g automatic-rename off
