@@ -18,12 +18,12 @@ set lazyredraw      " Redraw the screen less, leading to faster response
 set showmatch       " Shows matching bracket when highlighting with cursor
 " }}}
 "Folding {{{
-set foldenable      " Enables Folding
+set foldenable        " Enables Folding
 set foldlevelstart=10 " Opens the first 10 folds by default
-set foldnestmax=10  " 10 nested fold max
-set foldmethod=indent " Tells vim to fold based on indent level
-set modeline        " Turn ModeLine On
-set modelines=1     " Checks last line for file specific commands via modeline
+set foldnestmax=10    " 10 nested fold max
+set foldmethod=marker " Tells vim to fold based on indent level
+set modeline          " Turn ModeLine On
+set modelines=1       " Checks last line for file specific commands via modeline
 " }}}
 " }}}
 "Spaceing, Tab Key, and Indention {{{
@@ -39,92 +39,87 @@ filetype indent on  " Activates indenting for files
 filetype plugin on  " Activates plugins for file types
 autocmd Filetype puppet setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 autocmd Filetype yaml setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
+augroup standardActonsPerFile " Allign all code according to syntax
+    autocmd!
+    autocmd BufWrite *.py,*.sh,*.pp :normal gg=G " Allign all of these files to syntax
+    autocmd BufWrite *.py,*.sh,*.pp :%s/\s\+$//  " Remove Trailing White space
+augroup END
 " }}}
 " }}}
 "Writeing and backing up files {{{
 set backupdir=~/.config/nvim/backup// " Backup files
 set directory=~/.config/nvim/swap//   " Swap Files
 set undodir=~/.config/nvim/undo//     " Undo files
+" If a directory dosnt exist, create it
+function s:mkNonExDir(file, buf)
+    if empty(getbufvar(a:buf, '&buftype')) && a:file!~#'\v^\w+\:\/'
+        let dir=fnamemodify(a:file, ':h')
+        if !isdirectory(dir)
+            call mkdir(dir, 'p')
+        endif
+    endif
+endfunction
+augroup BWCCreateDir
+    autocmd!
+    autocmd BufWritePre * :call s:mkNonExDir(expand('<afile>'), +expand('<abuf>'))
+augroup END
 " }}}
 "Menu and Search {{{
 set wildmode=list:longest " Make 'wildmenu' behave a little nicer
-set ignorecase      " Ignores case when searching 
+set ignorecase      " Ignores case when searching
 set smartcase       " Even with ignore case, still try to be smart about it
 " }}}
 " Key Remaps {{{
-" Leader is comma
-let mapleader=","
-
-" The below sets NERDTree to Ctrl+N
-map <C-n> :NERDTreeToggle<CR>
-
-" Press Space to turn off highlighting and clear any message already displayed.
-nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
-
-" Leader-space open/closes folds
-nnoremap <leader><space> za
-
-" Highlights last inserted text from insert mode in visual mode
-nnoremap gV `[v`]
-
-" Inteligently Remove line numbers (both kinds) with ,n add them again with ,n
-nnoremap <silent> <leader>n :set invnumber <bar> :set invrelativenumber<CR>
-
-" :W (Capitol W) saves the file with sudo, needed when editing some files
-command W w !sudo tee % > /dev/null
-
-" Quick saving of files
-nnoremap <leader>w :w!<CR>
-
+" Extended Functionality {{{
 "For lines longer then the screens width, treat them as seperate lines
 map j gj
 map k gk
-
-" Enables spell check, but only after pressing ,ss
-" Press ,ss again to disable
-" Cloned from github.com/amix
-map <leader>ss :setlocal invspell<CR>
-
-" For those of us who sometimes have to edit files in windows in non-vim,
-" remove the ^M at the end of line
-" Cloned from github.com/amix
-noremap <leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
-
+" Highlights last inserted text from insert mode in visual mode
+nnoremap gV `[v`]
+" :W (Capitol W) saves the file with sudo, needed when editing some files
+command W w !sudo tee % > /dev/null
 " Map <F1> to <Esc> everywhere
 map <F1> <Esc>
 imap <F1> <Esc>
 vmap <F1> <Esc>
 nmap <F1> <Esc>
-
-" Fix Common Spelling mistake of typeing q: instead of :q
-nnoremap q: iq<Esc>
-
-" ,y yanks to end of line
-nnoremap <leader>y y$
-
+" Create Space above or below current line! (Shift above Ctrl)
+nmap gO O<ESC>j
+nmap g<C-O> o<ESC>k
+" Leader is comma
+let mapleader=","
+" Space to turn off highlighting
+nnoremap <silent><Space> :nohlsearch<Bar>:echo<CR>
+" Inteligently Add/Remove line numbers
+nnoremap <silent> <leader>n :set invnumber <bar> :set invrelativenumber<CR>
 " Run the entire file through the indent filter with <Leader>=
 noremap <silent> <Leader>= :call Preserve("normal gg=G")<CR>
-
+" Leader-space open/closes folds
+nnoremap <leader><space> za
+" Quick saving of files
+nnoremap <leader>w :w!<CR>
+" Enables spell check, but only after pressing ,ss like 'set spell'
+nnoremap <leader>ss :setlocal invspell<CR>
+" Remove the extra ^M that windows creates at the end of lines
+noremap <leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
+" ,y yanks to end of line
+nnoremap <leader>y y$
 " Toggle paste mode with <Leader>p (need to turn it back off agian though!)
 nnoremap <leader>p :set invpaste paste?<CR>
-
 " Delete (not cut) selection
 nnoremap <leader>d "_d
 vnoremap <leader>d "_d
-
-" Create Space above or below current line!
-" g<Shift>o (gO) to create line ABOVE cursor
-nmap gO O<ESC>j
-" g<Ctrl>o (gC-o) to create line BELOW cursor (ctrl b/c its right below shift
-nmap g<C-O> o<ESC>k
-
 " Create pairs like in modern IDEs skipping { due to manual folding use
 imap <leader>' ''<ESC>i
 imap <leader>" ""<ESC>i
 imap <leader>( ()<ESC>i
 imap <leader>[ []<ESC>i
-
-" Delete surrounding characters {{{
+" }}}
+" Keymaps for Plugins {{{
+" The below sets NERDTree to Ctrl+N
+map <C-n> :NERDTreeToggle<CR>
+" }}}
+" Delete/Change surrounding characters {{{
 " ds<char> only deltes
 " cs<char> deletes and puts you into insert mode
 noremap ds{ F{xf}x
@@ -142,6 +137,7 @@ noremap cs) F(xf)xi
 " Move current line up or down 1 line
 noremap <up> ddkP
 noremap <down> ddp
+" Dont use these keys for anything
 noremap <left> <Nop>
 noremap <right> <Nop>
 inoremap <up> <Nop>
@@ -154,7 +150,7 @@ vnoremap <left> <Nop>
 vnoremap <right> <Nop>
 " }}}
 " }}}
-" NVim Functions Stuff {{{
+" Functions/AuGroups {{{
 " OS Detection {{{
 let s:has_arch = 0
 let s:has_ubuntu = 0
@@ -173,13 +169,14 @@ if has('unix')
     endif
 endif
 " }}}
-"Delete trailing white space on save, useful for Python
+"Delete trailing white space on save, useful for Python {{{
 func! DeleteTrailingWS()
     exe "normal mz"
     %s/\s\+$//ge
     exe "normal `z"
 endfunc
 autocmd BufWrite *.py :call DeleteTrailingWS()
+"}}}
 " }}}
 " Plugin Stuff {{{
 " VimPlug {{{
@@ -202,9 +199,10 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
     augroup END
 endif
 " }}}
+" Plugins to Install {{{
 " The syntax is 'Plug' single quote name of author/vim-plugin single quote. So
 " for example 'bling/vim-airline' is https://github.com/bling/vim-airline
-call plug#begin('~/.nvim/plugged')   " Starts using vim-plug https://github.com/junegunn/vim-plug
+call plug#begin('~/.config/nvim/plugged')   " Starts using vim-plug https://github.com/junegunn/vim-plug
 Plug 'bling/vim-airline'            " This is a bar that shows current mode as well as ton of useful info
 Plug 'tomasr/molokai'               " Color scheme 'Molokai' for vim, since solarized is so touchy....
 Plug 'aserebryakov/filestyle'       " Highlights tab and space combos, and trailing spaces
@@ -222,6 +220,7 @@ Plug 'tmux-plugins/vim-tmux'        " A syntax highlighter for tmux! :D
 Plug 'benekastah/neomake'           " Syntax Checker to replace Syntastic for neovim
 Plug 'elzr/vim-json', { 'for': 'json' } " JSON Hilight and indent plugin
 call plug#end()                     " Stops using vim-plug
+" }}}
 " }}}
 " Powerline Specific Settings {{{
 let g:airline_theme='luna' " This sets the theme of airline
@@ -245,11 +244,6 @@ let g:airline_symbols.whitespace = 'Ξ'
 let g:airline_powerline_fonts = 1
 " }}}
 " Neomake Specific Settings  {{{
-augroup neomake_after_save
-    autocmd!
-    autocmd BufReadPost,BufWritePost *
-                \ Neomake | if has('nvim') | Neomake! | endif
-augroup END
 let g:neomake_verbose = 0
 let g:neomake_error_sign = {
             \ 'text': '>>',
@@ -285,7 +279,7 @@ let g:rehash256 = 1 " More like the gui 256 scheme'
 " Syntastic Specific Settings {{{
 let g:syntastic_check_on_open = 1 " Check on file open
 let g:syntastic_check_on_wq = 0 " Dont check on :wq
-let g:syntastic_enable_signs = 1 " Enable symbols listed below 
+let g:syntastic_enable_signs = 1 " Enable symbols listed below
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_error_symbol = "X"
