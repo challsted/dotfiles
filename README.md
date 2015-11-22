@@ -118,4 +118,7 @@ TODO:
   * Include on Mac how the shell font needs to be changed
 * Add how to use custom prompts
   * Create a custom prompt!!! Agnoster alone isnt what I want!!
-* Remove non-personalized stuff from files!
+* ~Remove non-personalized stuff from files!~ (Pushed this to a different repo)
+* (Git)Create development branch for all this crazy junk im doing
+* (Vim)Remove status line (plugin) from vim and nvim, build own status line to do what it does on my own
+* (i3)Convert to use i3Blocks again, ive been inspired :P
