@@ -40,14 +40,11 @@ export GIT_EDITOR=vim #Export git commit message editor (if you dont use -m)
 
 #Application Stuff
 alias top="htop" #Allows for htop to run if i type top instead
-alias nvim="nocorrect nvim" #This is to prevent auto correction of nvim to vim
+#alias nvim="nocorrect nvim" #This is to prevent auto correction of nvim to vim
 alias vi="nvim" #vi will launch nvim, vim will launch vim
 
 #TMux Stuff
 alias tmux="TERM=screen-256color-bce tmux"
-
-#Add Custom bin dir
-export PATH=$HOME/bin/:$PATH
 
 #mps-youtube
 alias youtube="mpsyt"

@@ -6,7 +6,7 @@
 #Author: Hackinginfo
 #Source: https://github.com/hackinginformation/dotfiles
 #
-#Purpose: This file is intended to be a single file put into the home directory that loads all of the other files, 
+#Purpose: This file is intended to be a single file put into the home directory that loads all of the other files,
 #IF YOU CHOOSE TO USE THIS FILE, I suggest you delete everything from the if statement below
 ## Unless you happen to also be playing with Powerline in your ZSH and want a quick easy way to switch between QWERTY and DVORAK
 
@@ -21,7 +21,7 @@ COMPLETION_WAITING_DOTS="true"
 # The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
 HIST_STAMPS="mm/dd/yyyy"
 
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*) 
+# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 plugins=(git command-not-found vi-mode brew osx tmux)
 
 #########################
@@ -41,11 +41,11 @@ then
     . ~/.local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
 fi
 
-#This sets the keyboard layout to QWERTY, but after pressing the right control and the right shift (at the same time) key it toggles the keyboard layout to be Dvoark 
+#This sets the keyboard layout to QWERTY, but after pressing the right control and the right shift (at the same time) key it toggles the keyboard layout to be Dvoark
 #It also turns the CAPS LOCK Key into a Control Key
 #It Also turns on/off the Scroll Lock LED Off = QWERTY On=Dvorak
 if type setxkbmap > /dev/null;
 then
     setxkbmap -layout "us,us" -variant ",dvorak" -option "grp:rctrl_rshift_toggle,grp_led:scroll,caps:ctrl_modifier"
 fi
-export PATH="$(ruby -e 'print Gem.user_dir')/bin:$HOME/bin:$PATH"
+#export PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
