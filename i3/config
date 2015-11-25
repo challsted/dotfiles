@@ -1,110 +1,97 @@
+#####
+# PREFIX KEYS
 # Mod4 = Windows, Mod1 = Alt
+######
 set $mod Mod1
 set $win Mod4
 
+#####
+# i3 CONFIG
+#####
+# reload the configuration file
+bindsym $win+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $win+Shift+r restart
+# exit i3 (logs you out of your X session)
+bindsym $win+Shift+e exec i3-nagbar -t warning -m 'You pressed the exit shortcut.' -b lock 'exec ~/.i3/i3lock.sh lock' -b logout 'exec ~/.i3/i3lock.sh logout' -b suspend 'exec ~/.i3/i3lock.sh suspend' -b hibernate 'exec ~/.i3/i3lock.sh hibernate' -b reboot 'exec ~/.i3/i3lock.sh reboot' -b shutdown 'exec ~/.i3/i3lock.sh shutdown'
+
+#####
+# SYSTEM
+#####
 #Font for panels
-font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
-# The font above is very space-efficient, that is, it looks good, sharp and
-# clear in small sizes. However, if you need a lot of unicode glyphs or
-# right-to-left text rendering, you should instead use pango for rendering and
-# chose a FreeType font, such as:
-# font pango:DejaVu Sans Mono 10
+font pango:System San Francisco Display 10
 
-# Use Mouse+$win to drag floating windows to their wanted position
-floating_modifier $win
-
-# start a terminal
-bindsym $win+Return exec gnome-terminal
-
-# kill focused window
-bindsym $win+Shift+q kill
-
-# start dmenu (a program launcher)
-bindsym $win+d exec dmenu_run
-# There also is the (new) i3-dmenu-desktop which only displays applications
-# shipping a .desktop file. It is a wrapper around dmenu, so you need that
-# installed.
-# bindsym $win+d exec --no-startup-id i3-dmenu-desktop
-
+#####
+# MOVEMENT
+#####
 # change focus
 bindsym $win+j focus left
 bindsym $win+k focus down
 bindsym $win+l focus up
 bindsym $win+semicolon focus right
-
 # alternatively, you can use the cursor keys:
 bindsym $win+Left focus left
 bindsym $win+Down focus down
 bindsym $win+Up focus up
 bindsym $win+Right focus right
-
 # move focused window
 bindsym $win+Shift+j move left
 bindsym $win+Shift+k move down
 bindsym $win+Shift+l move up
 bindsym $win+Shift+semicolon move right
-
 # alternatively, you can use the cursor keys:
 bindsym $win+Shift+Left move left
 bindsym $win+Shift+Down move down
 bindsym $win+Shift+Up move up
 bindsym $win+Shift+Right move right
 
+#####
+# NEED A MOUSE?
+#####
+# Use Mouse+$win to drag floating windows to their wanted position
+floating_modifier $win
+
+#####
+# PROGRAMS
+#####
+# start a terminal
+bindsym $win+Return exec gnome-terminal
+# start rofi in run mode
+bindsym $win+d exec rofi -show run -lines 3 -eh 2 -width -25 -padding 50 -opacity "85" -bw 0 -bc "$black" -bg "$black" -fg "$green" -hlbg "$black" -hlfg "#9575cd" -font "System San Francisco Display 18"
+# Need to build a scrpt for Shena that will allow me to pass it to rofi -dmenu to read off the options interactivly
+
+#####
+# CONTROL YOUR SCREEN
+#####
 # split in horizontal orientation
 bindsym $win+h split h
-
 # split in vertical orientation
 bindsym $win+v split v
-
-# enter fullscreen mode for the focused container
-bindsym $win+f fullscreen
-
-# change container layout (stacked, tabbed, toggle split)
-bindsym $win+s layout stacking
-bindsym $win+w layout tabbed
-bindsym $win+e layout toggle split
-
+# enter zoomed/fullscreen  mode for the focused container (Win+Z like on tmux)
+bindsym $win+z fullscreen
+# kill focused window
+bindsym $win+Shift+x kill
 # toggle tiling / floating
-bindsym $win+Shift+space floating toggle
-
+bindsym $win+space floating toggle
 # change focus between tiling / floating windows
-bindsym $win+space focus mode_toggle
+bindsym $win+Shift+space focus mode_toggle
 
-# focus the parent container
-bindsym $win+a focus parent
-
-# focus the child container
-#bindsym $win+d focus child
-
-# reload the configuration file
-bindsym $win+Shift+c reload
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $win+Shift+r restart
-# exit i3 (logs you out of your X session)
-set $script ~/.i3/i3lock.sh
-bindsym $win+Shift+e exec i3-nagbar -t warning -m 'You pressed the exit shortcut.' -b lock 'exec ~/.i3/i3lock.sh lock' -b logout 'exec ~/.i3/i3lock.sh logout' -b suspend 'exec ~/.i3/i3lock.sh suspend' -b hibernate 'exec ~/.i3/i3lock.sh hibernate' -b reboot 'exec ~/.i3/i3lock.sh reboot' -b shutdown 'exec ~/.i3/i3lock.sh shutdown'
-
-# resize window (you can also use the mouse for that)
+#####
+# RESIZE WINDOW
+#####
 bindsym $win+r mode "resize"
 mode "resize" {
-# These bindings trigger as soon as you enter the resize mode
-
-# Pressing left will shrink the window’s width.
-# Pressing right will grow the window’s width.
-# Pressing up will shrink the window’s height.
-# Pressing down will grow the window’s height.
+    # These bindings trigger as soon as you enter the resize mode
     bindsym j resize shrink width 10 px or 10 ppt
     bindsym k resize grow height 10 px or 10 ppt
     bindsym l resize shrink height 10 px or 10 ppt
     bindsym semicolon resize grow width 10 px or 10 ppt
-
-# same bindings, but for the arrow keys
+    # same bindings, but for the arrow keys
     bindsym Left resize shrink width 10 px or 10 ppt
     bindsym Down resize grow height 10 px or 10 ppt
     bindsym Up resize shrink height 10 px or 10 ppt
     bindsym Right resize grow width 10 px or 10 ppt
-
-# back to normal: Enter or Escape
+    # back to normal: Enter or Escape
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
@@ -113,24 +100,20 @@ mode "resize" {
 # WORKSPACES
 #####
 
-#
-
 # Window for Firefox and other web stuff
-set $w1 1: www
+set $w1 1: 
 # Primary Window for doing what ever
-set $w2 2: Play
+set $w2 2: 
 # Workspace for irc, pidgin, hangouts what ever
-set $w3 3: Comm
+set $w3 3: 
 # Work spaces for Codeing and practise
-set $w4 4: Code
-set $w5 5: Code
-set $w6 6: Code
-set $w7 7: Code
-set $w8 8: Code
-set $w9 9: Code
-# Juejuejuejuejuejuejue
-set $w10 10: NSFW
-
+set $w4 4: 
+set $w5 5: 
+set $w6 6: 
+set $w7 7: 
+set $w8 8: 
+set $w9 9: 
+set $w0 10: 
 # switch to workspace
 bindsym $win+1 workspace $w1
 bindsym $win+2 workspace $w2
@@ -141,8 +124,7 @@ bindsym $win+6 workspace $w6
 bindsym $win+7 workspace $w7
 bindsym $win+8 workspace $w8
 bindsym $win+9 workspace $w9
-bindsym $win+0 workspace $w10
-
+bindsym $win+0 workspace $w0
 # move focused container to workspace
 bindsym $win+Shift+1 move container to workspace $w1
 bindsym $win+Shift+2 move container to workspace $w2
@@ -153,31 +135,29 @@ bindsym $win+Shift+6 move container to workspace $w6
 bindsym $win+Shift+7 move container to workspace $w7
 bindsym $win+Shift+8 move container to workspace $w8
 bindsym $win+Shift+9 move container to workspace $w9
-bindsym $win+Shift+0 move container to workspace $w10
+bindsym $win+Shift+0 move container to workspace $w0
 
 #####
 # FORCED WINDOWS
 #####
-
+# Always launch FF on WorkSpace 1
 assign [class="Firefox"] $w1
 exec --no-startup-id i3-msg 'workspace $w1; exec /usr/bin/firefox'
-assign [class="Pidgin"] $w3
+assign [class="Pidgin"] $w2
 
 #####
 # BARS
 #####
-
-#Bottom Bar with primary config
+# Bottom Bar with primary config
 bar {
     position            bottom
     output              HDMI3
     status_command      i3status --config ~/.i3/i3status.conf
     mode                dock
     id                  bar-1
-    font                xft:Cousine, FontAwesome 10
     workspace_buttons   yes
 }
-#Top bar for icons and shit?
+# Top bar for icons and shit?
 #bar {
 #    position            top
 #    output              HDMI3
@@ -190,15 +170,9 @@ bar {
 #####
 
 #Fixes Popups to be floating
+# TODO: Add Hangouts, and possibly audacity to this
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="task_dialog"] floating enable
-
-#Kills active window (Useing Z until i can get a keyboard with a working q)
-bindsym $win+Shift+z kill
-
-#Replace Previously placed Nitrogen Desktop after a restart
-exec nitrogen --restore
-
 #Lock screen activate on keepress
 bindsym $mod+l exec i3lock -i ~/Pictures/wallpaper/anime-bleach_271508.png -u -p default -n
 bindsym $mod+shift+l exec ~/.i3/i3lock.sh
@@ -206,10 +180,8 @@ bindsym $mod+shift+l exec ~/.i3/i3lock.sh
 #####
 # Look
 #####
-
 new_window pixel 2
 new_float pixel 2
-
 # Hybrid colors
 set $back               #1d1F21
 set $black              #282A2E
@@ -221,13 +193,22 @@ set $red                #CC6666
 set $darkred            #A54242
 set $green              #B5BD56
 
-#class                  border      backgr.     text        split
-client.focused          $green     $green       $black      $red
+# CLASS                 BORDER      BG          TEXT        SPLIT
+client.focused          $green      $green      $black      $red
 client.focused_inactive $grey       $grey       $lightgrey  $grey
 client.unfocused        $grey       $grey       $lightgrey  $grey
 client.urgent           $red        $red        $black      $red
 client.background       $back
 
-#bar {
-#    i3bar_command ~/.i3/bar/i3_bar.sh
-#}
+#####
+# LOAD ON BOOT
+#####
+# Needs to be installed, adds transition effects
+exec compton
+# Replace Previously placed Nitrogen Desktop after a restart
+exec_always nitrogen --restore --no-recurse ~/Pictures/wallpaper
+
+#####
+# LOAD EVERY RELOAD
+#####
+#exec_always <something>
