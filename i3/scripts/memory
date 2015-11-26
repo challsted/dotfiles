@@ -1,0 +1,6 @@
+#!/bin/env bash
+
+USED=`free -h | awk 'FNR == 2 {print $3}'`
+TOTAL=`free -h | awk 'FNR == 2 {print $2}'`
+
+echo "$USED/$TOTAL"
