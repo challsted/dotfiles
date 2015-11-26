@@ -22,8 +22,8 @@ set -g default-shell /bin/zsh
 #set -g default-shell /usr/bin/bash
 
 # Set TMux to utf-8
-set -g utf8
-setw -g utf8 on
+#set -g utf8
+#setw -g utf8 on
 
 # Set Tmux to display in 256 Colors
 set -g default-terminal "screen-256color"
@@ -132,7 +132,7 @@ bind l select-pane -R
 #####
 
 # Status Bar
-set -g status-utf8 on
+#set -g status-utf8 on
 set -g status-fg colour201 #
 set -g status-bg colour233 #Solid Black, matches the background of terminal or "transparent"
 # Left Bar
