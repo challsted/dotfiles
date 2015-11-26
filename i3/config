@@ -158,17 +158,17 @@ bar {
     workspace_buttons   yes
 }
 # Top bar for icons and shit?
-#bar {
-#    position            top
-#    output              HDMI3
-#    status_command      exec --no-startup-id xfce4-panel --disable-wm-check
-#    id                  bar-2
-#}
+bar {
+    position            top
+    output              HDMI3
+    status_command      i3blocks -c ~/.i3/i3blocks.conf
+    id                  bar-2
+    workspace_buttons   no
+}
 
 #####
 # CORRECTIONS
 #####
-
 #Fixes Popups to be floating
 # TODO: Add Hangouts, and possibly audacity to this
 for_window [window_role="pop-up"] floating enable
