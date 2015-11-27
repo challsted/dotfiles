@@ -30,7 +30,7 @@ If you want to make a folder first you can do this:
 If you created the folder make sure you cd into it, then run the next command
 * `git clone https://github.com/hackinginformation/dotfiles.git`
 
-### ZSH
+## ZSH
 [**ZSH Wiki**][ZSH_WIKI]
 
 **Packages:**
@@ -45,7 +45,7 @@ Once that is complete, you will need to run:
 **Notes:**
 * If you do not use `~/$USER/git/` to clone, then you will need to open ~/.zshrc and tweak the line that starts with `CUSTZSH` to the path to this repo's zsh folder
 
-### Vim
+## Vim
 [**VIM Wiki**][VIM_WIKI]
 
 **Packages:**
@@ -65,7 +65,7 @@ Once that is complete, you will need to run:
 **Notes:**
 * If you do not use `~/$USER/git/` to clone, then you will need to tweak the symlinks above
 
-### NeoVim
+## NeoVim
 [**NVim Wiki**][NVIM_WIKI]
 
 **Packages**
@@ -83,7 +83,7 @@ Once that is complete, you will need to run:
 * If you do not use `~/$USER/git/` to clone, then you will need to tweak the symlinks above
 * Neovim will automatically install vim-plug and all plugins if you haven't done so already
 
-### TMux
+## TMux
 [**TMUX Wiki**][TMUX_WIKI]
 
 **Packages:**
@@ -109,7 +109,7 @@ Once that is complete, you will need to run:
 * If you do not use `~/$USER/git/` to clone, then you will need to tweak the symlinks above
 * If you chose not to use TPM, you will probably want to remove the bottom section of the file about TPM, and update the bar to not have the extra info in the bottom right
 
-### Mutt
+## Mutt
 **Mutt**
 
 **Packages**
@@ -144,7 +144,7 @@ My Blog    [masammich's][blog]
 [template_dotfiles]: https://github.com/hackinginformation/template_dotfiles
 [neovim_wiki_installing-neovim]: https://github.com/neovim/neovim/wiki/Installing-Neovim
 
-### TODO:  
+## TODO:  
 * ZSH:
   * Add to the Wiki how to get agnoster to work
     * Include Powerline Setup and Install
