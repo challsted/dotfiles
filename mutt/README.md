@@ -13,14 +13,16 @@ This is to log any extra things i had to do other then simply install listed pac
 
 Needed for Arch and Ubuntu:  
 * msmtp - more complete smtp (and uses sendmail)
-  * msmtp-mta - dependency for msmtp that needs to be manually resolved
-  * edit a file called ~/.msmtprc
+  * ln -s ~/git/dotfiles/MAIL/msmtprc ~/.msmtprc
   * make sure its 600
-* procmail - mail sorting tool
 * fetchmail - downloads mail (pop3)
+  * ln -s ~/git/dotfiles/MAIL/fetchmailrc ~/.fetchmailrc
+  * make sure its 700
+* procmail - mail sorting tool
+  * ln -s ~/git/dotfiles/MAIL/procmailrc ~/.procmailrc
 
 Needed specifically for Arch:  
-* Place Holder
+* msmtp-mta - dependency for msmtp that needs to be manually resolved
 
 Needed specifically for Ubuntu:  
 * Place Holder
@@ -37,7 +39,7 @@ Needed specifically for OSX:
     * Passwords are hard coded and open for anyone on your box to view or if you upload them to git (like i am doing) then the password is readable from the world
     * I have found a way around this, please see further down
 
-# Encrypted Passwords Working!
+## Encrypted Passwords Working!
 * gpg --gen-key
   * This will prompt you for a name, and a password
   * You will need the name for the encryption below
@@ -50,10 +52,11 @@ Needed specifically for OSX:
 * `shred -xu ~/git/dotfiles/mutt/passwords` because gpg made a file called passwords.gpg
 * Where passwords are requested insert this:
   * `"gpg -d ~/git/dotfiles/mutt/password.gpg | awk '/GMail:/ {print $2}'"`
+* In msmtprc you need this instead `passwordeval   "gpg --quiet --for-your-eyes-only --no-tty --decrypt ~/mutt/gmailpassword.gpg"`
 
-# Patches that will need to be added/I plan on adding
-* planned - sidebar
-* planned - trash folder
-
-#Issues
+## Issues
 * Color scheme is not working? Not sure where im supposed to see it at still
+* Have to preform multiple fetchmail -vs to get "all" emails
+
+## TODO
+* Build a script to auto build mutt with patches!!
