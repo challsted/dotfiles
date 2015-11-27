@@ -124,6 +124,29 @@ Once that is complete, you will need to run:
 **Notes:**
 * Please read the [README.md][MuttREADME] file located inside of the mutt folder, this doc will eventually become my Mutt Wiki Page, but its easier to edit as I'm working on it via the readme for now.
 
+## Things TODO:
+* This README
+  * Move all of this into the "issues" section of github
+* ZSH:
+  * Add to the Wiki how to get agnoster to work
+    * Include Powerline Setup and Install
+    * Include on Mac how the shell font needs to be changed
+  * Add how to use custom prompts
+    * Create a custom prompt!!! Agnoster alone isn't what I want!!
+* (N)VIM:
+  * Remove status line (plugin) from vim and nvim, build own status line to do what it does on my own
+* TMux:
+  * Investigate why 2.2 doesn't like UTF-8
+* i3:
+  * Convert to purely i3Blocks (remove i3Status)
+  * Move i3Blocks to bottom bar
+  * Install and begin learning LemonBar (in the top bar)
+* Mutt:
+  * Merge [FullOverRide](https://github.com/fulloverride)'s changes to allow msmtp to use encrypted passwords
+  * Validate Existing Documentation
+  * Start Patching Mutt (SCRIPT THIS!!!!)
+  * Incorporate .muttrc changes in email
+
 ## Contact the author
 
 Professional  Twitter [@hackinginfo][tweet]
@@ -144,24 +167,3 @@ My Blog    [masammich's][blog]
 [template_dotfiles]: https://github.com/hackinginformation/template_dotfiles
 [neovim_wiki_installing-neovim]: https://github.com/neovim/neovim/wiki/Installing-Neovim
 [MuttREADME]:   https://github.com/hackinginformation/dotfiles/blob/development/mutt/README.md
-
-## TODO:  
-* ZSH:
-  * Add to the Wiki how to get agnoster to work
-    * Include Powerline Setup and Install
-    * Include on Mac how the shell font needs to be changed
-  * Add how to use custom prompts
-    * Create a custom prompt!!! Agnoster alone isn't what I want!!
-* (N)VIM:
-  * Remove status line (plugin) from vim and nvim, build own status line to do what it does on my own
-* TMux:
-  * Investigate why 2.2 doesn't like UTF-8
-* i3:
-  * Convert to purely i3Blocks (remove i3Status)
-  * Move i3Blocks to bottom bar
-  * Install and begin learning LemonBar (in the top bar)
-* Mutt:
-  * Merge [FullOverRide][https://github.com/fulloverride]'s changes to allow msmtp to use encrypted passwords
-  * Validate Existing Documentation
-  * Start Patching Mutt (SCRIPT THIS!!!!)
-  * Incorporate .muttrc changes in email
