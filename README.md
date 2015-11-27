@@ -30,7 +30,7 @@ If you want to make a folder first you can do this:
 If you created the folder make sure you cd into it, then run the next command
 * `git clone https://github.com/hackinginformation/dotfiles.git`
 
-## ZSH
+## ZSH Setup
 [**ZSH Wiki**][ZSH_WIKI]
 
 **Packages:**
@@ -45,14 +45,14 @@ Once that is complete, you will need to run:
 **Notes:**
 * If you do not use `~/$USER/git/` to clone, then you will need to open ~/.zshrc and tweak the line that starts with `CUSTZSH` to the path to this repo's zsh folder
 
-## Vim
+## Vim Setup
 [**VIM Wiki**][VIM_WIKI]
 
 **Packages:**
 * `vim` (Official Repositories)
 * [vim-plug][plug]
 
-*You will need to run this to use my config:*
+**You will need to run this to use my config:**
 * `ln -sf ~/git/dotfiles/vim/vimrc.symlink ~/.vimrc`
 * `mkdir -p ~/.vim/colors/`
 * `ln -sf ~/.vim/plugged/molokai/colors/molokai.vim ~/.vim/colors/molokai.vim`
@@ -65,11 +65,11 @@ Once that is complete, you will need to run:
 **Notes:**
 * If you do not use `~/$USER/git/` to clone, then you will need to tweak the symlinks above
 
-## NeoVim
+## NeoVim Setup
 [**NVim Wiki**][NVIM_WIKI]
 
 **Packages**
-* `nvim` ([Installing_Neovim][neovim_wiki_installing-neovim])
+* `nvim` ([Installing Neovim][neovim_wiki_installing-neovim])
 * [vim-plug][plug]
 
 
@@ -83,7 +83,7 @@ Once that is complete, you will need to run:
 * If you do not use `~/$USER/git/` to clone, then you will need to tweak the symlinks above
 * Neovim will automatically install vim-plug and all plugins if you haven't done so already
 
-## TMux
+## TMux Setup
 [**TMUX Wiki**][TMUX_WIKI]
 
 **Packages:**
@@ -109,7 +109,7 @@ Once that is complete, you will need to run:
 * If you do not use `~/$USER/git/` to clone, then you will need to tweak the symlinks above
 * If you chose not to use TPM, you will probably want to remove the bottom section of the file about TPM, and update the bar to not have the extra info in the bottom right
 
-## Mutt
+## Mutt Setup
 **Mutt**
 
 **Packages**
@@ -122,7 +122,7 @@ Once that is complete, you will need to run:
 * `ln -s ~/git/dotfiles/MAIL/fetchmailrc ~/.fetchmailrc`
 
 **Notes:**
-* Please read the `README.md` file located inside of the mutt folder, this doc will eventually become my Mutt Wiki Page, but its easier to edit as I'm working on it via the readme for now.
+* Please read the [README.md][MuttREADME] file located inside of the mutt folder, this doc will eventually become my Mutt Wiki Page, but its easier to edit as I'm working on it via the readme for now.
 
 ## Contact the author
 
@@ -143,6 +143,7 @@ My Blog    [masammich's][blog]
 [MUTT_WIKI]:    ../../wiki/Mutt
 [template_dotfiles]: https://github.com/hackinginformation/template_dotfiles
 [neovim_wiki_installing-neovim]: https://github.com/neovim/neovim/wiki/Installing-Neovim
+[MuttREADME]:   https://github.com/hackinginformation/dotfiles/blob/development/mutt/README.md
 
 ## TODO:  
 * ZSH:
@@ -160,7 +161,7 @@ My Blog    [masammich's][blog]
   * Move i3Blocks to bottom bar
   * Install and begin learning LemonBar (in the top bar)
 * Mutt:
-  * Merge FullOverRide's changes to allow msmtp to use encrypted passwords
+  * Merge [FullOverRide][https://github.com/fulloverride]'s changes to allow msmtp to use encrypted passwords
   * Validate Existing Documentation
   * Start Patching Mutt (SCRIPT THIS!!!!)
   * Incorporate .muttrc changes in email
