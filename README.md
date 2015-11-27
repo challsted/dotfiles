@@ -30,71 +30,74 @@ If you want to make a folder first you can do this:
 If you created the folder make sure you cd into it, then run the next command
 * `git clone https://github.com/hackinginformation/dotfiles.git`
 
-### [**ZSH**][ZSH_WIKI]
+### ZSH
+[**ZSH Wiki**][ZSH_WIKI]
 
-Packages:
+**Packages:**
 * `zsh` (Official Repositories)
 * [Oh-My-Zsh][zsh]
 
-You will need to run this to use my config:
+**You will need to run this to use my config:**
 * `ln -sf ~/git/dotfiles/zsh/zshrc.symlink ~/.zshrc`
 Once that is complete, you will need to run:
 * `source ~/.zshrc`
 
-Notes:
+**Notes:**
 * If you do not use `~/$USER/git/` to clone, then you will need to open ~/.zshrc and tweak the line that starts with `CUSTZSH` to the path to this repo's zsh folder
 
-### [**VIM**][VIM_WIKI]
+### Vim
+[**VIM Wiki**][VIM_WIKI]
 
-Packages:
+**Packages:**
 * `vim` (Official Repositories)
 * [vim-plug][plug]
 
-You will need to run this to use my config:
+*You will need to run this to use my config:*
 * `ln -sf ~/git/dotfiles/vim/vimrc.symlink ~/.vimrc`
 * `mkdir -p ~/.vim/colors/`
 * `ln -sf ~/.vim/plugged/molokai/colors/molokai.vim ~/.vim/colors/molokai.vim`
 
-Once that is complete open your vimrc in vim:
+**Once that is complete open your vimrc in vim:**
 * `vim ~/.vimrc`
 * Once vim is up type `:PlugInstall`, this will cause a new pane to open in your vim window on the left, depending on your connection speed it will download a bunch of plugins from the internet and put them where they belong.
 * Type `:q` then `:q` this will exit the new pane, then exit vim.
 
-
-Notes:
+**Notes:**
 * If you do not use `~/$USER/git/` to clone, then you will need to tweak the symlinks above
 
-### [**NVim**][NVIM_WIKI]
+### NeoVim
+[**NVim Wiki**][NVIM_WIKI]
 
-Packages
+**Packages**
 * `nvim` ([Installing_Neovim][neovim_wiki_installing-neovim])
 * [vim-plug][plug]
 
 
-You will need to run this to use my config:
+**You will need to run this to use my config:**
 * `mkdir -p ~/.config/nvim`
 * `cd ~/.config/nvim && mkdir colors undo swap spell backup && cd -`
 * `ln -sf ~/git/dotfiles/nvim/nvimrc.symlink ~/.config/nvim/init.vim`
 * `ln -sf ~/.config/nvim/plugged/molokai/colors/molokai.vim ~/.config/nvim/colors/molokai.vim`
 
-Notes:
+**Notes:**
 * If you do not use `~/$USER/git/` to clone, then you will need to tweak the symlinks above
 * Neovim will automatically install vim-plug and all plugins if you haven't done so already
 
-### [**TMUX**][TMUX_WIKI]
+### TMux
+[**TMUX Wiki**][TMUX_WIKI]
 
-Packages:
+**Packages:**
 * `tmux`
-Optional Package
+**Optional Package**
 * [TMux Plugin Manager][tpm]
 
-You will need to run this to use my config:
+**You will need to run this to use my config:**
 * If your using 2.0 or older then you'll need to use the "PRE" file
   * `ln -sf ~/git/dotfiles/tmux/tmux.conf.symlink.PRE ~/.tmux.conf`
 * If your using the latest and greatest (2.1+)
   * `ln -sf ~/git/dotfiles/tmux/tmux.conf.symlink ~/.tmux.conf`
 
-Optional Package Install:
+**Optional Package Install:**
 * Download [TPM][tpm] from its site, as of right now the command do that is
   * git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 * Open a new tmux session (if your not already in one)
@@ -102,22 +105,23 @@ Optional Package Install:
 * Once inside a tmux session, press `$PREFIX + I`
   * If your using my tmux.conf then this will be `Ctrl+A` (Release the keys) `Shift i`
 
-Notes:
+**Notes:**
 * If you do not use `~/$USER/git/` to clone, then you will need to tweak the symlinks above
 * If you chose not to use TPM, you will probably want to remove the bottom section of the file about TPM, and update the bar to not have the extra info in the bottom right
 
-### **Mutt**
+### Mutt
+**Mutt**
 
-Packages
+**Packages**
 * `mutt` - the base package
 
-You will need to run this to use my config:
+**You will need to run this to use my config:**
 * `ln -s ~/git/dotfiles/mutt ~/.mutt`
 * `ln -s ~/git/dotfiles/MAIL/procmailrc ~/.procmailrc`
 * `ln -s ~/git/dotfiles/MAIL/msmtprc.. ~/.msmtprc`
 * `ln -s ~/git/dotfiles/MAIL/fetchmailrc ~/.fetchmailrc`
 
-Notes:
+**Notes:**
 * Please read the `README.md` file located inside of the mutt folder, this doc will eventually become my Mutt Wiki Page, but its easier to edit as I'm working on it via the readme for now.
 
 ## Contact the author
@@ -125,7 +129,6 @@ Notes:
 Professional  Twitter [@hackinginfo][tweet]
 
 My Blog    [masammich's][blog]
-
 
 [plug]:         https://github.com/junegunn/vim-plug
 [zsh]:          https://github.com/robbyrussell/oh-my-zsh
@@ -141,7 +144,7 @@ My Blog    [masammich's][blog]
 [template_dotfiles]: https://github.com/hackinginformation/template_dotfiles
 [neovim_wiki_installing-neovim]: https://github.com/neovim/neovim/wiki/Installing-Neovim
 
-TODO:  
+### TODO:  
 * ZSH:
   * Add to the Wiki how to get agnoster to work
     * Include Powerline Setup and Install
