@@ -2,18 +2,19 @@
 
 #Global Variables
 set my_user = 'chase.hallsted@gmail.com'
-set my_msmtp_pass = `gpg -d ~/git/dotfiles/mutt/passwords.gpg | awk '/GMail:/ {print $2}'`
+#set my_msmtp_pass = `gpg -d ~/git/dotfiles/mutt/passwords.gpg | awk '/GMail:/ {print $2}'`
+set my_msmtp_pass = `gpg --quiet --for-your-eyes-only --no-tty --decrypt ~/mutt/gmailpassword.gpg`
 
 # Basics for most everyone
-set imap_user = $my_user          # Gmail Required Full Email
-set imap_pass = $my_msmtp_password # Set inside encrypted password.gpg
+set imap_user = $my_user                # Gmail Required Full Email
+set imap_pass = $my_msmtp_password      # Set inside encrypted password.gpg
 set smtp_url  = "smtps://chase.hallsted@smtp.gmail.com:587/"
-set smtp_pass = $my_msmtp_password # Set insie encrypted password.gpg
-set realname  = "Chase Hallsted"   # Your Real Name
-set from      = $my_user # Set who to appear "as"
-set use_from  = yes      # Use from?
-set sendmail  =      /usr/bin/msmtp # Use msmtp and not sendmail
-set spoolfile = "+INBOX"               # Where to check for mail
+set smtp_pass = $my_msmtp_password      # Set insie encrypted password.gpg
+set realname  = "Chase Hallsted"        # Your Real Name
+set from      = $my_user                # Set who to appear "as"
+set use_from  = yes                     # Use from?
+set sendmail  = /usr/bin/msmtp          # Use msmtp and not sendmail
+set spoolfile = "/var/spool/mail/$USER" # Where to check for mail
 set envelope_from = "yes" #
 
 #Folders
@@ -82,7 +83,6 @@ color signature red black
 set pager             = "builtin"   # Need to research this whole Pager thing
 set pager_context     = 5 # show last 5 lines in pager
 set pager_index_lines = 20 #
-
 
 #Random stuff for now
 set move           = yes # Stop asking to "move read messages to mbox"!
