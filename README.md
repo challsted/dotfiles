@@ -27,7 +27,7 @@ I personally use a folder called "git" but this is up to you, and optional.
 If you want to make a folder first you can do this:
 * `mkdir -p ~/git && cd ~/git`
 
-If you created the folder make sure you cd into it, then run the next command  
+If you created the folder make sure you cd into it, then run the next command
 * `git clone https://github.com/hackinginformation/dotfiles.git`
 
 ### [**ZSH**][ZSH_WIKI]
@@ -36,12 +36,12 @@ Packages:
 * `zsh` (Official Repositories)
 * [Oh-My-Zsh][zsh]
 
-You will need to run this to use my config:  
+You will need to run this to use my config:
 * `ln -sf ~/git/dotfiles/zsh/zshrc.symlink ~/.zshrc`
-Once that is complete, you will need to run:  
+Once that is complete, you will need to run:
 * `source ~/.zshrc`
 
-Notes:  
+Notes:
 * If you do not use `~/$USER/git/` to clone, then you will need to open ~/.zshrc and tweak the line that starts with `CUSTZSH` to the path to this repo's zsh folder
 
 ### [**VIM**][VIM_WIKI]
@@ -50,7 +50,7 @@ Packages:
 * `vim` (Official Repositories)
 * [vim-plug][plug]
 
-You will need to run this to use my config:  
+You will need to run this to use my config:
 * `ln -sf ~/git/dotfiles/vim/vimrc.symlink ~/.vimrc`
 * `mkdir -p ~/.vim/colors/`
 * `ln -sf ~/.vim/plugged/molokai/colors/molokai.vim ~/.vim/colors/molokai.vim`
@@ -60,7 +60,8 @@ Once that is complete open your vimrc in vim:
 * Once vim is up type `:PlugInstall`, this will cause a new pane to open in your vim window on the left, depending on your connection speed it will download a bunch of plugins from the internet and put them where they belong.
 * Type `:q` then `:q` this will exit the new pane, then exit vim.
 
-Notes:  
+
+Notes:
 * If you do not use `~/$USER/git/` to clone, then you will need to tweak the symlinks above
 
 ### [**NVim**][NVIM_WIKI]
@@ -69,13 +70,14 @@ Packages
 * `nvim` ([Installing_Neovim][neovim_wiki_installing-neovim])
 * [vim-plug][plug]
 
-You will need to run this to use my config:  
+
+You will need to run this to use my config:
 * `mkdir -p ~/.config/nvim`
 * `cd ~/.config/nvim && mkdir colors undo swap spell backup && cd -`
 * `ln -sf ~/git/dotfiles/nvim/nvimrc.symlink ~/.config/nvim/init.vim`
 * `ln -sf ~/.config/nvim/plugged/molokai/colors/molokai.vim ~/.config/nvim/colors/molokai.vim`
 
-Notes:  
+Notes:
 * If you do not use `~/$USER/git/` to clone, then you will need to tweak the symlinks above
 * Neovim will automatically install vim-plug and all plugins if you haven't done so already
 
@@ -83,11 +85,10 @@ Notes:
 
 Packages:
 * `tmux`
-  * I suggest you get it from the official repos of your distro, but if the version is less then 1.9, then you wont be able to use the optional package.
 Optional Package
 * [TMux Plugin Manager][tpm]
 
-You will need to run this to use my config:  
+You will need to run this to use my config:
 * If your using 2.0 or older then you'll need to use the "PRE" file
   * `ln -sf ~/git/dotfiles/tmux/tmux.conf.symlink.PRE ~/.tmux.conf`
 * If your using the latest and greatest (2.1+)
@@ -101,7 +102,7 @@ Optional Package Install:
 * Once inside a tmux session, press `$PREFIX + I`
   * If your using my tmux.conf then this will be `Ctrl+A` (Release the keys) `Shift i`
 
-Notes:  
+Notes:
 * If you do not use `~/$USER/git/` to clone, then you will need to tweak the symlinks above
 * If you chose not to use TPM, you will probably want to remove the bottom section of the file about TPM, and update the bar to not have the extra info in the bottom right
 
@@ -110,13 +111,13 @@ Notes:
 Packages
 * `mutt` - the base package
 
-You will need to run this to use my config:  
+You will need to run this to use my config:
 * `ln -s ~/git/dotfiles/mutt ~/.mutt`
 * `ln -s ~/git/dotfiles/MAIL/procmailrc ~/.procmailrc`
 * `ln -s ~/git/dotfiles/MAIL/msmtprc.. ~/.msmtprc`
 * `ln -s ~/git/dotfiles/MAIL/fetchmailrc ~/.fetchmailrc`
 
-Notes:  
+Notes:
 * Please read the `README.md` file located inside of the mutt folder, this doc will eventually become my Mutt Wiki Page, but its easier to edit as I'm working on it via the readme for now.
 
 ## Contact the author
