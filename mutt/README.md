@@ -11,12 +11,22 @@ This is to log any extra things i had to do other then simply install listed pac
 
 ## Extra Packages on top of what was told
 
+Needed for Arch and Ubuntu:  
 * msmtp - more complete smtp (and uses sendmail)
   * msmtp-mta - dependency for msmtp that needs to be manually resolved
   * edit a file called ~/.msmtprc
   * make sure its 600
 * procmail - mail sorting tool
 * fetchmail - downloads mail (pop3)
+
+Needed specifically for Arch:  
+* Place Holder
+
+Needed specifically for Ubuntu:  
+* Place Holder
+
+Needed specifically for OSX:  
+* Place Holder
 
 
 ## Guides I followed to get what i have working
