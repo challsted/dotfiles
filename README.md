@@ -7,15 +7,6 @@ Feel free to take any or all of them, tweak them to your desire and distribute t
 By Request, I have created some "[templates_dotfiles][template_dotfiles]". If you could rather use them.  
 These files have no plugins, and a lot less "personalized" stuff in them, they are designed to be used a spring board to jump start you into a customized set of files.  
 
-
-## Need To Move ALL of this section
-
-If you want to use ZSH you will need to download [Oh-My-ZSH][zsh] for pieces of my config
-
-If you are using vim, please download [vim-plug][plug] by following the instructions on his github.
-
-[TMux Plugin Manager][tpm] is needed if you want to use my TMux Files. You don't NEED it, but you'll want it and once you realise what it offers, its very very helpful. Requires that your 'tmux' version is 1.9 or higher.
-
 ## Pre-Installation
 
 Obviously, if you want to use any of the tools below, you will need to have it installed, any of its dependencies, as well as any extras I list and there dependencies.  
@@ -30,7 +21,7 @@ If you want to make a folder first you can do this:
 If you created the folder make sure you cd into it, then run the next command
 * `git clone https://github.com/hackinginformation/dotfiles.git`
 
-## ZSH Setup
+## ZSH Installation
 [**ZSH Wiki**][ZSH_WIKI]
 
 **Packages:**
@@ -45,7 +36,7 @@ Once that is complete, you will need to run:
 **Notes:**
 * If you do not use `~/$USER/git/` to clone, then you will need to open ~/.zshrc and tweak the line that starts with `CUSTZSH` to the path to this repo's zsh folder
 
-## Vim Setup
+## Vim Installation
 [**VIM Wiki**][VIM_WIKI]
 
 **Packages:**
@@ -65,7 +56,7 @@ Once that is complete, you will need to run:
 **Notes:**
 * If you do not use `~/$USER/git/` to clone, then you will need to tweak the symlinks above
 
-## NeoVim Setup
+## NeoVim Installation
 [**NVim Wiki**][NVIM_WIKI]
 
 **Packages**
@@ -83,7 +74,7 @@ Once that is complete, you will need to run:
 * If you do not use `~/$USER/git/` to clone, then you will need to tweak the symlinks above
 * Neovim will automatically install vim-plug and all plugins if you haven't done so already
 
-## TMux Setup
+## TMux Installation
 [**TMUX Wiki**][TMUX_WIKI]
 
 **Packages:**
@@ -109,11 +100,11 @@ Once that is complete, you will need to run:
 * If you do not use `~/$USER/git/` to clone, then you will need to tweak the symlinks above
 * If you chose not to use TPM, you will probably want to remove the bottom section of the file about TPM, and update the bar to not have the extra info in the bottom right
 
-## Mutt Setup
+## Mutt Installation
 **Mutt**
 
 **Packages**
-* `mutt` - the base package
+* `mutt`
 
 **You will need to run this to use my config:**
 * `ln -s ~/git/dotfiles/mutt ~/.mutt`
