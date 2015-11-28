@@ -115,35 +115,6 @@ Once that is complete, you will need to run:
 **Notes:**
 * Please read the [README.md][MuttREADME] file located inside of the mutt folder, this doc will eventually become my Mutt Wiki Page, but its easier to edit as I'm working on it via the readme for now.
 
-## Things TODO:
-* This README
-  * Move all of this into the "issues" section of github
-* ZSH:
-  * Add to the Wiki how to get agnoster to work
-    * Include Powerline Setup and Install
-    * Include on Mac how the shell font needs to be changed
-  * Add how to use custom prompts
-    * Create a custom prompt!!! Agnoster alone isn't what I want!!
-* (N)VIM:
-  * Remove status line (plugin) from vim and nvim, build own status line to do what it does on my own
-  * Debating breaking out this file to be similar to zsh with many different pieces feeding into the main
-    * OR combine zsh into a single file and add folding :P
-* TMux:
-  * Investigate why 2.2 doesn't like UTF-8
-* i3:
-  * Convert to purely i3Blocks (remove i3Status)
-  * Move i3Blocks to bottom bar
-  * Install and begin learning LemonBar (in the top bar)
-* Mutt:
-  * Start Patching Mutt
-    * scripts/custom_mutt.sh - WIP
-  * Incorporate .muttrc changes in email
-  * Create a Mutt Wiki and move all of the mutt/README.md stuff into it
-  * Convert MAIL/fetchmailrc to work with multiple usernames
-    * Every computer I own uses a totally separate local account...
-* Scripts:
-  * Fix Install Script, its ugly and has no options!!
-
 ## Contact the author
 
 Professional  Twitter [@hackinginfo][tweet]  
