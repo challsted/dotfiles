@@ -25,25 +25,15 @@ font pango:System San Francisco Display 10
 # MOVEMENT
 #####
 # change focus
-bindsym $win+j focus left
-bindsym $win+k focus down
-bindsym $win+l focus up
-bindsym $win+semicolon focus right
-# alternatively, you can use the cursor keys:
-bindsym $win+Left focus left
-bindsym $win+Down focus down
-bindsym $win+Up focus up
-bindsym $win+Right focus right
+bindsym $win+h focus left
+bindsym $win+j focus down
+bindsym $win+k focus up
+bindsym $win+l focus right
 # move focused window
-bindsym $win+Shift+j move left
-bindsym $win+Shift+k move down
-bindsym $win+Shift+l move up
-bindsym $win+Shift+semicolon move right
-# alternatively, you can use the cursor keys:
-bindsym $win+Shift+Left move left
-bindsym $win+Shift+Down move down
-bindsym $win+Shift+Up move up
-bindsym $win+Shift+Right move right
+bindsym $win+Shift+h move left
+bindsym $win+Shift+j move down
+bindsym $win+Shift+k move up
+bindsym $win+Shift+l move right
 
 #####
 # NEED A MOUSE?
@@ -63,14 +53,14 @@ bindsym $win+d exec rofi -show run -lines 3 -eh 2 -width -25 -padding 50 -opacit
 #####
 # CONTROL YOUR SCREEN
 #####
-# split in horizontal orientation
-bindsym $win+h split h
+# split in horizontal orientation (Same as TMux)
+bindsym $win+h split V
 # split in vertical orientation
 bindsym $win+v split v
 # enter zoomed/fullscreen  mode for the focused container (Win+Z like on tmux)
 bindsym $win+z fullscreen
-# kill focused window
-bindsym $win+Shift+x kill
+# kill focused window (Same as TMux)
+bindsym $win+x kill
 # toggle tiling / floating
 bindsym $win+space floating toggle
 # change focus between tiling / floating windows
@@ -82,15 +72,10 @@ bindsym $win+Shift+space focus mode_toggle
 bindsym $win+r mode "resize"
 mode "resize" {
     # These bindings trigger as soon as you enter the resize mode
-    bindsym j resize shrink width 10 px or 10 ppt
-    bindsym k resize grow height 10 px or 10 ppt
-    bindsym l resize shrink height 10 px or 10 ppt
-    bindsym semicolon resize grow width 10 px or 10 ppt
-    # same bindings, but for the arrow keys
-    bindsym Left resize shrink width 10 px or 10 ppt
-    bindsym Down resize grow height 10 px or 10 ppt
-    bindsym Up resize shrink height 10 px or 10 ppt
-    bindsym Right resize grow width 10 px or 10 ppt
+    bindsym h resize shrink width 10 px or 10 ppt
+    bindsym j resize grow height 10 px or 10 ppt
+    bindsym k resize shrink height 10 px or 10 ppt
+    bindsym l resize grow width 10 px or 10 ppt
     # back to normal: Enter or Escape
     bindsym Return mode "default"
     bindsym Escape mode "default"
@@ -136,14 +121,6 @@ bindsym $win+Shift+7 move container to workspace $w7
 bindsym $win+Shift+8 move container to workspace $w8
 bindsym $win+Shift+9 move container to workspace $w9
 bindsym $win+Shift+0 move container to workspace $w0
-
-#####
-# FORCED WINDOWS
-#####
-# Always launch FF on WorkSpace 1
-assign [class="Firefox"] $w1
-exec --no-startup-id i3-msg 'workspace $w1; exec /usr/bin/firefox'
-assign [class="Pidgin"] $w2
 
 #####
 # BARS
@@ -205,10 +182,16 @@ client.background       $back
 #####
 # Needs to be installed, adds transition effects
 exec compton
+# TODO Convert this to feh
 # Replace Previously placed Nitrogen Desktop after a restart
 exec_always nitrogen --restore --no-recurse ~/Pictures/wallpaper
 
 #####
-# LOAD EVERY RELOAD
+# FORCED WINDOWS
 #####
-#exec_always <something>
+# Always launch FF on WorkSpace 1
+assign [class="Firefox"] → $w1
+exec --no-startup-id i3-msg 'workspace $w1; exec /usr/bin/firefox'
+assign [class="Pidgin"] → $w3
+assign [title="^Hangout" ] → $w3
+
