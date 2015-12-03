@@ -41,8 +41,8 @@ autocmd Filetype puppet setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 autocmd Filetype yaml setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 augroup standardActonsPerFile " Allign all code according to syntax
     autocmd!
-    autocmd BufWrite *.py,*.sh,*.pp :normal gg=G " Allign all of these files to syntax
-    autocmd BufWrite *.py,*.sh,*.pp :%s/\s\+$//  " Remove Trailing White space
+    autocmd BufWrite *.py,*.pp :normal gg=G " Allign all of these files to syntax
+    autocmd BufWrite *.py,*.pp :%s/\s\+$//  " Remove Trailing White space
 augroup END
 " }}}
 " }}}
@@ -217,7 +217,8 @@ Plug 'rodjek/vim-puppet', { 'for': 'puppet' }               " Helps Vim Play Nic
 Plug 'rodjek/puppet-lint', { 'for': 'puppet' }              " Suggested by PuppetLabs as a linter
 Plug 'klen/python-mode', { 'for': 'python' }                " Python edior on crack
 Plug 'tmux-plugins/vim-tmux'        " A syntax highlighter for tmux! :D
-Plug 'benekastah/neomake'           " Syntax Checker to replace Syntastic for neovim
+"Plug 'benekastah/neomake'           " Syntax Checker to replace Syntastic for neovim
+Plug 'scrooloose/syntastic'         " Syntax Checker to to use until i get neomake working
 Plug 'elzr/vim-json', { 'for': 'json' } " JSON Hilight and indent plugin
 call plug#end()                     " Stops using vim-plug
 " }}}
