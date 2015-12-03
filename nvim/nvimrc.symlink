@@ -72,8 +72,6 @@ set smartcase       " Even with ignore case, still try to be smart about it
 " Key Remaps {{{
 " Extended Functionality {{{
 "For lines longer then the screens width, treat them as seperate lines
-map j gj
-map k gk
 " Highlights last inserted text from insert mode in visual mode
 nnoremap gV `[v`]
 " :W (Capitol W) saves the file with sudo, needed when editing some files
@@ -148,6 +146,27 @@ vnoremap <up> <Nop>
 vnoremap <down> <Nop>
 vnoremap <left> <Nop>
 vnoremap <right> <Nop>
+" }}}
+" Make J and K work with Relative Number {{{
+function! Down(vcount)
+    if a:vcount == 0
+        exe "normal! gj"
+    else
+        exe "normal!".a:vcount."j"
+    endif
+endfunction
+function! Up(vcount)
+    if a:vcount == 0
+        exe "normal! gk"
+    else
+        exe "normal!".a:vcount."k"
+    endif
+endfunction
+
+nnoremap <silent> j :<C-U>call Down(v:count)<CR>
+vnoremap <silent> j gj
+nnoremap <silent> k :<C-U>call Up(v:count)<CR>
+vnoremap <silent> k gk
 " }}}
 " }}}
 " Functions/AuGroups {{{

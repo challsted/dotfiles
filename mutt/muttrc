@@ -2,28 +2,41 @@
 
 #Global Variables
 set my_user = 'chase.hallsted@gmail.com'
-set my_msmtp_pass = `gpg -d ~/git/dotfiles/mutt/passwords.gpg | awk '/GMail:/ {print $2}'`
+#set my_msmtp_pass = `gpg -d ~/git/dotfiles/mutt/passwords.gpg | awk '/GMail:/ {print $2}'`
+set my_msmtp_pass = `gpg --quiet --for-your-eyes-only --no-tty --decrypt ~/mutt/gmailpassword.gpg`
 
 # Basics for most everyone
-set imap_user = $my_user          # Gmail Required Full Email
-set imap_pass = $my_msmtp_password # Set inside encrypted password.gpg
-set smtp_url  = "smtps://chase.hallsted@smtp.gmail.com:587/"
-set smtp_pass = $my_msmtp_password # Set insie encrypted password.gpg
-set realname  = "Chase Hallsted"   # Your Real Name
-set from      = $my_user # Set who to appear "as"
-set use_from  = yes      # Use from?
-set sendmail  =      /usr/bin/msmtp # Use msmtp and not sendmail
-set spoolfile = "+INBOX"               # Where to check for mail
-set envelope_from = "yes" #
+#set imap_user = $my_user                # Gmail Required Full Email
+#set imap_pass = $my_msmtp_password      # Set inside encrypted password.gpg
+#set smtp_url  = "smtps://chase.hallsted@smtp.gmail.com:587/"
+#set smtp_pass = $my_msmtp_password      # Set insie encrypted password.gpg
+set realname  = "Chase Hallsted"        # Your Real Name
+set from      = $my_user                # Set who to appear "as"
+set use_from  = yes                     # Use from?
+set sendmail  = /usr/bin/msmtp          # Use msmtp and not sendmail
+set envelope_from = "yes"               #
+set mbox_type = Maildir
 
 #Folders
-set folder    = "~/Mail"  # Mailboxes in here
-set record    = "+Sent"   # Sent Messages
-set postponed = "+Drafts" # Draft Messages
-set move      = no        # Dont move mail from the spool
+#set spoolfile = /var/spool/mail/$USER  # Where to check for mail
+set spoolfile = ~/.mail/Inbox
+set folder    = ~/.mail  # Mailboxes in here
+set mbox      = +Archive   # Read Emails
+set record    = +Sent   # Sent Messages
+set postponed = +Drafts # Draft Messages
+set move      = no      # Dont move mail from the spool
+set status_format = "───[ Folder: %f ]───[%r%m messages%?n? (%n new)?%?d? (%d to delete)?%?t? (%t tagged)? ]───%>─%?p?( %p postponed )?───"
 
 #MAILBOXES - Regularly checked folders
-mailboxes = ! +Fetchmail +slrn +mutt
+mailboxes ! \
+          +[GMail]/Inbox \
+          +mbox \
+          +[GMail]/Important \
+          +[GMail]/Friends \
+          +[GMail]/Chat \
+          +[GMail]/Keeps \
+          +[GMail]/Sent
+
 set sort_browser = alpha # Sort mailboes by alphabetical
 
 # Order of Headers - and what to show
@@ -47,30 +60,34 @@ set status_on_top     # show status on top of screen
 push <show-version>   # show mutt version on startup
 
 #Local folders and files
-set header_cache     = ~/.mutt/cache/headers # Store headers locally
-set message_cachedir = ~/.mutt/cache/bodies  # Store messages locally
-set certificate_file = ~/.mutt/certificates  # Store certificates
+#set header_cache     = ~/.mutt/cache/headers # Store headers locally
+#set message_cachedir = ~/.mutt/cache/bodies  # Store messages locally
+#set certificate_file = ~/.mutt/certificates  # Store certificates
 set alias_file       = ~/.mutt/alias        # Local Alises
 set mailcap_path     = ~/.mutt/mailcap      # Entries for filetypes
 set tmpdir           = ~/.mutt/temp         # Temp files
 set signature        = ~/.mutt/sig          # Signature file
 
 #TLS/SSL Stuff
-unset ssl_usesystemcerts
-set ssl_force_tls    = yes
-set ssl_starttls     = yes
-set ssl_verify_dates = yes
-set ssl_verify_host  = yes
-set ssl_use_tlsv1_2  = yes
-set ssl_use_tlsv1_1  = no
-set ssl_use_tlsv1    = no
-set ssl_use_sslv3    = no
-set ssl_use_sslv2    = no
+#unset ssl_usesystemcerts
+#set ssl_force_tls    = yes
+#set ssl_starttls     = yes
+#set ssl_verify_dates = yes
+#set ssl_verify_host  = yes
+#set ssl_use_tlsv1_2  = yes
+#set ssl_use_tlsv1_1  = no
+#set ssl_use_tlsv1    = no
+#set ssl_use_sslv3    = no
+#set ssl_use_sslv2    = no
 
-#Sort by newest conversation first.
-set sort        = threads
+set sort        = threads                    # Similar to GMail
+set sort_aux    = reverse-last-date-received # Similar to GMail
+set uncollapse_jump                          # don't collapse on an unread message
+set sort_re                                  # thread based on regex
+set reply_regexp = "^(([Rr][Ee]?(\[[0-9]+\])?: *)?(\[[^]]+\] *)?)*"
 set sort_browser= date
-set sort_aux    = reverse-last-date-received
+set date_format = "%m/%d"
+set index_format = "[%Z]  %D  %-20.20F  %s"
 
 #Color scheme (Fg Bg)
 color hdrdefault white black
@@ -78,15 +95,14 @@ color header green black From
 color quoted cyan black
 color signature red black
 
-#Page view settings
+#Pager view settings
 set pager             = "builtin"   # Need to research this whole Pager thing
 set pager_context     = 5 # show last 5 lines in pager
 set pager_index_lines = 20 #
 
-
 #Random stuff for now
 set move           = yes # Stop asking to "move read messages to mbox"!
-set imap_keepalive = 900 # How often to send a hello packet
+#set imap_keepalive = 900 # How often to send a hello packet
 set mail_check     = 120 # How often to check for new mail
 set tilde                # Pads the end of emails with tilde like vim does
 set fast_reply           # Dont ask a ton of questions!
@@ -95,37 +111,37 @@ set quit                 # Quit when i tell you to!
 set include              # Include previous messages in replies
 set nomark_old           # Dont mark unread emails as old
 set nobeep               # Turning off alarms (We dont need no bleeping software!)
+set menu_scroll          # Turn on Scrolling in menus
 
 #GPG File - Needs to be sourced BEFORE account specific files are sourced
 #source "gpg -dq $HOME/git/dotfiles/mutt/passwords.gpg |"
 
 #Macros
 macro index,pager I '<shell-escape> fetchmail -v<enter>'
+macro index C "<copy-message>?<toggle-mailboxes>" "copy a message to a mailbox"
+macro index M "<save-message>?<toggle-mailboxes>" "move a message to a mailbox"
 
-#KeyBindings
+#KeyBindings (Attempting to be as vimlike as possible
 bind pager j next-line
 bind pager k previous-line
-bind attach,index,pager \CD next-page
-bind attach,index,pager \CU previous-page
-bind pager g top
+bind pager gg top
 bind pager G bottom
-bind attach,index g first-entry
+bind attach,index,pager \CF next-page
+bind attach,index,pager \CB previous-page
+bind attach,index gg first-entry
 bind attach,index G last-entry
+bind index R        group-reply
+bind index <tab>    sync-mailbox
+bind index <space>  collapse-thread
 
-## Sidebar Patch
-##set sidebar_delim   = ' │'
-#set sidebar_visible = no
-#set sidebar_width   = 24
-#color sidebar_new color221 black #color233
-
-#set sidebar_delim='|'
-#set sidebar_sort=yes
-#bind index CP sidebar-prev
-#bind index CN sidebar-next
-#bind index CO sidebar-open
-#bind pager CP sidebar-prev
-#bind pager CN sidebar-next
-#bind pager CO sidebar-open
-#bind index B bounce-message
-#macro index b '<enter-command>toggle sidebar_visible<enter>'
+# Sidebar Patch
+set sidebar_visible = yes
+set sidebar_sort    = yes
+set sidebar_width   = 24
+#color sidebar_new color221 color233
+bind index,pager <up> sidebar-prev
+bind index,pager <down> sidebar-next
+bind index,pager <right> sidebar-open
+bind index B bounce-message
+macro index,pager b '<enter-command>toggle sidebar_visible<enter>'
 #macro pager b '<enter-command>toggle sidebar_visible<enter>'

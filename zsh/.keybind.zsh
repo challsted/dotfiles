@@ -86,3 +86,6 @@ case "$TERM" in
 ;;
 esac
 
+# Pressing Alt+h while typing a command will pop open a manpage for that command, takes | into consideration
+bindkey -M vicmd '^h' run-help
+bindkey -M viins '^h' run-help

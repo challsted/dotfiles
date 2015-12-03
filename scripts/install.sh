@@ -5,8 +5,8 @@
 ##Author: HackingInformation
 ##Contact: https://github.com/hackinginformation/dotfiles
 ##Version 2.0.0 - Rewriting the whole script to be automated and possibly work on arch
-##Notes: 
-#Need to add pushd/popd to allow user to run this script from anywhere but everything still work as expected. 
+##Notes:
+#Need to add pushd/popd to allow user to run this script from anywhere but everything still work as expected.
 #Need to check what package management tool is installed, (which apt-get) and if it exists install with it. This will allow for debian, mint, fedora, rhel, centos, and many others to be used simply by adding this and "yum" as options!
 
 
@@ -36,7 +36,7 @@ mkdir -p ~/.vim/colors && ln -sf ~/.vim/plugged/molokai/colors/molokai.vim
 
 #Checks if an existing .zshrc exists, if so it backes it up first
 if [[ -e ~/.zshrc ]]; then
-    mv ~/.zshrc ~/.zshrc.backup-pre-script && ln -sf ~/git/dotfiles/zsh/zshrc.symlink ~/.zshrc 
+    mv ~/.zshrc ~/.zshrc.backup-pre-script && ln -sf ~/git/dotfiles/zsh/zshrc.symlink ~/.zshrc
 else
     ln -sf ~/git/dotfiles/zsh/zshrc.symlink ~/.zshrc
 fi
@@ -49,8 +49,8 @@ else
 fi
 
 #Calls vim-plug to install plugins, and quites both windows
-vim ~/.vimrc -c 'PlugInstall | q | q' 
+vim ~/.vimrc -c 'PlugInstall | q | q'
 
 #Change login shell to zsh
-sudo chsh -s $(which zsh) 
+sudo chsh -s $(which zsh)
 exit 0
