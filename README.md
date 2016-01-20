@@ -19,7 +19,7 @@ If you want to make a folder first you can do this:
 * `mkdir -p ~/git && cd ~/git`
 
 If you created the folder make sure you cd into it, then run the next command
-* `git clone https://github.com/hackinginformation/dotfiles.git`
+* `git clone https://github.com/challsted/dotfiles.git`
 
 ## ZSH Installation
 [**ZSH Wiki**][ZSH_WIKI]
@@ -131,6 +131,6 @@ My Blog    [masammich's][blog]
 [I3_WIKI]:      ../../wiki/i3
 [NVIM_WIKI]:    ../../wiki/NVim
 [MUTT_WIKI]:    ../../wiki/Mutt
-[template_dotfiles]: https://github.com/hackinginformation/template_dotfiles
+[template_dotfiles]: https://github.com/challsted/template_dotfiles
 [neovim_wiki_installing-neovim]: https://github.com/neovim/neovim/wiki/Installing-Neovim
-[MuttREADME]:   https://github.com/hackinginformation/dotfiles/blob/development/mutt/README.md
+[MuttREADME]:   https://github.com/challsted/dotfiles/blob/development/mutt/README.md

@@ -54,7 +54,7 @@ bindsym $win+d exec rofi -show run -lines 3 -eh 2 -width -25 -padding 50 -opacit
 # CONTROL YOUR SCREEN
 #####
 # split in horizontal orientation (Same as TMux)
-bindsym $win+h split V
+bindsym $win+Shift+v split h
 # split in vertical orientation
 bindsym $win+v split v
 # enter zoomed/fullscreen  mode for the focused container (Win+Z like on tmux)

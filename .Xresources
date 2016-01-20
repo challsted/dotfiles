@@ -1,35 +1,28 @@
-! vim: set filetype=xdefaults :
-*foreground: #D7D0C7
-*background: #151515
+! Zenburn
 
-!black
-! *color0:     #AF875F
-! *color8:     #AF875F
-*color0:     #101010
-*color8:     #404040
-!red
-*color1:     #E84F4F
-*color9:     #D23D3D
-!green
-*color2:     #B8D68C
-*color10:    #A0CF5D
-!yellow
-*color3:     #E1AA5D
-*color11:    #F39D21
-!blue
-*color4:     #7DC1CF
-*color12:    #4E9FB1
-!magenta
-*color5:     #9B64FB
-*color13:    #8542FF
-!cyan
-*color6:     #6D878D
-*color14:    #42717B
-!white
-*color7:     #dddddd
-*color15:    #dddddd
+*color0:  #1E2320
+*color1:  #705050
+*color2:  #60b48a
+*color3:  #dfaf8f
+*color4:  #506070
+*color5:  #dc8cc3
+*color6:  #8cd0d3
+*color7:  #dcdccc
+*color8:  #709080
+*color9:  #dca3a3
+*color10: #c3bf9f
+*color11: #f0dfaf
+*color12: #94bff3
+*color13: #ec93d3
+*color14: #93e0e3
+*color15: #ffffff
 
-URxvt*borderColor:        #151515
-URxvt*colorBD:            #ffffff
-URxvt*cursorColor:        #ff8939
-URxvt*cursorColor2:       #151515
+
+
+
+
+! Playing around with settings, nothing solid yet
+URxvt.termName: rxvt-unicode-256color
+URxvt.*scrollBar_right:    true
+URxvt.*scrollBar_floating: true
+URxvt.*scrollBar_align:    centre

@@ -1,6 +1,6 @@
 #.alias.zsh
 #Author: Hackinginfo
-#Source: https://github.com/hackinginformation/dotfiles
+#Source: https://github.com/challsted/dotfiles
 #
 #Purpose: This file is to be source from the ~/.zshrc file and its purpose is supply the end user with a series of usable alias's and some humorous alias's
 ###################
