@@ -52,4 +52,5 @@ fi
 if type xcape > /dev/null; then
     xcape -e 'Caps_Lock=Escape'
 fi
-#export PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
+# Enable RBEnv on boot
+eval "$(rbenv init -)"
