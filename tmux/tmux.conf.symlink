@@ -131,7 +131,7 @@ set -g status-right-length 40
 ####
 set-option -g pane-border-fg green
 set-option -g pane-border-bg black
- 
+
 set-option -g pane-active-border-fg green
 set-option -g pane-active-border-bg green
 
@@ -141,19 +141,19 @@ set-option -g pane-active-border-bg green
 # Tmux - TPM
 # Prefix + I = Install
 # Prefix + U = Update
-# Prefix + u = Uninstll Unused
+# Prefix + alt +  u = Uninstll Unused
 #####
 
 #List of Plugins
-set -g @tpm_plugins '         \
-  tmux-plugins/tpm            \
-  tmux-plugins/tmux-yank      \
-  tmux-plugins/tmux-sensible  \
-'
-
-# Tmux - Yank
-set -g @yank_selection 'clipboard'
-
+set -g @plugin 'tmux-plugins/tpm'                 # TMux Plugin Manager - Needed for base Tmux Plugins to work
+set -g @plugin 'tmux-plugins/tmux-yank'           # TMux Yank -
+set -g @yank_selection 'clipboard'                # Tells Yank where to store your copied contents
+set -g @plugin 'tmux-plugins/tmux-sensible'       # A set of "sensible" defaults for Tmux, allowed me to remove a lot of junk from this config :)
+set -g @plugin 'tmux-plugins/tmux-resurrect'      # Restore TMux sessions after system restart
+set -g @plugin 'tmux-plugins/tmux-continuum'      # Constantly saves session for Resurrect's benefit
+set -g @continuum-restore 'on'                    # Automatically restore last saved envinoment when tmux starts
+set -g @continuum-boot 'on'                       # Start TMux on Boot (Works with OSX and SystemD)
+set -g @continuum-boot-options 'iterm,fullscreen' # Starts iTerm instead of Termina.app (This is OSX Specific)
 
 #Initializes Tmux Plugin Manager
 #KEEP THIS AT THE VERY BOTTOM
