@@ -2,8 +2,8 @@
 #This file is intended to be symlinked to the home dir like this:
 #ln -s $path/to/this/tmux.conf ~/.tmux.conf
 #
-#Author: HackingInfo
-#Source: https://github.com/hackinginformation/dotfiles
+#Author: CHallsted
+#Source: https://github.com/challsted/dotfiles
 #
 #Purpose: This file is intended to be a single file dropped into the home dir for tmux users
 
@@ -17,23 +17,6 @@ set -g prefix C-a
 # Changes the shell inside of tmux, ONLY 1 should be uncommented at a time
 # If you need to know which shell, type "which $SHELL" or "which zsh" or "which bash"
 set -g default-shell /bin/zsh
-#set -g default-shell /usr/bin/zsh
-#set -g default-shell /bin/bash
-#set -g default-shell /usr/bin/bash
-
-# Set TMux to utf-8
-#set -g utf8
-#setw -g utf8 on
-
-# Set Tmux to display in 256 Colors
-set -g default-terminal "screen-256color"
-set -g terminal-overrides "xterm:colors=256"
-
-# Change the history to 10,000
-set -g history-limit 10000
-
-# Make Messages Stay on the screen longer (2 seconds)
-set -g display-time 2000
 
 # Make Panes and Windows function a little better (mainly needed for some plugins)
 set -g base-index 1
@@ -44,11 +27,11 @@ set -g pane-base-index 1
 #####
 
 # Turn on Mouse Operations
-set-option -g -q mode-mouse on
+set -g mouse on
 
 # Enable mousewheel to act as a scroll back, also allows for "full screen" apps to accept keys instead of tmux
-bind-key -T root WheelUpPane if-shell -F -t = "#{alternate_on}" "send-keys -M" "select-pane -t =; copy-mode -e; send-keys -M"
-bind-key -T root WheelDownPane if-shell -F -t = "#{alternate_on}" "send-keys -M" "select-pane -t =; send-keys -M"
+bind -n WheelUpPane if-shell -F -t = "#{mouse_any_flag}" "send-keys -M" "if -Ft= '#{pane_in_mode}' 'send-keys -M' 'select-pane -t=; copy-mode -e; send-keys -M'"
+bind -n WheelDownPane select-pane -t= \; send-keys -M
 
 # Allow highlight and paste like in Putty
 bind-key -t vi-copy WheelUpPane halfpage-up
@@ -66,9 +49,6 @@ set -g visual-activity on
 bind s setw synchronize-panes on \; display-message "Sync on"    # Uppercase Turns Sync on
 bind S setw synchronize-panes off \; display-message "Sync off"  # Lowercase Turns Sync off
 
-# I use VIM inside of tmux, i HATE waiting ~1 second after hitting Esc before it responds
-set -sg escape-time 0
-
 # $PREFIX X closes a window
 bind X confirm kill-window
 
@@ -81,17 +61,11 @@ bind S-Down swap-window -t +1  # Swap window Right 1
 bind S-Left select-window -t -1  # Move Window Left 1
 bind S-Right select-window -t +1 # Move Window Right 1
 
-#Move Panes with Arrows
-### Need to research this part
-#bind Up
-#bind Down
-#bind Left
-
 #####
 # Resize
 #####
 
-bind -r ^ resize-pane -U 5 # Resize Pane by a lot 
+bind -r ^ resize-pane -U 5 # Resize Pane by a lot
 bind -r + resize-pane -U 1 # Resize Pane by a little with the rest
 bind -r - resize-pane -D 1
 bind -r < resize-pane -L 1
@@ -173,24 +147,13 @@ set-option -g pane-active-border-bg green
 #List of Plugins
 set -g @tpm_plugins '         \
   tmux-plugins/tpm            \
-  tmux-plugins/tmux-battery   \
-  tmux-plugins/tmux-cpu       \
   tmux-plugins/tmux-yank      \
-  tmux-plugins/tmux-sidebar   \
-  davidscholberg/tmux-cluster \
+  tmux-plugins/tmux-sensible  \
 '
 
 # Tmux - Yank
 set -g @yank_selection 'clipboard'
 
-# Tmux - Sidebar
-set -g @sidebar-tree 't'                #Prefix t Pop Open Tree
-set -g @sidebar-tree 'T'                #Prefix T Pop Open Tree and Focus Tree 
-set -g @sidebar-tree-command 'tree -C'  #Attempt to "Colorize" Tree
-
-#Tmux-Cluster
-#Uncomment if you want to set it to something non-default, set to default to prevent accidents
-#set -g @tmux_cluster_prompt_key C
 
 #Initializes Tmux Plugin Manager
 #KEEP THIS AT THE VERY BOTTOM
