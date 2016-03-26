@@ -7,9 +7,9 @@
 
 # Alt-S inserts "sudo " at the start of the line
 insert_sudo () {
-	zle beginnng-of-line ; zle -U "sudo " }
-	zle -N insert-sudo insert_sudo
-	bindkey "^[s" insert-sudo
+    zle beginnng-of-line ; zle -U "sudo " }
+    zle -N insert-sudo insert_sudo
+    bindkey "^[s" insert-sudo
 
 #Explode the following formats by typing ex $1
 ex () {

@@ -84,7 +84,7 @@ nnoremap <leader><space> za
 " Highlights last inserted text from insert mode in visual mode
 nnoremap gV `[v`]
 
-" Inteligently Remove line numbers (both kinds) with ,n add them again with ,n
+" Intelligently Remove line numbers (both kinds) with ,n add them again with ,n
 if &relativenumber  " Hacky way of finding out if you have set 'relative number', if so turn it off with ,n
   nnoremap <silent> <leader>n :set invnumber <bar> :set invrelativenumber<CR>
 else  
@@ -142,7 +142,7 @@ func! DeleteTrailingWS()
       endfunc
       autocmd BufWrite *.py :call DeleteTrailingWS()
 " }}}
-" Plugin Stuff {{{ 
+" Plugin Stuff {{{
 " VimPlug {{{
 " The syntax is 'Plug' single quote name of author/vim-plugin single quote. So
 " for example 'bling/vim-airline' is https://github.com/bling/vim-airline
@@ -162,6 +162,7 @@ Plug 'rodjek/vim-puppet', { 'for': 'puppet' }               " Helps Vim Play Nic
 Plug 'rodjek/puppet-lint', { 'for': 'puppet' }              " Suggested by PuppetLabs as a linter
 Plug 'klen/python-mode', { 'for': 'python' }                " Python edior on crack
 Plug 'tmux-plugins/vim-tmux'        " A syntax highlighter for tmux! :D
+
 call plug#end()                     " Stops using vim-plug
 " }}}
 " Powerline Specific Settings {{{
