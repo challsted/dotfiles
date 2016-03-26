@@ -84,7 +84,7 @@ nnoremap <leader><space> za
 " Highlights last inserted text from insert mode in visual mode
 nnoremap gV `[v`]
 
-" Inteligently Remove line numbers (both kinds) with ,n add them again with ,n
+" Intelligently Remove line numbers (both kinds) with ,n add them again with ,n
 if &relativenumber  " Hacky way of finding out if you have set 'relative number', if so turn it off with ,n
   nnoremap <silent> <leader>n :set invnumber <bar> :set invrelativenumber<CR>
 else  
