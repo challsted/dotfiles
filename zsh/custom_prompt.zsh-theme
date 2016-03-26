@@ -1,7 +1,7 @@
 #.prompt.zsh
 #Version 1.1 - Starting this number now, no idea how many modifications have gone into this...
 #Author: Hackinginfo
-#Source: https://github.com/hackinginformation/dotfiles
+#Source: https://github.com/challsted/dotfiles
 #
 #Purpose: This file is to be source from the ~/.zshrc file and its purpose is to present the user with a nice looking custom prompt
 

@@ -1,7 +1,7 @@
 #.keybind.zsh
 #Version 1.1 - Starting this number now, no idea how many modifications have gone into this...
 #Author: Hackinginfo
-#Source: https://github.com/hackinginformation/dotfiles
+#Source: https://github.com/challsted/dotfiles
 #
 #Purpose: This file is to be sourced from the ~/.zshrc file and its purpose is to provide a series of keybinds to the user
 

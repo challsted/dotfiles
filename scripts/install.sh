@@ -3,7 +3,7 @@
 #
 ##Filename: install.sh
 ##Author: HackingInformation
-##Contact: https://github.com/hackinginformation/dotfiles
+##Contact: https://github.com/challsted/dotfiles
 ##Version 2.0.0 - Rewriting the whole script to be automated and possibly work on arch
 ##Notes:
 #Need to add pushd/popd to allow user to run this script from anywhere but everything still work as expected.
@@ -28,7 +28,7 @@ fi
 mkdir -p ~/git/ && cd ~/git
 curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-git clone --quiet https://github.com/hackinginformation/dotfiles.git
+git clone --quiet https://github.com/challsted/dotfiles.git
 cd
 
 #Pre-Symlink molokai to prevent the issue with it assuming a light background

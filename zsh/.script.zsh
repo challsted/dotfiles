@@ -1,15 +1,15 @@
 #.script.zsh
 #Version 1.1 - Starting this number now, no idea how many modifications have gone into this...
 #Author: Hackinginfo
-#Source: https://github.com/hackinginformation/dotfiles
+#Source: https://github.com/challsted/dotfiles
 #
 #Purpose: This file is to be source from the ~/.zshrc file and its purpose is for small functions and other clutter cluter you dont play with often
 
 # Alt-S inserts "sudo " at the start of the line
 insert_sudo () {
-	zle beginnng-of-line ; zle -U "sudo " }
-	zle -N insert-sudo insert_sudo
-	bindkey "^[s" insert-sudo
+    zle beginnng-of-line ; zle -U "sudo " }
+    zle -N insert-sudo insert_sudo
+    bindkey "^[s" insert-sudo
 
 #Explode the following formats by typing ex $1
 ex () {

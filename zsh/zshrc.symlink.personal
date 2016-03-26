@@ -4,7 +4,7 @@
 #
 #Version 1.2
 #Author: Hackinginfo
-#Source: https://github.com/hackinginformation/dotfiles
+#Source: https://github.com/challsted/dotfiles
 #
 #Purpose: This file is intended to be a single file put into the home directory that loads all of the other files,
 #IF YOU CHOOSE TO USE THIS FILE, I suggest you delete everything from the if statement below
