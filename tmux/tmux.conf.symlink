@@ -26,6 +26,9 @@ set -g pane-base-index 1
 # Enable some things that are not on by default
 #####
 
+# Seems to be needed for Fedora and not anywhere else...
+set -g default-terminal xterm-256color
+
 # Turn on Mouse Operations
 set -g mouse on
 

@@ -29,6 +29,12 @@ source $CUSTZSH/.keybind.zsh    #This is mainly being used for vim keybinds
 source $CUSTZSH/.script.zsh     #Lots of functions and extra little stuff you use often but dont often touch
 source $CUSTZSH/.opts.zsh       #Options! Lots of them! (OMZsh)
 #source $CUSTZSH/.prompt.zsh     #The Prompt on the left side of your screen comes from here
+source $CUSTZSH/custom_prompt.zsh-theme     #The Prompt on the left side of your screen comes from here
 
 #ZSH_THEME="agnoster"
 #. {repository_root}/powerline/bindings/zsh/powerline.zsh
+
+export TERM=xterm-256color
+[ -n "$TMUX" ] && export TERM=screen-256color
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting

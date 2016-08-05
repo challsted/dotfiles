@@ -44,7 +44,7 @@ alias top="htop" #Allows for htop to run if i type top instead
 alias vi="nvim" #vi will launch nvim, vim will launch vim
 
 #TMux Stuff
-alias tmux="TERM=screen-256color-bce tmux"
+#alias tmux="TERM=screen-256color-bce tmux"
 
 #mps-youtube
 alias youtube="mpsyt"
