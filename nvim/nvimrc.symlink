@@ -16,6 +16,7 @@ set ruler           " Shows current position
 set noshowmode      " Prevents the 'mode' from showing (this is because airline does this for us) 
 set lazyredraw      " Redraw the screen less, leading to faster response
 set showmatch       " Shows matching bracket when highlighting with cursor
+set spelllang=en_us
 " }}}
 "Folding {{{
 set foldenable        " Enables Folding
@@ -92,8 +93,6 @@ noremap <silent> <Leader>= :call Preserve("normal gg=G")<CR>
 nnoremap <leader><space> za
 " Quick saving of files
 nnoremap <leader>w :w!<CR>
-" Enables spell check, but only after pressing ,ss like 'set spell'
-nnoremap <leader>ss :setlocal invspell<CR>
 " Remove the extra ^M that windows creates at the end of lines
 noremap <leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 " ,y yanks to end of line
@@ -108,6 +107,24 @@ imap <leader>' ''<ESC>i
 imap <leader>" ""<ESC>i
 imap <leader>( ()<ESC>i
 imap <leader>[ []<ESC>i
+" Keymaps for Vims built in 'Spell Check' {{{
+" Enables spell check, but only after pressing ,ss like 'set spell'
+nnoremap <leader>ss :setlocal invspell<CR>
+" ADD the word under the cusor to the spell file
+nnoremap <leader>sa zg
+" DELETE a word that you had previously said was good from the spell file
+nnoremap <leader>sd zW
+" CHANGE the word under the cusor (pulls up a list of words to change it to
+nnoremap <leader>sc z=
+" CHANGE the word under the cursor to the first suggestion that would pop up
+nnoremap <leader>sC 1z=
+" Repeate the replacmeent of z= for all matches in the current window
+nnoremap <leader>sz :spellrepall<CR>
+" Search Forwards for a misspelled word
+nnoremap <leader>sf ]s
+" Search Backwords for a misspelled word
+nnoremap <leader>sF [s
+" }}}
 " }}}
 " Keymaps for Plugins {{{
 " The below sets NERDTree to Ctrl+N
@@ -219,14 +236,15 @@ endif
 " The syntax is 'Plug' single quote name of author/vim-plugin single quote. So
 " for example 'bling/vim-airline' is https://github.com/bling/vim-airline
 call plug#begin('~/.config/nvim/plugged')   " Starts using vim-plug https://github.com/junegunn/vim-plug
-Plug 'bling/vim-airline'            " This is a bar that shows current mode as well as ton of useful info
-Plug 'tomasr/molokai'               " Color scheme 'Molokai' for vim, since solarized is so touchy....
-Plug 'aserebryakov/filestyle'       " Highlights tab and space combos, and trailing spaces
-Plug 'Lokaltog/vim-easymotion'      " \ss causes triggers easy motion
-Plug 'godlygeek/csapprox'           " Makes GVim Color Schemes work in Terminal Vim
-Plug 'godlygeek/tabular'            " Awesome plugin for alligining text
-Plug 'tpope/vim-fugitive'           " TPope's Git integration into vim
-Plug 'tpope/vim-surround'           " Helps surrounding code and text with other code and text
+Plug 'vim-airline/vim-airline'             " This is a bar that shows current mode as well as ton of useful info
+Plug 'vim-airline/vim-airline-themes' " Vim Airline has moved their themes to a sepearte location, adding it here
+Plug 'tomasr/molokai'                " Color scheme 'Molokai' for vim, since solarized is so touchy....
+Plug 'aserebryakov/filestyle'        " Highlights tab and space combos, and trailing spaces
+Plug 'Lokaltog/vim-easymotion'       " \ss causes triggers easy motion
+Plug 'godlygeek/csapprox'            " Makes GVim Color Schemes work in Terminal Vim
+Plug 'godlygeek/tabular'             " Awesome plugin for alligining text
+Plug 'tpope/vim-fugitive'            " TPope's Git integration into vim
+Plug 'tpope/vim-surround'            " Helps surrounding code and text with other code and text
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }      " Tree file navigator
 Plug 'puppetlabs/puppet-syntax-vim', { 'for': 'puppet' }    " Puppet Syntax Highlighting
 Plug 'rodjek/vim-puppet', { 'for': 'puppet' }               " Helps Vim Play Nice with Puppet
@@ -234,19 +252,21 @@ Plug 'rodjek/puppet-lint', { 'for': 'puppet' }              " Suggested by Puppe
 Plug 'klen/python-mode', { 'for': 'python' }                " Python edior on crack
 Plug 'ngmy/vim-rubocop', { 'for': 'ruby' }                  " RuboCop buildin
 Plug 'elzr/vim-json', { 'for': 'json' }                     " JSON Hilight and indent plugin
-Plug 'dougireton/vim-chef'          " Vim dosnt know what Chef is till now
-Plug 'tmux-plugins/vim-tmux'        " A syntax highlighter for tmux! :D
-Plug 'benekastah/neomake'           " Syntax Checker to replace Syntastic for neovim
-Plug 'scrooloose/syntastic'         " So maybe neomake cant do everything...
-call plug#end()                     " Stops using vim-plug
+Plug 'dougireton/vim-chef'           " Vim dosnt know what Chef is till now
+Plug 'tmux-plugins/vim-tmux'         " A syntax highlighter for tmux! :D
+Plug 'benekastah/neomake'            " Syntax Checker to replace Syntastic for neovim
+Plug 'scrooloose/syntastic'          " So maybe neomake cant do everything...
+call plug#end()                      " Stops using vim-plug
 " }}}
 " }}}
 " Powerline Specific Settings {{{
-let g:airline_theme='luna' " This sets the theme of airline
+let g:airline_theme='molokai' " This sets the theme of airline
 
 if !exists('g:airline_symbols')
-      let g:airline_symbols = {}
-  endif
+    let g:airline_symbols = {}
+endif
+
+let g:airline#extensions#tabline#enabled = 1
 
 let g:airline_left_sep = '»'
 let g:airline_left_sep = '▶'
