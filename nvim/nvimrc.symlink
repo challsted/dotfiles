@@ -1,5 +1,4 @@
-"If viewing this file and it appears like with several '+-- X lines: ...' you
-"can expand them easily by hovering over them and typeing ', ' or <leader><space>
+"If viewing this file and it appears like with several '+-- X lines: ...' you can expand them easily by hovering over them and typing ', ' or <leader><space>
 "or just 'za'
 " Looks, Layout and Folding {{{
 set t_Co=256        "Terminal Colors set to 256
@@ -11,12 +10,13 @@ set clipboard=unnamed,unnamedplus
 "Layout of the actual editor {{{
 set relativenumber  " Show Relative Number on non-selected lines
 set number          " Show Highlighted Line number in relation to file
-set cursorline      " Show location of cursor using a horizontal line
 set ruler           " Shows current position
-set noshowmode      " Prevents the 'mode' from showing (this is because airline does this for us) 
+set noshowmode      " Prevents the 'mode' from showing (this is because airline does this for us)
 set lazyredraw      " Redraw the screen less, leading to faster response
 set showmatch       " Shows matching bracket when highlighting with cursor
-set spelllang=en_us
+set spelllang=en_us " If Spell Check is enabled (<leader>ss) then use US English
+set nolinebreak     " I do NOT want my text breaking at 80 columns
+set textwidth=0     " Playing with settings to make my 80 column highlight stop...
 " }}}
 "Folding {{{
 set foldenable        " Enables Folding
@@ -24,10 +24,10 @@ set foldlevelstart=10 " Opens the first 10 folds by default
 set foldnestmax=10    " 10 nested fold max
 set foldmethod=marker " Tells vim to fold based on indent level
 set modeline          " Turn ModeLine On
-set modelines=1       " Checks last line for file specific commands via modeline
+set modelines=1       " Checks last line for file specific commands via ModeLine
 " }}}
 " }}}
-"Spaceing, Tab Key, and Indention {{{
+"Spacing, Tab Key, and Indention {{{
 set smartindent     " Smarter indenting
 set backspace=2     " Backspace in insert mode works like normal editor
 set expandtab       " 1 tab = 4 spaces
@@ -43,11 +43,11 @@ autocmd Filetype yaml setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 autocmd Filetype ruby setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 " }}}
 " }}}
-"Writeing and backing up files {{{
+"Writing and backing up files {{{
 set backupdir=~/.config/nvim/backup// " Backup files
 set directory=~/.config/nvim/swap//   " Swap Files
 set undodir=~/.config/nvim/undo//     " Undo files
-" If a directory dosnt exist, create it
+" If a directory doesn't exist, create it
 function s:mkNonExDir(file, buf)
     if empty(getbufvar(a:buf, '&buftype')) && a:file!~#'\v^\w+\:\/'
         let dir=fnamemodify(a:file, ':h')
@@ -68,7 +68,7 @@ set smartcase       " Even with ignore case, still try to be smart about it
 " }}}
 " Key Remaps {{{
 " Extended Functionality {{{
-"For lines longer then the screens width, treat them as seperate lines
+"For lines longer then the screens width, treat them as separated lines
 " Highlights last inserted text from insert mode in visual mode
 nnoremap gV `[v`]
 " :W (Capitol W) saves the file with sudo, needed when editing some files
@@ -85,7 +85,7 @@ nmap g<C-O> o<ESC>k
 let mapleader=","
 " Space to turn off highlighting
 nnoremap <silent><Space> :nohlsearch<Bar>:echo<CR>
-" Inteligently Add/Remove line numbers
+" Intelligently Add/Remove line numbers
 nnoremap <silent> <leader>n :set invnumber <bar> :set invrelativenumber<CR>
 " Run the entire file through the indent filter with <Leader>=
 noremap <silent> <Leader>= :call Preserve("normal gg=G")<CR>
@@ -97,7 +97,7 @@ nnoremap <leader>w :w!<CR>
 noremap <leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 " ,y yanks to end of line
 nnoremap <leader>y y$
-" Toggle paste mode with <Leader>p (need to turn it back off agian though!)
+" Toggle paste mode with <Leader>p (need to turn it back off again though!)
 nnoremap <leader>p :set invpaste paste?<CR>
 " Delete (not cut) selection
 nnoremap <leader>d "_d
@@ -107,22 +107,22 @@ imap <leader>' ''<ESC>i
 imap <leader>" ""<ESC>i
 imap <leader>( ()<ESC>i
 imap <leader>[ []<ESC>i
-" Keymaps for Vims built in 'Spell Check' {{{
+" Key maps for Vims built in 'Spell Check' {{{
 " Enables spell check, but only after pressing ,ss like 'set spell'
 nnoremap <leader>ss :setlocal invspell<CR>
-" ADD the word under the cusor to the spell file
+" ADD the word under the cursor to the spell file
 nnoremap <leader>sa zg
 " DELETE a word that you had previously said was good from the spell file
 nnoremap <leader>sd zW
-" CHANGE the word under the cusor (pulls up a list of words to change it to
+" CHANGE the word under the cursor (pulls up a list of words to change it to
 nnoremap <leader>sc z=
 " CHANGE the word under the cursor to the first suggestion that would pop up
 nnoremap <leader>sC 1z=
-" Repeate the replacmeent of z= for all matches in the current window
+" Repeat the replacement of z= for all matches in the current window
 nnoremap <leader>sz :spellrepall<CR>
 " Search Forwards for a misspelled word
 nnoremap <leader>sf ]s
-" Search Backwords for a misspelled word
+" Search Backwards for a misspelled word
 nnoremap <leader>sF [s
 " }}}
 " }}}
