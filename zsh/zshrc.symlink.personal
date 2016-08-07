@@ -54,3 +54,6 @@ if type xcape > /dev/null; then
 fi
 # Enable RBEnv on boot
 eval "$(rbenv init -)"
+
+#Possibly temp, we shall see soon enough
+PATH="/usr/local/heroku/bin:$PATH"
