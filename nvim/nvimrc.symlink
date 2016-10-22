@@ -236,8 +236,8 @@ endif
 " The syntax is 'Plug' single quote name of author/vim-plugin single quote. So
 " for example 'bling/vim-airline' is https://github.com/bling/vim-airline
 call plug#begin('~/.config/nvim/plugged')   " Starts using vim-plug https://github.com/junegunn/vim-plug
-Plug 'vim-airline/vim-airline'             " This is a bar that shows current mode as well as ton of useful info
-Plug 'vim-airline/vim-airline-themes' " Vim Airline has moved their themes to a sepearte location, adding it here
+Plug 'vim-airline/vim-airline'             " Useful status bar for *Vim
+Plug 'vim-airline/vim-airline-themes'
 Plug 'tomasr/molokai'                " Color scheme 'Molokai' for vim, since solarized is so touchy....
 Plug 'aserebryakov/filestyle'        " Highlights tab and space combos, and trailing spaces
 Plug 'Lokaltog/vim-easymotion'       " \ss causes triggers easy motion
@@ -256,6 +256,31 @@ Plug 'dougireton/vim-chef'           " Vim dosnt know what Chef is till now
 Plug 'tmux-plugins/vim-tmux'         " A syntax highlighter for tmux! :D
 Plug 'benekastah/neomake'            " Syntax Checker to replace Syntastic for neovim
 Plug 'scrooloose/syntastic'          " So maybe neomake cant do everything...
+Plug 'metakirby5/codi.vim'           " Realtime REPL Scratchpad
+" Space Vim - And assorted Plugins Connected to it - Needs Work{{{
+" Not sure how long I will keep these around, I recently discovered spacevim.
+" But I dont think I will like space as a leader key, im adding all of the
+" suggested plugins inside of this fold to make it easier to find them in the
+" future.
+Plug 'ctjhoa/spacevim'               " Not sure how long i will keep this, just playing around
+Plug 'mhinz/vim-startify'            " Really like this one"
+Plug 'easymotion/vim-easymotion'
+Plug 'junegunn/fzf', { 'dir': '~/.config/fzf', 'do': './install -all' }
+Plug 'junegunn/fzf.vim'
+Plug 'tpope/vim-commentary'
+Plug 'mbbill/undotree'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'haya14busa/incsearch.vim'
+Plug 'hecal3/vim-leader-guide'
+Plug 'kana/vim-arpeggio'
+Plug 'osyo-manga/vim-over'
+Plug 'Raimondi/delimitMate'
+Plug 'sheerun/vim-polyglot'
+Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-fugitive'
+
+" }}}
 call plug#end()                      " Stops using vim-plug
 " }}}
 " }}}
