@@ -52,8 +52,8 @@ fi
 if type xcape > /dev/null; then
     xcape -e 'Caps_Lock=Escape'
 fi
-# Enable RBEnv on boot
-eval "$(rbenv init -)"
+# Enable RBEnv on boot (not doing ruby dev atm, disaling this for the time)
+#eval "$(rbenv init -)"
 
 #Possibly temp, we shall see soon enough
-PATH="/usr/local/heroku/bin:$PATH"
+PATH="/usr/local/heroku/bin:~/.config/bspwm/:$PATH"
