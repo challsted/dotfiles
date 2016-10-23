@@ -1,26 +1,168 @@
+# vim: set foldmethod=marker foldlevel=0 :
 #
-# wm independent hotkeys
+# Top Level Prefix:             Super
+# Window/Desktop Level Prefix:  Alt
+# Prefix + Shift:               Alternate/Oposite Effect
 #
+# Ideas on Syntax {{{
+# Windows:
+#   window -c = Close
+#   window -d = Desktop(?)
+#   window -e = Change (Height/Width(?))
+#   window -f = Focus
+#   window -m = Move
+#   window -p = Spot
+#   window -s = Swap
+#   window -t
+# Node: (Same as window?)
+#   node -c = Close
+#   node -d
+#   node -f
+#   node -g
+#   node -k = Kill
+#   node -n
+#   node -o
+#   node -p
+#   node -s
+#   node -t
+#   node -v
+#   node -z
+# Desktop:
+#   desktop -B = Preset(?)
+#   desktop -c
+#   desktop -f = Focus
+#   desktop -l
+# Pointer:
+#   pointer -g
+#   pointer -t
+#   pointer -u
+# WM:
+#   wm -h
+# Query:
+#   query -N
+#   query -n
+#   query -d
+# Monitor
+#   monitor -f = Focus
+#
+# }}}
 
-# terminal emulator
+# General HotKeys {{{
+# Launch a Terminal
 super + Return
     gnome-terminal
 
-# program launcher
+# Program Launcher (need to get Rofi working)
 super + space
     dmenu_run
 
-# make sxhkd reload its configuration files:
+# Make sxhkd reload its configuration files:
 super + Escape
     pkill -USR1 -x sxhkd
 
-#
-# bspwm hotkeys
-#
-
-# quit bspwm normally
+# Quit BSPWM normally
 super + alt + Escape
     bspc quit
+# }}}
+
+# Window Specific Keys {{{
+
+# Close Focused Window
+alt + w
+    bspc window -c
+
+# Fullscreen current window
+alt + f
+    ~/.config/bspwm/misc/full
+
+# Float current window
+alt + shift + f
+    ~/.config/bspwm/misc/floating
+
+# Sticky current window
+alt + s
+    bspc window -t sticky
+
+# Sticky current window
+alt + s
+    bspc window -t sticky
+
+# Move window to current biggest spot
+alt + ctrl + f
+    bspc window -s biggest
+
+# focus the node in the given direction
+# -f for focus
+# -s for move(?)
+alt + {_,shift + }{h,j,k,l}
+    bspc node -{f,s} {west,south,north,east}
+
+# Move window
+alt + ctrl + {h,j,k,l}
+    bspc window -s {left,down,up,right}
+
+# preselect the direction
+super + ctrl + {h,j,k,l}
+    bspc node -p {west,south,north,east}
+
+
+# Move/Resize {{{
+
+# expand a window by moving one of its side outward
+super + alt + {h,j,k,l}
+    bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
+
+# contract a window by moving one of its side inward
+super + alt + shift + {h,j,k,l}
+    bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
+
+# move a floating window
+alt + {Left,Down,Up,Right}
+    bspc node -v {-20 0,0 20,0 -20,20 0}
+
+# }}}
+# }}}
+
+# Desktop Specific Keys {{{
+
+# Multiple Ways to:
+# Focus the next/prev desktop
+alt + bracket{left,right}
+    bspc desktop -f {prev,next}
+
+# NOTE I prob need to swap prev,next to make this work properly
+alt + ctrl + {_,shift +}Tab
+    bspc desktop -f {prev,next}
+
+alt + {_,shift +}grave
+    bspc desktop -f {next,prev}.occupied
+
+alt + ctrl + {_,shift +}grave
+    bspc desktop -f {next,prev}
+
+# }}}
+
+# Mouse Specific Keys {{{
+
+# Mouse Pointer raises focus on window
+~button1
+    bspc pointer -g focus
+
+# Mouse button to move and resize
+super + shift + button{1-3}
+    bspc pointer -g {move,resize_side,resize_corner}
+
+# NOTE Need to research how this works...
+super + shift + !button{1-3}
+    bspc pointer -t %i %i
+
+# NOTE Also this...
+super + shift + @button{1-3}
+    bspc pointer -u
+
+# }}}
+
+# I do not yet know what these keys do, they will be organized when i figure them out {{{
 
 # close and kill
 super + {_,shift + }w
@@ -54,10 +196,6 @@ super + ctrl + {x,y,z}
 # focus/swap
 #
 
-# focus the node in the given direction
-super + {_,shift + }{h,j,k,l}
-    bspc node -{f,s} {west,south,north,east}
-
 # focus the node for the given path jump
 super + {p,b,comma,period}
     bspc node -f @{parent,brother,first,second}
@@ -66,9 +204,6 @@ super + {p,b,comma,period}
 super + {_,shift + }c
     bspc node -f {next,prev}
 
-# focus the next/previous desktop
-super + bracket{left,right}
-    bspc desktop -f {prev,next}
 
 # focus the last node/desktop
 super + {grave,Tab}
@@ -88,10 +223,6 @@ super + {_,shift + }{1-9,0}
 # preselect
 #
 
-# preselect the direction
-super + ctrl + {h,j,k,l}
-    bspc node -p {west,south,north,east}
-
 # preselect the ratio
 super + ctrl + {1-9}
     bspc node -o 0.{1-9}
@@ -105,17 +236,5 @@ super + ctrl + shift + space
     bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
 
 #
-# move/resize
-#
 
-# expand a window by moving one of its side outward
-super + alt + {h,j,k,l}
-    bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
-
-# contract a window by moving one of its side inward
-super + alt + shift + {h,j,k,l}
-    bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
-
-# move a floating window
-super + {Left,Down,Up,Right}
-    bspc node -v {-20 0,0 20,0 -20,20 0}
+# }}}
