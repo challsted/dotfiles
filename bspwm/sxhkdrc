@@ -3,49 +3,7 @@
 # Top Level Prefix:             Super
 # Window/Desktop Level Prefix:  Alt
 # Prefix + Shift:               Alternate/Oposite Effect
-#
-# Ideas on Syntax {{{
-# Windows:
-#   window -c = Close
-#   window -d = Desktop(?)
-#   window -e = Change (Height/Width(?))
-#   window -f = Focus
-#   window -m = Move
-#   window -p = Spot
-#   window -s = Swap
-#   window -t
-# Node: (Same as window?)
-#   node -c = Close
-#   node -d
-#   node -f
-#   node -g
-#   node -k = Kill
-#   node -n
-#   node -o
-#   node -p
-#   node -s
-#   node -t
-#   node -v
-#   node -z
-# Desktop:
-#   desktop -B = Preset(?)
-#   desktop -c
-#   desktop -f = Focus
-#   desktop -l
-# Pointer:
-#   pointer -g
-#   pointer -t
-#   pointer -u
-# WM:
-#   wm -h
-# Query:
-#   query -N
-#   query -n
-#   query -d
-# Monitor
-#   monitor -f = Focus
-#
-# }}}
+# Doc on what these flags do can be found in `man bspwm`
 
 # General HotKeys {{{
 # Launch a Terminal

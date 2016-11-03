@@ -3,7 +3,23 @@
 
 This folder of this repo is to keep all config for my jump into BSPWM (Binary Space Partitioning Window Manager)
 
-# Keybindings
+# Extra Packages Installed
+* MPD and MPC - Music Player Daemon and a CLI client for MPD
+  * obtained though DNF
+* feh - image fiewer and cataloguer
+  * obtained though DNF
+* dmenu - a launcher
+  * was already on my system because of i3
+  * obtained though DNF
+* dunst - notification manager
+  * obtained from [here](https://github.com/knopwob/dunst)
+* dzen - menu bar
+  * also compiled "gadgets" under repo
+  * obtained from [here](https://github.com/robm/dzen)
+* sutils - Small CLI Utilities by Baskerville (maker of BSPWM)
+  * obtained from [here](https://github.com/baskerville/sutils)
+
+# Keybindings (NOT COMPLETE)
 **Please note that this section MAY be out of date as I am still learning how to use this WM and am adding things more or less randomly right now**
 
 All Config for Keybindings can be found under [sxhkdrc](https://github.com/challsted/dotfiles/blob/master/bspwm/sxhkdrc), and should be symlinked to `$XDG_CONFIG_HOME/sxhkd/sxhkdrc`
@@ -48,4 +64,3 @@ All Config for Keybindings can be found under [sxhkdrc](https://github.com/chall
 * `alt + {_,shift +}grave` - bspc desktop -f {next,prev}.occupied
 
 * `alt + ctrl + {_,shift +}grave` bspc desktop -f {next,prev}
-
