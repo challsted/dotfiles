@@ -132,5 +132,30 @@ conf(){
         sxhkd)
             $EDITOR ~/.config/sxhkd/sxhkd/sxhkdrc
             ;;
+        *)
+            echo -e "Sorry, you'll need to be more specific"
+            ;;
+    esac
+}
+
+# WORK IN PROGRESS - Easy Git(?)
+# TODO: Look for a way to add a inline message
+push(){
+    case $1 in
+        all)
+            git init &&
+                git -A &&
+                git commit &&
+                ;;
+        here)
+            git init &&
+                git add . &&
+                git commit &&
+                ;;
+        generic)
+            git init &&
+                git -A &&
+                git commit -m "Generic Commit - Automated"&&
+                ::
     esac
 }
