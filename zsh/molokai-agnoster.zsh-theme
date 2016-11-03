@@ -104,7 +104,7 @@ prompt_git() {
       if [ $behind -ne 0 ]; then
         prompt_segment magenta white
       else
-        prompt_segment cyan black
+        prompt_segment white black
       fi
       echo -n " $remote (-$behind)"
     fi
