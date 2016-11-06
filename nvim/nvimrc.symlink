@@ -2,23 +2,27 @@
 " you can expand them easily by hovering over them and typing either:
 " 1) ', ' which is <leader><space>
 " 2) 'za'
-" Looks, Layout and Folding {{{
+" Settings {{{
+" Looks {{{
 set t_Co=256        "Terminal Colors set to 256
 syntax on           "Creates better highlighting
 colorscheme molokai "Uses the very nice looking 'molokai' thee
 highlight Normal ctermfg=grey ctermbg=black
 set background=dark
 set clipboard=unnamed,unnamedplus " Allows Vim to use System Clipboard
-"Layout of the actual editor {{{
+" }}}
+"Layout {{{
 set relativenumber  " Show Relative Number on non-selected lines
 set number          " Show Highlighted Line number in relation to file
 set ruler           " Shows current position
 set noshowmode      " Prevents the 'mode' from showing (this is because airline does this for us)
+set laststatus=2    " Making Statusline appear
 set lazyredraw      " Redraw the screen less, leading to faster response
 set showmatch       " Shows matching bracket when highlighting with cursor
 set spelllang=en_us " If Spell Check is enabled (<leader>ss) then use US English
 set nolinebreak     " I do NOT want my text breaking at 80 columns
 set textwidth=0     " Playing with settings to make my 80 column highlight stop...
+set cursorline      " Show a highlighted line where cursor is at
 " }}}
 "Folding {{{
 set foldenable        " Enables Folding
@@ -28,7 +32,6 @@ set foldmethod=marker " Tells vim to fold based on indent level
 set modeline          " Turn ModeLine On
 set modelines=1       " Checks last line for file specific commands via ModeLine
 " }}}
-" }}}
 "Spacing, Tab Key, and Indention {{{
 set smartindent     " Smarter indenting
 set backspace=2     " Backspace in insert mode works like normal editor
@@ -37,18 +40,19 @@ set shiftwidth=4    " 1 tab = 4 spaces
 set tabstop=4       " Backspace over a full tab if tab is expanded to tabstop or expandtab
 set softtabstop=4   " Backspace over a full tab if tab is expanded to tabstop or expandtab
 set showtabline=2   " Always display the tabline, even if there is only 1 tab
-"Specific to a filetype {{{
+" }}}
+"Filetype Specific indents {{{
 filetype indent on  " Activates indenting for files
 filetype plugin on  " Activates plugins for file types
 autocmd Filetype puppet setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 autocmd Filetype yaml setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 autocmd Filetype ruby setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 " }}}
-" }}}
 "Menu and Search {{{
 set wildmode=list:longest " Make 'wildmenu' behave a little nicer
 set ignorecase      " Ignores case when searching
 set smartcase       " Even with ignore case, still try to be smart about it
+" }}}
 " }}}
 " Key Remaps {{{
 " Remaps with LEADER {{{
@@ -87,7 +91,7 @@ nnoremap gV `[v`]
 " Extended Functionality {{{
 "For lines longer then the screens width, treat them as separated lines
 " :W (Capitol W) saves the file with sudo, needed when editing some files
-command W w !sudo tee % > /dev/null
+command! W w !sudo tee % > /dev/null
 " Map <F1> to <Esc> everywhere
 map <F1> <Esc>
 imap <F1> <Esc>
@@ -95,6 +99,7 @@ vmap <F1> <Esc>
 nmap <F1> <Esc>
 " Space to turn off highlighting
 nnoremap <silent><Space> :nohlsearch<Bar>:echo<CR>
+" }}}
 " Key maps for Vims built in 'Spell Check' {{{
 " Enables spell check, but only after pressing ,ss like 'set spell'
 nnoremap <leader>ss :setlocal invspell<CR>
@@ -112,7 +117,6 @@ nnoremap <leader>sz :spellrepall<CR>
 nnoremap <leader>sf ]s
 " Search Backwards for a misspelled word
 nnoremap <leader>sF [s
-" }}}
 " }}}
 " Keymaps for Plugins {{{
 " The below sets NERDTree to Ctrl+N
@@ -203,7 +207,7 @@ set backupdir=~/.config/nvim/backup// " Backup files
 set directory=~/.config/nvim/swap//   " Swap Files
 set undodir=~/.config/nvim/undo//     " Undo files
 " If a directory doesn't exist, create it
-function s:mkNonExDir(file, buf)
+function! s:mkNonExDir(file, buf)
     if empty(getbufvar(a:buf, '&buftype')) && a:file!~#'\v^\w+\:\/'
         let dir=fnamemodify(a:file, ':h')
         if !isdirectory(dir)
@@ -229,7 +233,6 @@ endif
 " }}}
 " }}}
 " Plugin Stuff {{{
-" VimPlug {{{
 " Autoinstall vim-plug {{{
 let s:plugins=$XDG_CONFIG_HOME . '/plugged'
 let s:plugin_manager=$XDG_CONFIG_HOME . '/autoload/plug.vim'
@@ -253,8 +256,10 @@ endif
 " The syntax is 'Plug' single quote name of author/vim-plugin single quote. So
 " for example 'bling/vim-airline' is https://github.com/bling/vim-airline
 call plug#begin('~/.config/nvim/plugged')   " Starts using vim-plug https://github.com/junegunn/vim-plug
-Plug 'vim-airline/vim-airline'             " Useful status bar for *Vim
-Plug 'vim-airline/vim-airline-themes'
+" Commenting out Airline, im going to tryout LightLine
+" Plug 'vim-airline/vim-airline'             " Useful status bar for *Vim
+" Plug 'vim-airline/vim-airline-themes'
+Plug 'itchyny/lightline.vim'         " Replacement for Airline
 Plug 'tomasr/molokai'                " Color scheme 'Molokai' for vim, since solarized is so touchy....
 Plug 'aserebryakov/filestyle'        " Highlights tab and space combos, and trailing spaces
 Plug 'Lokaltog/vim-easymotion'       " \ss causes triggers easy motion
@@ -300,7 +305,6 @@ Plug 'tpope/vim-fugitive'
 " }}}
 call plug#end()                      " Stops using vim-plug
 " }}}
-" }}}
 " Powerline Specific Settings {{{
 let g:airline_theme='molokai' " This sets the theme of airline
 
@@ -323,6 +327,112 @@ let g:airline_symbols.paste = 'Þ'
 let g:airline_symbols.paste = '∥'
 let g:airline_symbols.whitespace = 'Ξ'
 let g:airline_powerline_fonts = 1
+" }}}
+" Lightline Specific settings {{{
+let g:lightline = {
+    \ 'colorscheme': 'molokai',
+    \ 'active': {
+    \   'left': [
+    \      [ 'mode',
+    \        'paste' ],
+    \      [ 'filename',
+    \        'fugitive' ]
+    \   ],
+    \   'right': [
+    \      [ 'lineinfo' ],
+    \      [ 'percent' ],
+    \      [ 'syntastic',
+    \        'nerdtree' ]
+    \    ],
+    \ },
+    \ 'component_function': {
+    \   'modified': 'LightlineModified',
+    \   'readonly': 'LightlineReadonly',
+    \   'fugitive': 'LightlineFugitive',
+    \   'filename': 'LightlineFilename',
+    \   'fileformat': 'LightlineFileformat',
+    \   'filetype': 'LightlineFiletype',
+    \   'fileencoding': 'LightlineFileencoding',
+    \   'mode': 'LightlineMode',
+    \ },
+    \ 'component_expand': {
+    \   'syntastic': 'SyntasticStatuslineFlag',
+    \ },
+    \ 'component_type': {
+    \   'syntastic': 'error',
+    \ },
+    \ 'separator': {
+    \   'left': '',
+    \   'right': '',
+    \ },
+    \ 'subseparator': {
+    \   'left': '',
+    \   'right': '',
+    \ },
+    \ 'mode_map': {
+    \   'No': 'NORMAL',
+    \   'In': 'INSERT',
+    \   'Re': 'REPLACE',
+    \   'Vs': 'VISUAL',
+    \   'VL': 'V-LINE',
+    \   'VB': 'V-BLOCK',
+    \   'Co': 'COMMAND',
+    \   'Se': 'SELECT',
+    \   'SL': 'S-LINE',
+    \   "SB": 'S-BLOCK',
+    \   'Te': 'TERMINAL',
+    \ },
+    \ }
+
+function! LightlineModified()
+  return &ft =~ 'help' ? '' : &modified ? '+' : &modifiable ? '' : '-'
+endfunction
+
+function! LightlineReadonly()
+  return &ft !~? 'help' && &readonly ? ' ' : ''
+endfunction
+
+function! LightlineFilename()
+ return ('' != LightlineReadonly() ? LightlineReadonly() . ' ' : '') .
+       \ (&ft == 'vimfiler' ? vimfiler#get_status_string() :
+       \  &ft == 'unite' ? unite#get_status_string() :
+       \  &ft == 'vimshell' ? vimshell#get_status_string() :
+       \ '' != expand('%:t') ? expand('%:t') : '[No Name]') .
+       \ ('' != LightlineModified() ? ' ' . LightlineModified() : '')
+endfunction
+
+function! LightlineFugitive()
+  if &ft !~? 'vimfiler\|gundo' && exists("*fugitive#head")
+    let branch = fugitive#head()
+    return branch !=# '' ? ' '.branch : ''
+  endif
+  return ''
+endfunction
+
+function! LightlineFileformat()
+  return winwidth(0) > 70 ? &fileformat : ''
+endfunction
+
+function! LightlineFiletype()
+  return winwidth(0) > 70 ? (&filetype !=# '' ? &filetype : 'no ft') : ''
+endfunction
+
+function! LightlineFileencoding()
+  return winwidth(0) > 70 ? (&fenc !=# '' ? &fenc : &enc) : ''
+endfunction
+
+function! LightlineMode()
+  return winwidth(0) > 60 ? lightline#mode() : ''
+endfunction
+
+augroup AutoSyntastic
+  autocmd!
+  autocmd BufWritePost *.c,*.cpp call s:syntastic()
+augroup END
+function! s:syntastic()
+  SyntasticCheck
+  call lightline#update()
+endfunction
 " }}}
 " Neomake Specific Settings  {{{
 let g:neomake_verbose = 0
