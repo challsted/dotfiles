@@ -28,7 +28,7 @@ set cursorline      " Show a highlighted line where cursor is at
 set foldenable        " Enables Folding
 set foldlevelstart=10 " Opens the first 10 folds by default
 set foldnestmax=10    " 10 nested fold max
-set foldmethod=marker " Tells vim to fold based on indent level
+set foldmethod=marker " Tells Vim to fold based on indent level
 set modeline          " Turn ModeLine On
 set modelines=1       " Checks last line for file specific commands via ModeLine
 " }}}
@@ -118,13 +118,13 @@ nnoremap <leader>sf ]s
 " Search Backwards for a misspelled word
 nnoremap <leader>sF [s
 " }}}
-" Keymaps for Plugins {{{
+" Key maps for Plugins {{{
 " The below sets NERDTree to Ctrl+N
 map <C-n> :NERDTreeToggle<CR>
 nmap <Leader>r :RuboCop<CR>
 " }}}
 " Delete/Change surrounding characters {{{
-" ds<char> only deltes
+" ds<char> only deletes
 " cs<char> deletes and puts you into insert mode
 noremap ds{ F{xf}x
 noremap cs{ F{xf}xi
@@ -141,7 +141,7 @@ noremap cs) F(xf)xi
 " Move current line up or down 1 line
 noremap <up> ddkP
 noremap <down> ddp
-" Dont use these keys for anything
+" Don't use these keys for anything
 noremap <left> <Nop>
 noremap <right> <Nop>
 inoremap <up> <Nop>
@@ -233,7 +233,7 @@ endif
 " }}}
 " }}}
 " Plugin Stuff {{{
-" Autoinstall vim-plug {{{
+" Autoinstall Vim-plug {{{
 let s:plugins=$XDG_CONFIG_HOME . '/plugged'
 let s:plugin_manager=$XDG_CONFIG_HOME . '/autoload/plug.vim'
 let s:plugin_url='https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
@@ -253,45 +253,34 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
 endif
 " }}}
 " Plugins to Install {{{
-" The syntax is 'Plug' single quote name of author/vim-plugin single quote. So
-" for example 'bling/vim-airline' is https://github.com/bling/vim-airline
-call plug#begin('~/.config/nvim/plugged')   " Starts using vim-plug https://github.com/junegunn/vim-plug
-" Commenting out Airline, im going to tryout LightLine
+call plug#begin('~/.config/nvim/plugged')   " Starts using Vim-plug https://github.com/junegunn/Vim-plug
+" Commenting out Airline, I'm going to tryout LightLine
 " Plug 'vim-airline/vim-airline'             " Useful status bar for *Vim
 " Plug 'vim-airline/vim-airline-themes'
 Plug 'itchyny/lightline.vim'         " Replacement for Airline
-Plug 'tomasr/molokai'                " Color scheme 'Molokai' for vim, since solarized is so touchy....
+Plug 'tomasr/molokai'                " Color scheme 'Molokai' for Vim
 Plug 'Lokaltog/vim-easymotion'       " \ss causes triggers easy motion
 Plug 'godlygeek/csapprox'            " Makes GVim Color Schemes work in Terminal Vim
-Plug 'godlygeek/tabular'             " Awesome plugin for alligining text
-Plug 'tpope/vim-fugitive'            " TPope's Git integration into vim
+Plug 'godlygeek/tabular'             " Awesome plugin for aligning text
+Plug 'tpope/vim-fugitive'            " TPope's Git integration into Vim
 Plug 'tpope/vim-surround'            " Helps surrounding code and text with other code and text
+Plug 'tpope/vim-sensible'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }      " Tree file navigator
-Plug 'puppetlabs/puppet-syntax-vim', { 'for': 'puppet' }    " Puppet Syntax Highlighting
-Plug 'rodjek/vim-puppet', { 'for': 'puppet' }               " Helps Vim Play Nice with Puppet
-Plug 'rodjek/puppet-lint', { 'for': 'puppet' }              " Suggested by PuppetLabs as a linter
-Plug 'klen/python-mode', { 'for': 'python' }                " Python edior on crack
-Plug 'ngmy/vim-rubocop', { 'for': 'ruby' }                  " RuboCop buildin
-Plug 'elzr/vim-json', { 'for': 'json' }                     " JSON Hilight and indent plugin
-Plug 'dougireton/vim-chef'           " Vim dosnt know what Chef is till now
+" Plug 'puppetlabs/puppet-syntax-vim', { 'for': 'puppet' }    " Puppet Syntax Highlighting
+" Plug 'rodjek/vim-puppet', { 'for': 'puppet' }               " Helps Vim Play Nice with Puppet
+" Plug 'rodjek/puppet-lint', { 'for': 'puppet' }              " Suggested by PuppetLabs as a linter
+Plug 'klen/python-mode', { 'for': 'python' }                " Python editor on crack
+Plug 'ngmy/vim-rubocop', { 'for': 'ruby' }                  " RuboCop build-in
+Plug 'elzr/vim-json', { 'for': 'json' }                     " JSON Highlight and indent plugin
+" Plug 'dougireton/vim-chef'           " Vim doesn't know what Chef is till now
 Plug 'tmux-plugins/vim-tmux'         " A syntax highlighter for tmux! :D
-Plug 'benekastah/neomake'            " Syntax Checker to replace Syntastic for neovim
+Plug 'benekastah/neomake'            " Syntax Checker to replace Syntastic for NeoVim
 Plug 'scrooloose/syntastic'          " So maybe neomake cant do everything...
-Plug 'metakirby5/codi.vim'           " Realtime REPL Scratchpad
-" Space Vim - And assorted Plugins Connected to it - Needs Work{{{
-" Not sure how long I will keep these around, I recently discovered spacevim.
-" But I dont think I will like space as a leader key, im adding all of the
-" suggested plugins inside of this fold to make it easier to find them in the
-" future.
-Plug 'mhinz/vim-startify'            " Really like this one
+Plug 'metakirby5/codi.vim'           " Real time REPL Scratchpad
+Plug 'mhinz/vim-startify'            " Launch nvim standalone to access this
 Plug 'junegunn/fzf', { 'dir': '~/.config/fzf', 'do': './install -all' }
 Plug 'junegunn/fzf.vim'
-Plug 'tpope/vim-sensible'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-fugitive'
-
-" }}}
-call plug#end()                      " Stops using vim-plug
+call plug#end()                      " Stops using Vim-plug
 " }}}
 " Lightline Specific settings {{{
 let g:lightline = {
@@ -430,11 +419,11 @@ endif
 
 " }}}
 " Molokai Specific Settings {{{
-let g:rehash256 = 1 " More like the gui 256 scheme'
+let g:rehash256 = 1 " More like the GUI 256 scheme'
 " }}}
 " Syntastic Specific Settings {{{
 let g:syntastic_check_on_open = 1 " Check on file open
-let g:syntastic_check_on_wq = 0 " Dont check on :wq
+let g:syntastic_check_on_wq = 0 " Don't check on :wq
 let g:syntastic_enable_signs = 1 " Enable symbols listed below
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_always_populate_loc_list = 1
@@ -468,4 +457,4 @@ let g:vimrubocop_keymap = 0
 " }}}
 " }}}
 " Do not edit below line unless you know what your doing
-" vim: set foldmethod=marker foldlevel=0 :
+" Vim: set foldmethod=marker foldlevel=0 :
