@@ -261,7 +261,6 @@ call plug#begin('~/.config/nvim/plugged')   " Starts using vim-plug https://gith
 " Plug 'vim-airline/vim-airline-themes'
 Plug 'itchyny/lightline.vim'         " Replacement for Airline
 Plug 'tomasr/molokai'                " Color scheme 'Molokai' for vim, since solarized is so touchy....
-Plug 'aserebryakov/filestyle'        " Highlights tab and space combos, and trailing spaces
 Plug 'Lokaltog/vim-easymotion'       " \ss causes triggers easy motion
 Plug 'godlygeek/csapprox'            " Makes GVim Color Schemes work in Terminal Vim
 Plug 'godlygeek/tabular'             " Awesome plugin for alligining text
@@ -284,49 +283,15 @@ Plug 'metakirby5/codi.vim'           " Realtime REPL Scratchpad
 " But I dont think I will like space as a leader key, im adding all of the
 " suggested plugins inside of this fold to make it easier to find them in the
 " future.
-Plug 'ctjhoa/spacevim'               " Not sure how long i will keep this, just playing around
-Plug 'mhinz/vim-startify'            " Really like this one"
-Plug 'easymotion/vim-easymotion'
+Plug 'mhinz/vim-startify'            " Really like this one
 Plug 'junegunn/fzf', { 'dir': '~/.config/fzf', 'do': './install -all' }
 Plug 'junegunn/fzf.vim'
-Plug 'tpope/vim-commentary'
-Plug 'mbbill/undotree'
-Plug 'editorconfig/editorconfig-vim'
-Plug 'haya14busa/incsearch.vim'
-Plug 'hecal3/vim-leader-guide'
-Plug 'kana/vim-arpeggio'
-Plug 'osyo-manga/vim-over'
-Plug 'Raimondi/delimitMate'
-Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
 
 " }}}
 call plug#end()                      " Stops using vim-plug
-" }}}
-" Powerline Specific Settings {{{
-let g:airline_theme='molokai' " This sets the theme of airline
-
-if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
-endif
-
-let g:airline#extensions#tabline#enabled = 1
-
-let g:airline_left_sep = '»'
-let g:airline_left_sep = '▶'
-let g:airline_right_sep = '«'
-let g:airline_right_sep = '◀'
-let g:airline_symbols.linenr = '␊'
-let g:airline_symbols.linenr = '␤'
-let g:airline_symbols.linenr = '¶'
-let g:airline_symbols.branch = '⎇'
-let g:airline_symbols.paste = 'ρ'
-let g:airline_symbols.paste = 'Þ'
-let g:airline_symbols.paste = '∥'
-let g:airline_symbols.whitespace = 'Ξ'
-let g:airline_powerline_fonts = 1
 " }}}
 " Lightline Specific settings {{{
 let g:lightline = {
