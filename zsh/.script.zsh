@@ -115,22 +115,22 @@ conf(){
             $EDITOR ~/.vimrc
             ;;
         nvim)
-            $EDITOR ~/.config/nvim/init.vim
+            $EDITOR $XDG_CONFIG_HOME/nvim/init.vim
             ;;
         wmpanel)
-            $EDITOR ~/.config/bspwm/panel
+            $EDITOR $XDG_CONFIG_HOME/bspwm/panel
             ;;
         wmbar)
-            $EDITOR ~/.config/bspwm/panel_bar
+            $EDITOR $XDG_CONFIG_HOME/bspwm/panel_bar
             ;;
         wmcolors)
-            $EDITOR ~/.config/bspwm/panel_colors
+            $EDITOR $XDG_CONFIG_HOME/bspwm/panel_colors
             ;;
         bsp)
-            $EDITOR ~/.config/bspwm/bspwmrc
+            $EDITOR $XDG_CONFIG_HOME/bspwm/bspwmrc
             ;;
         sxhkd)
-            $EDITOR ~/.config/sxhkd/sxhkd/sxhkdrc
+            $EDITOR $XDG_CONFIG_HOME/sxhkd/sxhkd/sxhkdrc
             ;;
         *)
             echo -e "Sorry, you'll need to be more specific"
@@ -157,5 +157,44 @@ push(){
                 git -A &&
                 git commit -m "Generic Commit - Automated"&&
                 ::
+    esac
+}
+
+# WORK IN PROGRESS - Common CD Dirs
+cdd(){
+    case $1 in
+        nvim)
+            cd $XDG_CONFIG_HOME/nvim
+            ;;
+        dots)
+            cd ~/git/dotfiles
+            ;;
+        bsp)
+            cd $XDG_CONFIG_HOME/bspwm
+            ;;
+        sxhkd)
+            cd $XDG_CONFIG_HOME/sxhkd
+            ;;
+        gnvim)
+            cd ~/git/dotfiles/nvim
+            ;;
+        gvim)
+            cd ~/git/dotfiles/vim
+            ;;
+        gtmux)
+            cd ~/git/dotfiles/tmux
+            ;;
+        gzsh)
+            cd ~/git/dotfiles/zsh
+            ;;
+        gbsp)
+            cd ~/git/dotfiles/bspwm
+            ;;
+        gi3)
+            cd ~/git/dotfiles/i3
+            ;;
+        *)
+            echo -e "Sorry, you'll need to be more specific"
+            ;;
     esac
 }
