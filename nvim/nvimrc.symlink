@@ -280,6 +280,7 @@ Plug 'metakirby5/codi.vim'           " Real time REPL Scratchpad
 Plug 'mhinz/vim-startify'            " Launch nvim standalone to access this
 Plug 'junegunn/fzf', { 'dir': '~/.config/fzf', 'do': './install -all' }
 Plug 'junegunn/fzf.vim'
+Plug 'guns/xterm-color-table.vim'    " Shows XTERM Colors in terminal as they are typed
 call plug#end()                      " Stops using Vim-plug
 " }}}
 " Lightline Specific settings {{{
@@ -420,6 +421,7 @@ endif
 " }}}
 " Molokai Specific Settings {{{
 let g:rehash256 = 1 " More like the GUI 256 scheme'
+let g:lightline_molokai_alternative = 1 " This is specific to LightLine
 " }}}
 " Syntastic Specific Settings {{{
 let g:syntastic_check_on_open = 1 " Check on file open
