@@ -32,8 +32,7 @@ source $CUSTZSH/.script.zsh     #Lots of functions and extra little stuff you us
 source $CUSTZSH/.opts.zsh       #Options! Lots of them! (OMZsh)
 
 #Currently only works on my desktop, need to make this work a little better...
-if [ -f ~/.local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh ]; then
-    . ~/.local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
+if [ -f ~/.local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh ]; then . ~/.local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
 fi
 
 #This sets the keyboard layout to QWERTY, but after pressing the right control and the right shift (at the same time) key it toggles the keyboard layout to be Dvoark
@@ -62,3 +61,8 @@ else
     export MANPAGER="env MAN_PN=1 vim -M +MANPAGER -"
     export EDITOR="vim"
 fi
+
+# For somereason Im having issues where my XDG's are not set...
+ if [ -z $XDG_CONFIG_HOME ]; then
+     export XDG_CONFIG_HOME="$HOME/.config"
+ fi
