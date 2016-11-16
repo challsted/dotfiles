@@ -26,10 +26,10 @@ plugins=(git command-not-found vi-mode osx tmux)
 #########################
 CUSTZSH=~/git/dotfiles/zsh
 source $ZSH/oh-my-zsh.sh        #The downloaded OMZsh files
-source $CUSTZSH/.alias.zsh      #A place for you to keep all of your shell alias's
-source $CUSTZSH/.keybind.zsh    #This is mainly being used for vim keybinds
-source $CUSTZSH/.script.zsh     #Lots of functions and extra little stuff you use often but dont often touch
-source $CUSTZSH/.opts.zsh       #Options! Lots of them! (OMZsh)
+source $CUSTZSH/alias.zsh      #A place for you to keep all of your shell alias's
+source $CUSTZSH/keybind.zsh    #This is mainly being used for vim keybinds
+source $CUSTZSH/script.zsh     #Lots of functions and extra little stuff you use often but dont often touch
+source $CUSTZSH/opts.zsh       #Options! Lots of them! (OMZsh)
 
 #Currently only works on my desktop, need to make this work a little better...
 if [ -f ~/.local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh ]; then . ~/.local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
@@ -47,20 +47,14 @@ fi
 if type xcape > /dev/null; then
     xcape -e 'Caps_Lock=Escape'
 fi
-# Enable RBEnv on boot (not doing ruby dev atm, disaling this for the time)
-#eval "$(rbenv init -)"
+
+# Enable RBEnv on boot
+if type rbenv > /dev/null; then
+    eval "$(rbenv init -)"
+fi
 
 #Possibly temp, we shall see soon enough
 PATH="/usr/local/heroku/bin:~/.config/bspwm/:$PATH"
-
-# Use NeoVim as a ManPager (used to open man pages)
-if type nvim > /dev/null; then
-    export MANPAGER="env MAN_PN=1 nvim -M +MANPAGER -"
-    export EDITOR="nvim"
-else
-    export MANPAGER="env MAN_PN=1 vim -M +MANPAGER -"
-    export EDITOR="vim"
-fi
 
 # For somereason Im having issues where my XDG's are not set...
  if [ -z $XDG_CONFIG_HOME ]; then
