@@ -1,15 +1,15 @@
 # ~* Mutt Run Commands *~ #
 
 #Global Variables
-set my_user = 'chase.hallsted@gmail.com'
-#set my_msmtp_pass = `gpg -d ~/git/dotfiles/mutt/passwords.gpg | awk '/GMail:/ {print $2}'`
-set my_msmtp_pass = `gpg --quiet --for-your-eyes-only --no-tty --decrypt ~/mutt/gmailpassword.gpg`
+ set my_user = 'chase.hallsted@gmail.com'
+set my_msmtp_pass = `gpg -d ~/git/dotfiles/mutt/passwords.gpg | awk '/GMail:/ {print $2}'`
+#set my_msmtp_pass = `gpg --quiet --for-your-eyes-only --no-tty --decrypt ~/.mutt/passwords.gpg`
 
 # Basics for most everyone
-#set imap_user = $my_user                # Gmail Required Full Email
-#set imap_pass = $my_msmtp_password      # Set inside encrypted password.gpg
-#set smtp_url  = "smtps://chase.hallsted@smtp.gmail.com:587/"
-#set smtp_pass = $my_msmtp_password      # Set insie encrypted password.gpg
+set imap_user = $my_user                # Gmail Required Full Email
+set imap_pass = $my_msmtp_password      # Set inside encrypted password.gpg
+set smtp_url  = "smtps://chase.hallsted@smtp.gmail.com:587/"
+set smtp_pass = $my_msmtp_password      # Set insie encrypted password.gpg
 set realname  = "Chase Hallsted"        # Your Real Name
 set from      = $my_user                # Set who to appear "as"
 set use_from  = yes                     # Use from?
@@ -136,7 +136,8 @@ bind index <space>  collapse-thread
 
 # Sidebar Patch
 set sidebar_visible = yes
-set sidebar_sort    = yes
+set sidebar_format = "%B%?F? [%F]?%* %?N%N/?%S"
+set mail_check_stats
 set sidebar_width   = 24
 #color sidebar_new color221 color233
 bind index,pager <up> sidebar-prev
