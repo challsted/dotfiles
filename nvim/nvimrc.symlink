@@ -102,7 +102,7 @@ nnoremap <silent><Space> :nohlsearch<Bar>:echo<CR>
 " }}}
 " Key maps for Vims built in 'Spell Check' {{{
 " Enables spell check, but only after pressing ,ss like 'set spell'
-nnoremap <leader>ss :setlocal invspell<CR>
+nnoremap <leader>ss :setlocal invspell<CR>:setlocal invcursorline<CR>
 " ADD the word under the cursor to the spell file
 nnoremap <leader>sa zg
 " DELETE a word that you had previously said was good from the spell file
