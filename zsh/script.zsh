@@ -218,44 +218,71 @@ if type tmux > /dev/null; then
         QTMUX_USER_INPUT=$1
         QTMUX_IS_NUM=$(isNum $1) #Checks if user passed in a number or a word, see "isNum()
         QTMUX_NAME_TAKEN=$(tmux list-sessions | grep $QTMUX_SESSION_NAME | wc -l)
+        QTMUX_SESSION_TAKEN=$(tmux list-sessions | grep $QTMUX_USER_INPUT)
         QTMUX_NUMBER=0
+
+        # WIP - Will print a hepful useage to user when complete
+        read HELP
+        case $HELP in
+            -[hH]|--[hH][eE][lL][pP])
+                echo "HELP IS HERE!" # Temp Text
+                break  # Need to stop running the below if this is passed...
+                ;;
+        esac
 
         if [[ $QTMUX_IS_NUM == "1" ]]; then
             QTMUX_NUMBER=1
         fi
 
+        if [[ $QTMUX_SESSION_TAKEN ]]; then
+            QTMUX_SESSION_FNAME=$(echo $QTMUX_SESSION_TAKEN | awk {'print $1'})
+            QTMUX_SESSION_AVAILABLE=$(echo $QTMUX_SESSION_FNAME | wc -l)
+        else
+            QTMUX_SESSION_FNAME=$(echo "0")
+            QTMUX_SESSION_AVAILABLE=0
+        fi
+
         if [[ ! -z $QTMUX_USER_INPUT ]]; then # If user passes input
-            if  [[ $QTMUX_NUMBER == "1" ]]; then # First check if the value given is a number (session id)
-                QTMUX_SESSION_AVAILABLE=$(tmux list-sessions | awk -v QTMUX_AWK=$QTMUX_USER_INPUT 'NR==QTMUX_AWK' | awk '{print $1}' | wc -l)
-                QTMUX_SESSION_FNAME=$(tmux list-sessions | awk -v QTMUX_AWK=$QTMUX_USER_INPUT 'NR==QTMUX_AWK' | awk '{print $1}')
-                if [[ $QTMUX_SESSION_AVAILABLE  == "1" ]]; then
+            if  [[ $QTMUX_NUMBER == "1" ]]; then # First check if the value given is a number (AKA session id)
+                QTMUX_SESSION_FNAME=$(tmux list-sessions | awk -v QTMUX_AWK=$QTMUX_USER_INPUT 'NR==QTMUX_AWK' | awk {'print $1'})
+                QTMUX_SESSION_AVAILABLE=$(tmux list-sessions | awk -v QTMUX_AWK=$QTMUX_USER_INPUT 'NR==QTMUX_AWK' | awk {'print $1'} | grep -v '^$' | wc -l)
+                if [[ $QTMUX_SESSION_AVAILABLE  == "1" ]]; then # If there is a single session availble, atach to it
                     tmux attach-session -t $QTMUX_SESSION_FNAME
-                elif [[ $QTMUX_SESSION_AVAILABLE  -ge "2" ]]; then
+                elif [[ $QTMUX_SESSION_AVAILABLE  -ge "2" ]]; then # If there is more then 1 session available, help the use out by showing them that
                     echo -e "I'm Sorry, but your search term was too ambiguous, please try something more specific"
                     echo -e "\tor maybe your sessions are named too similarly?"
                     echo -e "\nHere is the available results:\n"
-                    echo -e "$(tmux list-sessions | grep $QTMUX_USER_INPUT)"
-                else
+                    echo -e "\t$(tmux list-sessions | grep $QTMUX_USER_INPUT)"
+                else # They passed a number, but its not one that we have available
                     echo -e "I'm sorry, the Session ID you passed: \n\t$QTMUX_USER_INPUT \nAppears to not exist"
                 fi
-            else
-                QTMUX_SESSION_AVAILABLE=$(tmux list-sessions | grep $QTMUX_USER_INPUT | awk {'print $1'} | wc -l)
-                QTMUX_SESSION_FNAME=$(tmux list-sessions | grep $QTMUX_USER_INPUT | awk {'print $1'})
-                if [[ $QTMUX_SESSION_AVAILABLE  == "1" ]]; then
-                    tmux attach-session -t $QTMUX_SESSION_FNAME
-                elif [[ $QTMUX_SESSION_AVAILABLE  -ge "2" ]]; then
-                    echo -e "I'm Sorry, but your search term was too ambiguous, please try something more specific"
-                    echo -e "\tor maybe your sessions are named too similarly?"
-                    echo -e "\nHere is the available results:\n"
-                    echo -e "$(tmux list-sessions | grep $QTMUX_USER_INPUT)"
-                else
-                    echo -e "I'm sorry, the Session Name you passed: \n\t$QTMUX_USER_INPUT \nAppears to not exist"
-                fi
+            elif [[ $QTMUX_SESSION_AVAILABLE  == "1" ]]; then # If that name is an active session, connect to it
+                tmux attach-session -t $QTMUX_SESSION_FNAME
+            elif [[ $QTMUX_SESSION_AVAILABLE  -ge "2" ]]; then # If there is more then 1 session with that name, list them all
+                echo -e "I'm Sorry, but your search term was too ambiguous, please try something more specific"
+                echo -e "\tor maybe your sessions are named too similarly?"
+                echo -e "\nHere is the available results:\n"
+                echo -e "$(tmux list-sessions | grep $QTMUX_USER_INPUT)"
+            else # If sessions user listed is not available, ask if they want to create it
+                echo "The Session name you entered dosnt exist, would you like to create it now?"
+                echo "Y/n"
+                read YN
+                case $YN in
+                    [yY] | [yY][eE][sS] )
+                        tmux new-session -s $QTMUX_USER_INPUT
+                        ;;
+                    [nN] | [nN][oO] )
+                        echo -e "Ok, not creating that for you then"
+                        ;;
+                    *)
+                        echo -e "Dont know what you just told me to do, breaking instead"
+                        ;;
+                esac
             fi
-        elif [[ ! -z $QTMUX_NAME_TAKEN ]]; then
+        elif [[ ! -z $QTMUX_NAME_TAKEN ]]; then # If the use did not pass input BUT the QTMUX_SESSION_NAME is alrady taken
             tmux attach-session -t $QTMUX_SESSION_NAME
         else
             tmux new-session -s $QTMUX_SESSION_NAME
-        fi   
+        fi    
     }
 fi
