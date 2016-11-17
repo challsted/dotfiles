@@ -209,26 +209,38 @@ isNum(){
 }
 
 if type tmux > /dev/null; then
-    # Attempt at making a "Quick TMux Session Connector"
-    # "qtmux" - Open a new session with the value given to "QTMUX_SESSION_NAME"
-    # "qtmux <session name" - Attach to a pre-created session
-    # "qtmux <session id> - Attach to a pre-created session based on id (starting at 1)
     qtmux(){
+        # Use getopts to handle help, version, or any SINGLE LETTER arguments
+        while getopts ":h" OPT; do
+            case $OPT in
+                h)
+                    echo "Q(uick) TMux"
+                    echo "Attempt at making a \"Quick TMux Session Manager\""
+                    echo ""
+                    echo "\"qtmux\"                 - Open a new session with the value given to \"QTMUX_SESSION_NAME\""
+                    echo "                              - If a session with the default name already exists, it will attach instead" 
+                    echo "\"qtmux <session_name>\"  - Attach to a pre-created session OR create a session with this name"
+                    echo "                              - Also kind of does a fuzzy session attach if your session names are unique"
+                    echo "\"qtmux <session_id>\"    - Attach to a pre-created session based on id (starting at 1)"
+                    echo "                              - Will not create sessions!"
+                    echo "\"qtmux -h\"              - You get this little help menu"
+                    return
+                    ;;
+                \?)
+                    echo "Invalid Option: -$OPTARG" >&2
+                    ;;
+            esac
+        done
         QTMUX_SESSION_NAME="random" # Change this value if you want a different default name
         QTMUX_USER_INPUT=$1
         QTMUX_IS_NUM=$(isNum $1) #Checks if user passed in a number or a word, see "isNum()
-        QTMUX_NAME_TAKEN=$(tmux list-sessions | grep $QTMUX_SESSION_NAME | wc -l)
-        QTMUX_SESSION_TAKEN=$(tmux list-sessions | grep $QTMUX_USER_INPUT)
+        if [[ ! -z $QTMUX_SESSION_NAME ]]; then
+            QTMUX_NAME_TAKEN=$(tmux list-sessions | grep $QTMUX_SESSION_NAME | wc -l 2> /dev/null)
+        fi
+        if [[ ! -z $QTMUX_USER_INPUT ]]; then
+            QTMUX_SESSION_TAKEN=$(tmux list-sessions | grep $QTMUX_USER_INPUT 2> /dev/null)
+        fi
         QTMUX_NUMBER=0
-
-        # WIP - Will print a hepful useage to user when complete
-        read HELP
-        case $HELP in
-            -[hH]|--[hH][eE][lL][pP])
-                echo "HELP IS HERE!" # Temp Text
-                break  # Need to stop running the below if this is passed...
-                ;;
-        esac
 
         if [[ $QTMUX_IS_NUM == "1" ]]; then
             QTMUX_NUMBER=1
@@ -246,7 +258,7 @@ if type tmux > /dev/null; then
             if  [[ $QTMUX_NUMBER == "1" ]]; then # First check if the value given is a number (AKA session id)
                 QTMUX_SESSION_FNAME=$(tmux list-sessions | awk -v QTMUX_AWK=$QTMUX_USER_INPUT 'NR==QTMUX_AWK' | awk {'print $1'})
                 QTMUX_SESSION_AVAILABLE=$(tmux list-sessions | awk -v QTMUX_AWK=$QTMUX_USER_INPUT 'NR==QTMUX_AWK' | awk {'print $1'} | grep -v '^$' | wc -l)
-                if [[ $QTMUX_SESSION_AVAILABLE  == "1" ]]; then # If there is a single session availble, atach to it
+                if [[ $QTMUX_SESSION_AVAILABLE  == "1" ]]; then # If there is a single session available, attach to it
                     tmux attach-session -t $QTMUX_SESSION_FNAME
                 elif [[ $QTMUX_SESSION_AVAILABLE  -ge "2" ]]; then # If there is more then 1 session available, help the use out by showing them that
                     echo -e "I'm Sorry, but your search term was too ambiguous, please try something more specific"
@@ -279,7 +291,7 @@ if type tmux > /dev/null; then
                         ;;
                 esac
             fi
-        elif [[ ! -z $QTMUX_NAME_TAKEN ]]; then # If the use did not pass input BUT the QTMUX_SESSION_NAME is alrady taken
+        elif [[ ! -z $QTMUX_NAME_TAKEN ]]; then # If the use did not pass input BUT the QTMUX_SESSION_NAME is already taken
             tmux attach-session -t $QTMUX_SESSION_NAME
         else
             tmux new-session -s $QTMUX_SESSION_NAME
