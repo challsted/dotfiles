@@ -24,6 +24,7 @@ plugins=(git command-not-found sudo vi-mode web-search wd colored-man colorize c
 CUSTZSH=~/git/dotfiles/zsh # You might need to change this
 source $ZSH/oh-my-zsh.sh        #The downloaded OMZsh files
 source $CUSTZSH/alias.zsh      #A place for you to keep all of your shell alias's
+source $CUSTZSH/globals.zsh    #Global Values that are set everywhere
 source $CUSTZSH/keybind.zsh    #This is mainly being used for vim keybinds
-source $CUSTZSH/script.zsh     #Lots of functions and extra little stuff you use often but dont often touch
 source $CUSTZSH/opts.zsh       #Options! Lots of them! (OMZsh)
+source $CUSTZSH/script.zsh     #Lots of functions and extra little stuff you use often but dont often touch
