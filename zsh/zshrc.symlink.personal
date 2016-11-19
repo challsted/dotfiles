@@ -32,32 +32,3 @@ source $CUSTZSH/keybind.zsh    #This is mainly being used for vim keybinds
 source $CUSTZSH/opts.zsh       #Options! Lots of them! (OMZsh)
 source $CUSTZSH/script.zsh     #Lots of functions and extra little stuff you use often but dont often touch
 
-#Currently only works on my desktop, need to make this work a little better...
-if [ -f ~/.local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh ]; then . ~/.local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
-fi
-
-#This sets the keyboard layout to QWERTY, but after pressing the right control and the right shift (at the same time) key it toggles the keyboard layout to be Dvoark
-#It also turns the CAPS LOCK Key into a Control Key
-#It Also turns on/off the Scroll Lock LED Off = QWERTY On=Dvorak
-#Secondly, it turns caps lock (if held) into a ctrl key
-if type setxkbmap > /dev/null; then
-    setxkbmap -layout "us,us" -variant ",dvorak" -option "grp:rctrl_rshift_toggle,grp_led:scroll,caps:ctrl_modifier"
-    setxkbmap -option 'caps:ctrl_modifier'
-fi
-# This turns caps lock (if pressed) into Esc
-if type xcape > /dev/null; then
-    xcape -e 'Caps_Lock=Escape'
-fi
-
-# Enable RBEnv on boot
-if type rbenv > /dev/null; then
-    eval "$(rbenv init -)"
-fi
-
-#Possibly temp, we shall see soon enough
-PATH="/usr/local/heroku/bin:~/.config/bspwm/:$PATH"
-
-# For somereason Im having issues where my XDG's are not set...
- if [ -z $XDG_CONFIG_HOME ]; then
-     export XDG_CONFIG_HOME="$HOME/.config"
- fi
