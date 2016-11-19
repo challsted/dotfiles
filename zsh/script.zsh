@@ -1,15 +1,42 @@
-#.script.zsh
+#Name:   script.zsh
 #Author: CHallsted
 #Source: https://github.com/challsted/dotfiles
 #
 #Purpose: This file is to be source from the ~/.zshrc file and its purpose is for small functions and other clutter you don't clogging up your main files
-
+# Keybindings {{{
 # Alt-S inserts "sudo " at the start of the line (ZSH Specific)
 insert_sudo () {
     zle beginning-of-line ; zle -U "sudo "
 }
 zle -N insert-sudo insert_sudo
 bindkey "^[s" insert-sudo
+# }}}
+# General Purpose/Helpful Functions {{{
+
+#Attempt at the ability to make a directory and immediately cd into it!
+mkcd () {
+    mkdir -p "$@" &&
+        eval cd "\"\$$H\"";
+}
+
+# A small function to check if a given  value is a number 
+#   Bash doesn't have a clean way to do this that I can find
+# Returns "0" if the value is NOT a number
+# Returns "1" if the value is a number
+isNum(){
+    awk -v NUM="$1" 'BEGIN {print (NUM == NUM + 0)}';
+}
+
+#Prints a very nice looking "path" instead of the long string that is default
+path() {
+    echo $PATH | tr ":" "\n" | \
+        awk "{ sub(\"/usr\",   \"$fg_no_bold[green]/usr$reset_color\"); \
+        sub(\"/bin\",   \"$fg_no_bold[blue]/bin$reset_color\"); \
+        sub(\"/opt\",   \"$fg_no_bold[cyan]/opt$reset_color\"); \
+        sub(\"/sbin\",  \"$fg_no_bold[magenta]/sbin$reset_color\"); \
+        sub(\"/local\", \"$fg_no_bold[yellow]/local$reset_color\"); \
+        print }"
+}
 
 #Explode the following formats by typing ex $1
 ex () {
@@ -63,38 +90,8 @@ ex () {
     fi
 }
 
-#Attempt at the ability to make a directory and immediately cd into it!
-function mkcd () {
-    mkdir -p "$@" &&
-        eval cd "\"\$$H\"";
-}
-
-#Attempts to set xterm to xterm-256 colors
-#This works for xfce4-terminal
-case "$TERM" in
-    xterm*) TERM=xterm-256color
-esac
-
-#Prints a very nice looking "path" instead of the long string that is default
-path() {
-    echo $PATH | tr ":" "\n" | \
-        awk "{ sub(\"/usr\",   \"$fg_no_bold[green]/usr$reset_color\"); \
-        sub(\"/bin\",   \"$fg_no_bold[blue]/bin$reset_color\"); \
-        sub(\"/opt\",   \"$fg_no_bold[cyan]/opt$reset_color\"); \
-        sub(\"/sbin\",  \"$fg_no_bold[magenta]/sbin$reset_color\"); \
-        sub(\"/local\", \"$fg_no_bold[yellow]/local$reset_color\"); \
-        print }"
-}
-
-# Preferred editor if I'm ssh'd to somewhere
-if [[ -n $SSH_CONNECTION ]]; then
-    export EDITOR='vim'
-fi
-
-#Export ssh keys
-export SSH_KEY_PATH="~/.ssh/"
-export EDITOR=vim
-
+# }}}
+# Stuff to edit other stuff easier {{{
 # Easy Config Editor (Needs Work)
 # TODO: [Enhancement] conf() Add i3wm
 # TODO: [Enhancement] conf() Add (Neo)Mutt
@@ -139,29 +136,7 @@ conf(){
     esac
 }
 
-# WORK IN PROGRESS - Easy Git(?)
-# TODO: Look for a way to add a in line message
-push(){
-    case $1 in
-        all)
-            git init &&
-                git -A &&
-                git commit &&
-                ;;
-        here)
-            git init &&
-                git add . &&
-                git commit &&
-                ;;
-        generic)
-            git init &&
-                git -A &&
-                git commit -m "Generic Commit - Automated"&&
-                ::
-    esac
-}
-
-# WORK IN PROGRESS - Common CD Dirs
+# Easy CD to Commonly used Dir's
 cdd(){
     case $1 in
         nvim)
@@ -199,49 +174,56 @@ cdd(){
             ;;
     esac
 }
+#}}}
+# If Git is installed {{{
+if type git >/dev/null; then
+    pullall(){
+        for i in "$1"/*; do
+            if [ -d "$i"/.git ]; then
+                echo "Pulling \"$i\" ..."
+                cd "$i"
+                git pull
+                cd - &>/dev/null
+            fi
+        done
+    }
 
-gP(){
-    while getopts ":h" OPT; do
-        case $OPT in
-            h)
-                echo "gP - or git push"
-                echo "Attempt at making a quicker way to preform git commands"
-                echo ""
-                echo "\"gP\"            - Running this command with no arguments, will perform a push to origin <branch your on>"
-                echo "                      - eg: If you are on the \"Master\" branch, running \"gp\" will run git push origin master"
-                echo "\"gp <branch>\"   - Passing a branch to gp will push to the branch you specificed"
-                echo "                      - eg: If you are on the Master Branch, but you want to push to you dev branch instead, you can run \"gP dev\""
-                echo ""
-                echo "Calling this command with more then 1 argument will cause a error"
-                return
-                ;;
-            \?)
-                echo "Invalid Option: -$OPTARG" >&2
-                return
-                ;;
-        esac
-    done
+    gP(){
+        while getopts ":h" OPT; do
+            case $OPT in
+                h)
+                    echo "gP - or git push"
+                    echo "Attempt at making a quicker way to preform git commands"
+                    echo ""
+                    echo "\"gP\"            - Running this command with no arguments, will perform a push to origin <branch your on>"
+                    echo "                      - eg: If you are on the \"Master\" branch, running \"gp\" will run git push origin master"
+                    echo "\"gp <branch>\"   - Passing a branch to gp will push to the branch you specificed"
+                    echo "                      - eg: If you are on the Master Branch, but you want to push to you dev branch instead, you can run \"gP dev\""
+                    echo ""
+                    echo "Calling this command with more then 1 argument will cause a error"
+                    return
+                    ;;
+                \?)
+                    echo "Invalid Option: -$OPTARG" >&2
+                    return
+                    ;;
+            esac
+        done
 
-    export GP_BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD 2> /dev/null)
+        export GP_BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD 2> /dev/null)
 
-    if [[ $# -eq 0 ]]; then
-        git push origin $GP_BRANCH_NAME
-    elif [[ $# -eq 1 ]]; then
-        git push origin $1
-    else
-        echo "You passed too many arguments!"
-        echo "run gP -h if you need to know how to use this function"
-    fi
-}
-
-# A small function to check if a given  value is a number 
-#   Bash doesn't have a clean way to do this that I can find
-# Returns "0" if the value is NOT a number
-# Returns "1" if the value is a number
-isNum(){
-    awk -v NUM="$1" 'BEGIN {print (NUM == NUM + 0)}';
-}
-
+        if [[ $# -eq 0 ]]; then
+            git push origin $GP_BRANCH_NAME
+        elif [[ $# -eq 1 ]]; then
+            git push origin $1
+        else
+            echo "You passed too many arguments!"
+            echo "run gP -h if you need to know how to use this function"
+        fi
+    }
+fi
+# }}}
+# If TMux is installed {{{
 if type tmux > /dev/null; then
     qtmux(){
         # Use getopts to handle help, version, or any SINGLE LETTER arguments
@@ -333,3 +315,133 @@ if type tmux > /dev/null; then
         fi    
     }
 fi
+# }}}
+# In Progress {{{
+# WARNING!!! THE FOLLOWING IS ALL WIP AND PROBABLY WONT WORK
+#OS Specific
+# TODO [Enhancement] Has OS - Write Function to test what OS user is on
+# TODO [Dependency] e<thing> (OS Specific) - This relies on hasOS function being written
+# TODO [Testing] e<thing> (OS Specific) Need to test this on all OS's I run
+#eupdate - easy update
+#einstall - easy install
+#eremove - easy remove
+EOS_DECTIVE(){
+    export EOS_DETECT=$(lsb_release -i | awk {'print $3'})
+}
+
+eupdate(){
+    case $EOS_DETECT in
+        Ubuntu)
+            sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get dist-upgrade -y && sudo apt-get autoremove
+            ;;
+        Fedora)
+            sudo dnf upgrade && sudo dnf update
+            ;;
+        ARCH)
+            sudo pacman -Syu
+            ;;
+        GENTOO)
+            #STUFF
+            ;;
+        *)
+            echo "I cannot detect your OS, please use native tools"
+            ;;
+    esac
+    if [[ $2 == "pip" ]]; then
+        if type pip > /dev/null; then
+            pip freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 sudo pip install --upgrade
+        else
+            echo "You dont have pip installed"
+        fi
+    elif [[ $2 == "gem" ]]; then
+        if type gem > /dev/null; then
+            #STUFF
+        else
+            echo "You dont have gem installed"
+        fi
+    elif [[ $2 == "js" ]]; then
+        #STUFF
+    else
+        echo "Sorry, im not sure how to manage that languages packages"
+    fi
+}
+
+# TODO einsatll() only allows for a single package to be installed (with dependcies) need to upgrade to allow more then 1 package passed
+einsatll(){
+    case $EOS_DETECT in
+        Ubuntu)
+            sudo apt-get insatll $2
+            ;;
+        Fedora)
+            sudo dnf insatll $2
+            ;;
+        ARCH)
+            sudo pacman -S $2
+            ;;
+        GENTOO)
+            #STUFF
+            ;;
+        *)
+            echo "I cannot detect your OS, please use native tools"
+            ;;
+    esac
+
+    if [[ $3 == "pip" ]]; then
+        if type pip > /dev/null; then
+            sudo pip install $4
+        else
+            echo "You dont have pip installed"
+        fi
+    elif [[ $3 == "gem" ]]; then
+        if type gem > /dev/null; then
+            sudo gem install $4
+        else
+            echo "You dont have gem installed"
+        fi
+    elif [[ $3 == "js" ]]; then
+        #STUFF
+    else
+        echo "Sorry, im not sure how to manage that languages packages"
+    fi
+}
+
+# TODO eremove() only allows for a single package to be removed (with non-shared dependcies) need to upgrade to allow more then 1 package passed
+eremove(){
+    case $EOS_DETECT in
+        Ubuntu)
+            sudo apt-get remove $2
+            ;;
+        Fedora)
+            sudo dnf remove $2
+            ;;
+        ARCH)
+            sudo pacman -Rs $2
+            ;;
+        GENTOO)
+            #STUFF
+            ;;
+        *)
+            echo "I cannot detect your OS, please use native tools"
+            ;;
+    esac
+
+    if [[ $3 == "pip" ]]; then
+        if type pip > /dev/null; then
+            #STUFF
+        else
+            echo "You dont have pip installed"
+        fi
+    elif [[ $3 == "gem" ]]; then
+        if type gem > /dev/null; then
+            #STUFF
+        else
+            echo "You dont have gem installed"
+        fi
+    elif [[ $3 == "js" ]]; then
+        #STUFF
+    else
+        echo "Sorry, im not sure how to manage that languages packages"
+    fi
+}
+# }}}
+# Vim: set foldmethod=marker foldlevel=0 :
