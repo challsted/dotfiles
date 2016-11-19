@@ -421,7 +421,6 @@ endif
 " }}}
 " Molokai Specific Settings {{{
 let g:rehash256 = 1 " More like the GUI 256 scheme'
-let g:lightline_molokai_alternative = 1 " This is specific to LightLine
 " }}}
 " Syntastic Specific Settings {{{
 let g:syntastic_check_on_open = 1 " Check on file open
