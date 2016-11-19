@@ -1,4 +1,4 @@
-#.keybind.zsh
+#Name:   keybind.zsh
 #Author: CHallsted
 #Source: https://github.com/challsted/dotfiles
 #
