@@ -213,14 +213,16 @@ gP(){
                 echo "                      - eg: If you are on the Master Branch, but you want to push to you dev branch instead, you can run \"gP dev\""
                 echo ""
                 echo "Calling this command with more then 1 argument will cause a error"
+                return
                 ;;
             \?)
                 echo "Invalid Option: -$OPTARG" >&2
+                return
                 ;;
         esac
     done
 
-    GP_BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD)
+    export GP_BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD 2> /dev/null)
 
     if [[ $# -eq 0 ]]; then
         git push origin $GP_BRANCH_NAME
@@ -260,6 +262,7 @@ if type tmux > /dev/null; then
                     ;;
                 \?)
                     echo "Invalid Option: -$OPTARG" >&2
+                    return
                     ;;
             esac
         done
