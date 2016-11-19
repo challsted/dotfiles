@@ -1,4 +1,4 @@
-#.opts.zsh
+#Name:   opts.zsh
 #Author: Challsted
 #Source: https://github.com/challsted/dotfiles
 #
