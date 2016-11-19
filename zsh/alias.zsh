@@ -17,14 +17,15 @@ alias tree="ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^
 alias sshx="ssh -c arcfour,blowfish -XC" #Add a connection and a thing you want forwarded to user this
 
 #Git Stuff
-# TODO [Testing] git aliases - validate all of these work
 if type git > /dev/null; then
-    alias gs="git status"
+    alias co="git checkout $2" #Checks out a branch given after co
     alias ga="git add $2" #ga <file name>. Add file name after ga
     alias gA="git add -A" #Add everything, adds, deletes, changes to the git queue
     alias gc="git commit" #Commits current queue to git. Requires you to type a commit message
+    alias gd="git reset HEAD $2" #Unstage a staged file "Git Delete"
+    alias gD="git reset --soft HEAD^" # Unsatge all staged files
     alias gp="git pull" #Pulls the updates from remote to local
-    alias co="git checkout $2" #Checks out a branch given after co
+    alias gs="git status" #Check the status of the git repo your located inside of
     alias cod="git checkout development" #Checks out the development branch
     alias com="git checkout master" #Checks out the master branch
     alias cop="git checkout production" #Checks out the production branch
@@ -36,7 +37,7 @@ if type htop > /dev/null; then
     alias top="htop" #Allows for htop to run if i type top instead
 fi
 
-#TMux Stuff
+#TMux Stuff - QTMux is inside of script.zsh
 if type tmux > /dev/null; then
     alias ntmux="tmux new-session -s $2" #Allows you to type "ntmux <random>" and it will open a new tmux session
     alias atmux="tmux attach-session -t $2" #Allows you to attach to a tmux session at willA
@@ -49,6 +50,3 @@ if type mpsyt > /dev/null; then
     alias youtube="mpsyt"
     alias youtube-update="sudo pip install mps-youtube --upgrade"
 fi
-
-#Stupid Stuff
-alias doit="sudo !!"
