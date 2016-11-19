@@ -3,9 +3,11 @@
 Just a place for me to share my current "dot files" with everyone and a easy way to make sure I stay in sync across multiple devices.  
 Feel free to take any or all of them, tweak them to your desire and distribute them!  
 
-### Optional Template Repo
+### Optional Extra Repos
 By Request, I have created some "[templates_dotfiles][template_dotfiles]". If you could rather use them.  
 These files have no plugins, and a lot less "personalized" stuff in them, they are designed to be used a spring board to jump start you into a customized set of files.  
+
+I have also created an "[Extended Dotfiles][extended_dotfiles]" repo for people who want dotfiles for window managers or other utilities. 
 
 ## Pre-Installation
 
@@ -114,4 +116,5 @@ Professional  Twitter [@hackinginfo][tweet]
 [ZSH_WIKI]:     ../../wiki/ZSH
 [NVIM_WIKI]:    ../../wiki/NVim
 [template_dotfiles]: https://github.com/challsted/template_dotfiles
+[extended_dotfiles]: https://github.com/challsted/extended_dotfiles
 [neovim_wiki_installing-neovim]: https://github.com/neovim/neovim/wiki/Installing-Neovim
