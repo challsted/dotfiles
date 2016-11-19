@@ -1,6 +1,6 @@
 # What this is for
 
-Just a place for me to share my current "dot files" with everyone and a easy way to make sure I stay in sync acrosst multiple devices.  
+Just a place for me to share my current "dot files" with everyone and a easy way to make sure I stay in sync across multiple devices.  
 Feel free to take any or all of them, tweak them to your desire and distribute them!  
 
 ### Optional Template Repo
@@ -100,37 +100,18 @@ Once that is complete, you will need to run:
 * If you do not use `~/$USER/git/` to clone, then you will need to tweak the symlinks above
 * If you chose not to use TPM, you will probably want to remove the bottom section of the file about TPM, and update the bar to not have the extra info in the bottom right
 
-## Mutt Installation
-**Mutt**
-
-**Packages**
-* `mutt`
-
-**You will need to run this to use my config:**
-* `ln -s ~/git/dotfiles/mutt ~/.mutt`
-* `ln -s ~/git/dotfiles/MAIL/procmailrc ~/.procmailrc`
-* `ln -s ~/git/dotfiles/MAIL/msmtprc.. ~/.msmtprc`
-* `ln -s ~/git/dotfiles/MAIL/fetchmailrc ~/.fetchmailrc`
-
-**Notes:**
-* Please read the [README.md][MuttREADME] file located inside of the mutt folder, this doc will eventually become my Mutt Wiki Page, but its easier to edit as I'm working on it via the readme for now.
 
 ## Contact the author
 
 Professional  Twitter [@hackinginfo][tweet]  
-My Blog    [masammich's][blog]  
 
 [plug]:         https://github.com/junegunn/vim-plug
 [zsh]:          https://github.com/robbyrussell/oh-my-zsh
 [tpm]:          https://github.com/tmux-plugins/tpm
 [tweet]:        https://twitter.com/MaSammchs
-[blog]:         http://masammich.technoanomaly.com/
 [TMUX_WIKI]:    ../../wiki/TMux
 [VIM_WIKI]:     ../../wiki/VIM
 [ZSH_WIKI]:     ../../wiki/ZSH
-[I3_WIKI]:      ../../wiki/i3
 [NVIM_WIKI]:    ../../wiki/NVim
-[MUTT_WIKI]:    ../../wiki/Mutt
 [template_dotfiles]: https://github.com/challsted/template_dotfiles
 [neovim_wiki_installing-neovim]: https://github.com/neovim/neovim/wiki/Installing-Neovim
-[MuttREADME]:   https://github.com/challsted/dotfiles/blob/development/mutt/README.md
