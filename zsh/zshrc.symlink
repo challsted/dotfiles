@@ -2,15 +2,14 @@
 #This file is intended to be symlinked to the home dir like this:
 ##ln -s $path/to/this/zshrc.symlink ~/.zshrc
 #
-#Version 1.0 - Starting this number now, no idea how many modifications have gone into this...
-#Author: Hackinginfo
+#Author: CHallsted
 #Source: https://github.com/challsted/dotfiles
 #
 #Purpose: This file is intended to be a single file put into the home directory that loads all of the other files
 
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
-#ZSH_THEME=agnoster-fcamblor
+ZSH_THEME=agnoster
 
 ENABLE_CORRECTION="true"
 COMPLETION_WAITING_DOTS="true"
@@ -24,17 +23,7 @@ plugins=(git command-not-found sudo vi-mode web-search wd colored-man colorize c
 #########################
 CUSTZSH=~/git/dotfiles/zsh # You might need to change this
 source $ZSH/oh-my-zsh.sh        #The downloaded OMZsh files
-source $CUSTZSH/.alias.zsh      #A place for you to keep all of your shell alias's
-source $CUSTZSH/.keybind.zsh    #This is mainly being used for vim keybinds
-source $CUSTZSH/.script.zsh     #Lots of functions and extra little stuff you use often but dont often touch
-source $CUSTZSH/.opts.zsh       #Options! Lots of them! (OMZsh)
-#source $CUSTZSH/.prompt.zsh     #The Prompt on the left side of your screen comes from here
-source $CUSTZSH/custom_prompt.zsh-theme     #The Prompt on the left side of your screen comes from here
-
-#ZSH_THEME="agnoster"
-#. {repository_root}/powerline/bindings/zsh/powerline.zsh
-
-export TERM=xterm-256color
-[ -n "$TMUX" ] && export TERM=screen-256color
-
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+source $CUSTZSH/alias.zsh      #A place for you to keep all of your shell alias's
+source $CUSTZSH/keybind.zsh    #This is mainly being used for vim keybinds
+source $CUSTZSH/script.zsh     #Lots of functions and extra little stuff you use often but dont often touch
+source $CUSTZSH/opts.zsh       #Options! Lots of them! (OMZsh)
