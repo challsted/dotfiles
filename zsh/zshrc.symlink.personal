@@ -27,9 +27,10 @@ plugins=(git command-not-found vi-mode osx tmux)
 CUSTZSH=~/git/dotfiles/zsh
 source $ZSH/oh-my-zsh.sh        #The downloaded OMZsh files
 source $CUSTZSH/alias.zsh      #A place for you to keep all of your shell alias's
+source $CUSTZSH/globals.zsh    #Global Values that are set everywhere
 source $CUSTZSH/keybind.zsh    #This is mainly being used for vim keybinds
-source $CUSTZSH/script.zsh     #Lots of functions and extra little stuff you use often but dont often touch
 source $CUSTZSH/opts.zsh       #Options! Lots of them! (OMZsh)
+source $CUSTZSH/script.zsh     #Lots of functions and extra little stuff you use often but dont often touch
 
 #Currently only works on my desktop, need to make this work a little better...
 if [ -f ~/.local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh ]; then . ~/.local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
