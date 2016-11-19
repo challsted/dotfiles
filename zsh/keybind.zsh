@@ -8,12 +8,6 @@
 # cat > /dev/null
 # And press it
 
-# Enable Edit Inline Command, conditionally with nvim
-if type nvim > /dev/null; then
-    export VISUAL="nvim"
-else
-    export VISUAL="vim"
-fi
 autoload edit-command-line; zle -N edit-command-line
 
 #Below was copied during search to setup vi keys in zsh and a few modifications have been added

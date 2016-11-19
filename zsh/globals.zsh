@@ -21,14 +21,18 @@ export SSH_KEY_PATH="~/.ssh/"
 # Set multiple values ONLY if NVim is installed
 # Set MANPAGER to open man pages in NVim or Vim
 # Set system wide EDITOR and GIT_EDITOR as appropriate
+# Enable Edit Inline Command, conditionally with nvim
 # Alias "vi" to NeoVim, leaving "vim" to open vim
 if type nvim > /dev/null; then
     export MANPAGER="env MAN_PN=1 nvim -M +MANPAGER -"
     export EDITOR="nvim"
     export GIT_EDITOR="nvim"
+    export VISUAL="nvim"
     alias vi="nvim"
 else
     export MANPAGER="env MAN_PN=1 vim -M +MANPAGER -"
     export EDITOR="vim"
     export GIT_EDITOR="vim"
+    export VISUAL="vim"
+    alias vi="vim"
 fi
