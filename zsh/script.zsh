@@ -177,6 +177,7 @@ cdd(){
 #}}}
 # If Git is installed {{{
 if type git >/dev/null; then
+    # You'll need to pass a directory of WHERE to pull all stuff from! (eg pullall . or pullall ~/git
     pullall(){
         for i in "$1"/*; do
             if [ -d "$i"/.git ]; then
