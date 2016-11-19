@@ -97,26 +97,20 @@ ex () {
 # TODO: [Enhancement] conf() Add (Neo)Mutt
 conf(){
     case "$1" in
-        zsh)
-            $EDITOR ~/.zshrc && source ~/.zshrc
+        bsp)
+            $EDITOR "$XDG_CONFIG_HOME"/bspwm/bspwmrc
             ;;
-        xinit)
-            $EDITOR ~/.xinitrc
+        emacs)
+            $EDITOR ~/.emacsrc
             ;;
-        xres)
-            $EDITOR ~/.Xresources && xrdb ~/.Xresources
+        space)
+            $EDITOR ~/.spacemacs
+            ;;
+        sxhkd)
+            $EDITOR "$XDG_CONFIG_HOME"/sxhkd/sxhkd/sxhkdrc
             ;;
         tmux)
             $EDITOR ~/.tmux.conf
-            ;;
-        vim)
-            $EDITOR ~/.vimrc
-            ;;
-        nvim)
-            $EDITOR "$XDG_CONFIG_HOME"/nvim/init.vim
-            ;;
-        wmpanel)
-            $EDITOR "$XDG_CONFIG_HOME"/bspwm/panel
             ;;
         wmbar)
             $EDITOR "$XDG_CONFIG_HOME"/bspwm/panel_bar
@@ -124,11 +118,17 @@ conf(){
         wmcolors)
             $EDITOR "$XDG_CONFIG_HOME"/bspwm/panel_colors
             ;;
-        bsp)
-            $EDITOR "$XDG_CONFIG_HOME"/bspwm/bspwmrc
+        wmpanel)
+            $EDITOR "$XDG_CONFIG_HOME"/bspwm/panel
             ;;
-        sxhkd)
-            $EDITOR "$XDG_CONFIG_HOME"/sxhkd/sxhkd/sxhkdrc
+        xinit)
+            $EDITOR ~/.xinitrc
+            ;;
+        xres)
+            $EDITOR ~/.Xresources && xrdb ~/.Xresources
+            ;;
+        zsh)
+            $EDITOR ~/.zshrc && source ~/.zshrc
             ;;
         *)
             echo -e "Sorry, you'll need to be more specific"
@@ -139,35 +139,38 @@ conf(){
 # Easy CD to Commonly used Dir's
 cdd(){
     case "$1" in
-        nvim)
-            cd "$XDG_CONFIG_HOME"/nvim || return
+        bsp)
+            cd "$XDG_CONFIG_HOME"/bspwm || return
             ;;
         dots)
             cd ~/git/dotfiles || return
             ;;
-        bsp)
-            cd "$XDG_CONFIG_HOME"/bspwm || return
-            ;;
-        sxhkd)
-            cd "$XDG_CONFIG_HOME"/sxhkd || return
-            ;;
-        gnvim)
-            cd ~/git/dotfiles/nvim || return
-            ;;
-        gvim)
-            cd ~/git/dotfiles/vim || return
-            ;;
-        gtmux)
-            cd ~/git/dotfiles/tmux || return
-            ;;
-        gzsh)
-            cd ~/git/dotfiles/zsh || return
+        emacs)
+            cd ~/.emacs.d || return
             ;;
         gbsp)
             cd ~/git/dotfiles/bspwm || return
             ;;
         gi3)
             cd ~/git/dotfiles/i3 || return
+            ;;
+        gnvim)
+            cd ~/git/dotfiles/nvim || return
+            ;;
+        gtmux)
+            cd ~/git/dotfiles/tmux || return
+            ;;
+        gvim)
+            cd ~/git/dotfiles/vim || return
+            ;;
+        gzsh)
+            cd ~/git/dotfiles/zsh || return
+            ;;
+        nvim)
+            cd "$XDG_CONFIG_HOME"/nvim || return
+            ;;
+        sxhkd)
+            cd "$XDG_CONFIG_HOME"/sxhkd || return
             ;;
         *)
             echo -e "Sorry, you'll need to be more specific"
