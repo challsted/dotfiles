@@ -208,3 +208,5 @@ Dirs
 qtmux
 pre
 getopts
+grep
+isNum
