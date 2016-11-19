@@ -53,7 +53,6 @@ if type git > /dev/null; then
     alias gA="git add -A" #Add everything, adds, deletes, changes to the git queue
     alias gc="git commit" #Commits current queue to git. Requires you to type a commit message
     alias gp="git pull" #Pulls the updates from remote to local
-    alias gP="git push origin $2" #Pushs to remote branch (given after gP) ex. gP master will git push origin master
     alias co="git checkout $2" #Checks out a branch given after co
     alias cod="git checkout development" #Checks out the development branch
     alias com="git checkout master" #Checks out the master branch

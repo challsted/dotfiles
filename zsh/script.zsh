@@ -200,6 +200,38 @@ cdd(){
     esac
 }
 
+gP(){
+    while getopts ":h" OPT; do
+        case $OPT in
+            h)
+                echo "gP - or git push"
+                echo "Attempt at making a quicker way to preform git commands"
+                echo ""
+                echo "\"gP\"            - Running this command with no arguments, will perform a push to origin <branch your on>"
+                echo "                      - eg: If you are on the \"Master\" branch, running \"gp\" will run git push origin master"
+                echo "\"gp <branch>\"   - Passing a branch to gp will push to the branch you specificed"
+                echo "                      - eg: If you are on the Master Branch, but you want to push to you dev branch instead, you can run \"gP dev\""
+                echo ""
+                echo "Calling this command with more then 1 argument will cause a error"
+                ;;
+            \?)
+                echo "Invalid Option: -$OPTARG" >&2
+                ;;
+        esac
+    done
+
+    GP_BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD)
+
+    if [[ $# -eq 0 ]]; then
+        git push origin $GP_BRANCH_NAME
+    elif [[ $# -eq 1 ]]; then
+        git push origin $1
+    else
+        echo "You passed too many arguments!"
+        echo "run gP -h if you need to know how to use this function"
+    fi
+}
+
 # A small function to check if a given  value is a number 
 #   Bash doesn't have a clean way to do this that I can find
 # Returns "0" if the value is NOT a number
