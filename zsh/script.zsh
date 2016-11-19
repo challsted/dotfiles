@@ -29,7 +29,7 @@ isNum(){
 
 #Prints a very nice looking "path" instead of the long string that is default
 path() {
-    echo $PATH | tr ":" "\n" | \
+    echo "$PATH" | tr ":" "\n" | \
         awk "{ sub(\"/usr\",   \"$fg_no_bold[green]/usr$reset_color\"); \
         sub(\"/bin\",   \"$fg_no_bold[blue]/bin$reset_color\"); \
         sub(\"/opt\",   \"$fg_no_bold[cyan]/opt$reset_color\"); \
@@ -38,48 +38,48 @@ path() {
         print }"
 }
 
-#Explode the following formats by typing ex $1
+#Explode the following formats by typing ex "$1"
 ex () {
-    if [ -f $1 ] ; then
-        case $1 in
+    if [ -f "$1" ] ; then
+        case "$1" in
             *.tar.bz2)
-                tar xvjf $1
+                tar xvjf "$1"
                 ;;
             *.tar.gz)
-                tar xvzf $1
+                tar xvzf "$1"
                 ;;
             *.tar.xz)
-                tar xvJf $1
+                tar xvJf "$1"
                 ;;
             *.tar.lzma)
-                tar --lzma xvf $1
+                tar --lzma xvf "$1"
                 ;;
             *.bz2)
-                bunzip2 $1
+                bunzip2 "$1"
                 ;;
             *.rar)
-                unrar $1
+                unrar "$1"
                 ;;
             *.gz)
-                gunzip $1
+                gunzip "$1"
                 ;;
             *.tar)
-                tar xvf $1
+                tar xvf "$1"
                 ;;
             *.tbz2)
-                tar xvjf $1
+                tar xvjf "$1"
                 ;;
             *.tgz)
-                tar xvzf $1
+                tar xvzf "$1"
                 ;;
             *.zip)
-                unzip $1
+                unzip "$1"
                 ;;
             *.Z)
-                uncompress $1
+                uncompress "$1"
                 ;;
             *.7z)
-                7z x $1
+                7z x "$1"
                 ;;
             *)
                 echo "'$1' cannot be extracted via extract()"
@@ -96,7 +96,7 @@ ex () {
 # TODO: [Enhancement] conf() Add i3wm
 # TODO: [Enhancement] conf() Add (Neo)Mutt
 conf(){
-    case $1 in
+    case "$1" in
         zsh)
             $EDITOR ~/.zshrc && source ~/.zshrc
             ;;
@@ -113,22 +113,22 @@ conf(){
             $EDITOR ~/.vimrc
             ;;
         nvim)
-            $EDITOR $XDG_CONFIG_HOME/nvim/init.vim
+            $EDITOR "$XDG_CONFIG_HOME"/nvim/init.vim
             ;;
         wmpanel)
-            $EDITOR $XDG_CONFIG_HOME/bspwm/panel
+            $EDITOR "$XDG_CONFIG_HOME"/bspwm/panel
             ;;
         wmbar)
-            $EDITOR $XDG_CONFIG_HOME/bspwm/panel_bar
+            $EDITOR "$XDG_CONFIG_HOME"/bspwm/panel_bar
             ;;
         wmcolors)
-            $EDITOR $XDG_CONFIG_HOME/bspwm/panel_colors
+            $EDITOR "$XDG_CONFIG_HOME"/bspwm/panel_colors
             ;;
         bsp)
-            $EDITOR $XDG_CONFIG_HOME/bspwm/bspwmrc
+            $EDITOR "$XDG_CONFIG_HOME"/bspwm/bspwmrc
             ;;
         sxhkd)
-            $EDITOR $XDG_CONFIG_HOME/sxhkd/sxhkd/sxhkdrc
+            $EDITOR "$XDG_CONFIG_HOME"/sxhkd/sxhkd/sxhkdrc
             ;;
         *)
             echo -e "Sorry, you'll need to be more specific"
@@ -138,36 +138,36 @@ conf(){
 
 # Easy CD to Commonly used Dir's
 cdd(){
-    case $1 in
+    case "$1" in
         nvim)
-            cd $XDG_CONFIG_HOME/nvim
+            cd "$XDG_CONFIG_HOME"/nvim || return
             ;;
         dots)
-            cd ~/git/dotfiles
+            cd ~/git/dotfiles || return
             ;;
         bsp)
-            cd $XDG_CONFIG_HOME/bspwm
+            cd "$XDG_CONFIG_HOME"/bspwm || return
             ;;
         sxhkd)
-            cd $XDG_CONFIG_HOME/sxhkd
+            cd "$XDG_CONFIG_HOME"/sxhkd || return
             ;;
         gnvim)
-            cd ~/git/dotfiles/nvim
+            cd ~/git/dotfiles/nvim || return
             ;;
         gvim)
-            cd ~/git/dotfiles/vim
+            cd ~/git/dotfiles/vim || return
             ;;
         gtmux)
-            cd ~/git/dotfiles/tmux
+            cd ~/git/dotfiles/tmux || return
             ;;
         gzsh)
-            cd ~/git/dotfiles/zsh
+            cd ~/git/dotfiles/zsh || return
             ;;
         gbsp)
-            cd ~/git/dotfiles/bspwm
+            cd ~/git/dotfiles/bspwm || return
             ;;
         gi3)
-            cd ~/git/dotfiles/i3
+            cd ~/git/dotfiles/i3 || return
             ;;
         *)
             echo -e "Sorry, you'll need to be more specific"
@@ -180,10 +180,12 @@ if type git >/dev/null; then
     pullall(){
         for i in "$1"/*; do
             if [ -d "$i"/.git ]; then
+                (
                 echo "Pulling \"$i\" ..."
-                cd "$i"
+                cd "$i" || return
                 git pull
-                cd - &>/dev/null
+                cd - &>/dev/null || return
+                )
             fi
         done
     }
@@ -210,12 +212,13 @@ if type git >/dev/null; then
             esac
         done
 
-        export GP_BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD 2> /dev/null)
+        export GP_BRANCH_NAME
+        GP_BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD 2> /dev/null)
 
         if [[ $# -eq 0 ]]; then
-            git push origin $GP_BRANCH_NAME
+            git push origin "$GP_BRANCH_NAME"
         elif [[ $# -eq 1 ]]; then
-            git push origin $1
+            git push origin "$1"
         else
             echo "You passed too many arguments!"
             echo "run gP -h if you need to know how to use this function"
@@ -249,56 +252,56 @@ if type tmux > /dev/null; then
             esac
         done
         QTMUX_SESSION_NAME="random" # Change this value if you want a different default name
-        QTMUX_USER_INPUT=$1
-        QTMUX_IS_NUM=$(isNum $1) #Checks if user passed in a number or a word, see "isNum()
-        if [[ ! -z $QTMUX_SESSION_NAME ]]; then
-            QTMUX_NAME_TAKEN=$(tmux list-sessions | grep $QTMUX_SESSION_NAME | wc -l 2> /dev/null)
+        QTMUX_USER_INPUT="$1"
+        QTMUX_IS_NUM=$(isNum "$1") #Checks if user passed in a number or a word, see "isNum()
+        if [[ ! -z "$QTMUX_SESSION_NAME" ]]; then
+            QTMUX_NAME_TAKEN=$(tmux list-sessions | grep "$QTMUX_SESSION_NAME" | wc -l 2> /dev/null)
         fi
-        if [[ ! -z $QTMUX_USER_INPUT ]]; then
-            QTMUX_SESSION_TAKEN=$(tmux list-sessions | grep $QTMUX_USER_INPUT 2> /dev/null)
+        if [[ ! -z "$QTMUX_USER_INPUT" ]]; then
+            QTMUX_SESSION_TAKEN=$(tmux list-sessions | grep "$QTMUX_USER_INPUT" 2> /dev/null)
         fi
         QTMUX_NUMBER=0
 
-        if [[ $QTMUX_IS_NUM == "1" ]]; then
+        if [[ "$QTMUX_IS_NUM" == "1" ]]; then
             QTMUX_NUMBER=1
         fi
 
-        if [[ $QTMUX_SESSION_TAKEN ]]; then
-            QTMUX_SESSION_FNAME=$(echo $QTMUX_SESSION_TAKEN | awk {'print $1'})
-            QTMUX_SESSION_AVAILABLE=$(echo $QTMUX_SESSION_FNAME | wc -l)
+        if [[ "$QTMUX_SESSION_TAKEN" ]]; then
+            QTMUX_SESSION_FNAME=$(echo "$QTMUX_SESSION_TAKEN" | awk '{print "$1"}')
+            QTMUX_SESSION_AVAILABLE=$(echo "$QTMUX_SESSION_FNAME" | wc -l)
         else
             QTMUX_SESSION_FNAME=$(echo "0")
             QTMUX_SESSION_AVAILABLE=0
         fi
 
-        if [[ ! -z $QTMUX_USER_INPUT ]]; then # If user passes input
-            if  [[ $QTMUX_NUMBER == "1" ]]; then # First check if the value given is a number (AKA session id)
-                QTMUX_SESSION_FNAME=$(tmux list-sessions | awk -v QTMUX_AWK=$QTMUX_USER_INPUT 'NR==QTMUX_AWK' | awk {'print $1'})
-                QTMUX_SESSION_AVAILABLE=$(tmux list-sessions | awk -v QTMUX_AWK=$QTMUX_USER_INPUT 'NR==QTMUX_AWK' | awk {'print $1'} | grep -v '^$' | wc -l)
-                if [[ $QTMUX_SESSION_AVAILABLE  == "1" ]]; then # If there is a single session available, attach to it
-                    tmux attach-session -t $QTMUX_SESSION_FNAME
-                elif [[ $QTMUX_SESSION_AVAILABLE  -ge "2" ]]; then # If there is more then 1 session available, help the use out by showing them that
+        if [[ ! -z "$QTMUX_USER_INPUT" ]]; then # If user passes input
+            if  [[ "$QTMUX_NUMBER" == "1" ]]; then # First check if the value given is a number (AKA session id)
+                QTMUX_SESSION_FNAME=$(tmux list-sessions | awk -v QTMUX_AWK="$QTMUX_USER_INPUT" 'NR==QTMUX_AWK' | awk '{print "$1"}')
+                QTMUX_SESSION_AVAILABLE=$(tmux list-sessions | awk -v QTMUX_AWK="$QTMUX_USER_INPUT" 'NR==QTMUX_AWK' | awk '{print "$1"}' | grep -v '^$' | wc -l)
+                if [[ "$QTMUX_SESSION_AVAILABLE"  == "1" ]]; then # If there is a single session available, attach to it
+                    tmux attach-session -t "$QTMUX_SESSION_FNAME"
+                elif [[ "$QTMUX_SESSION_AVAILABLE"  -ge "2" ]]; then # If there is more then 1 session available, help the use out by showing them that
                     echo -e "I'm Sorry, but your search term was too ambiguous, please try something more specific"
                     echo -e "\tor maybe your sessions are named too similarly?"
                     echo -e "\nHere is the available results:\n"
-                    echo -e "\t$(tmux list-sessions | grep $QTMUX_USER_INPUT)"
+                    echo -e "\t$(tmux list-sessions | grep \"$QTMUX_USER_INPUT\")"
                 else # They passed a number, but its not one that we have available
                     echo -e "I'm sorry, the Session ID you passed: \n\t$QTMUX_USER_INPUT \nAppears to not exist"
                 fi
-            elif [[ $QTMUX_SESSION_AVAILABLE  == "1" ]]; then # If that name is an active session, connect to it
-                tmux attach-session -t $QTMUX_SESSION_FNAME
-            elif [[ $QTMUX_SESSION_AVAILABLE  -ge "2" ]]; then # If there is more then 1 session with that name, list them all
+            elif [[ "$QTMUX_SESSION_AVAILABLE"  == "1" ]]; then # If that name is an active session, connect to it
+                tmux attach-session -t "$QTMUX_SESSION_FNAME"
+            elif [[ "$QTMUX_SESSION_AVAILABLE"  -ge "2" ]]; then # If there is more then 1 session with that name, list them all
                 echo -e "I'm Sorry, but your search term was too ambiguous, please try something more specific"
                 echo -e "\tor maybe your sessions are named too similarly?"
                 echo -e "\nHere is the available results:\n"
-                echo -e "$(tmux list-sessions | grep $QTMUX_USER_INPUT)"
+                echo -e "$(tmux list-sessions | grep \"$QTMUX_USER_INPUT\")"
             else # If sessions user listed is not available, ask if they want to create it
                 echo "The Session name you entered dosnt exist, would you like to create it now?"
                 echo "Y/n"
-                read YN
-                case $YN in
+                read -r YN
+                case "$YN" in
                     [yY] | [yY][eE][sS] )
-                        tmux new-session -s $QTMUX_USER_INPUT
+                        tmux new-session -s "$QTMUX_USER_INPUT"
                         ;;
                     [nN] | [nN][oO] )
                         echo -e "Ok, not creating that for you then"
@@ -308,10 +311,10 @@ if type tmux > /dev/null; then
                         ;;
                 esac
             fi
-        elif [[ ! -z $QTMUX_NAME_TAKEN ]]; then # If the use did not pass input BUT the QTMUX_SESSION_NAME is already taken
-            tmux attach-session -t $QTMUX_SESSION_NAME
+        elif [[ ! -z "$QTMUX_NAME_TAKEN" ]]; then # If the use did not pass input BUT the QTMUX_SESSION_NAME is already taken
+            tmux attach-session -t "$QTMUX_SESSION_NAME"
         else
-            tmux new-session -s $QTMUX_SESSION_NAME
+            tmux new-session -s "$QTMUX_SESSION_NAME"
         fi    
     }
 fi
@@ -326,7 +329,8 @@ fi
 #einstall - easy install
 #eremove - easy remove
 EOS_DECTIVE(){
-    export EOS_DETECT=$(lsb_release -i | awk {'print $3'})
+    export EOS_DETECT
+    EOS_DETECT=$(lsb_release -i | awk '{print "$3"}')
 }
 
 eupdate(){
@@ -341,26 +345,26 @@ eupdate(){
             sudo pacman -Syu
             ;;
         GENTOO)
-            #STUFF
+            echo "STUFF"
             ;;
         *)
             echo "I cannot detect your OS, please use native tools"
             ;;
     esac
-    if [[ $2 == "pip" ]]; then
+    if [[ "$2" == "pip" ]]; then
         if type pip > /dev/null; then
             pip freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 sudo pip install --upgrade
         else
             echo "You dont have pip installed"
         fi
-    elif [[ $2 == "gem" ]]; then
+    elif [[ "$2" == "gem" ]]; then
         if type gem > /dev/null; then
-            #STUFF
+            echo "STUFF"
         else
             echo "You dont have gem installed"
         fi
-    elif [[ $2 == "js" ]]; then
-        #STUFF
+    elif [[ "$2" == "js" ]]; then
+        echo "STUFF"
     else
         echo "Sorry, im not sure how to manage that languages packages"
     fi
@@ -370,36 +374,36 @@ eupdate(){
 einsatll(){
     case $EOS_DETECT in
         Ubuntu)
-            sudo apt-get insatll $2
+            sudo apt-get insatll "$2"
             ;;
         Fedora)
-            sudo dnf insatll $2
+            sudo dnf insatll "$2"
             ;;
         ARCH)
-            sudo pacman -S $2
+            sudo pacman -S "$2"
             ;;
         GENTOO)
-            #STUFF
+            echo "STUFF"
             ;;
         *)
             echo "I cannot detect your OS, please use native tools"
             ;;
     esac
 
-    if [[ $3 == "pip" ]]; then
+    if [[ "$3" == "pip" ]]; then
         if type pip > /dev/null; then
-            sudo pip install $4
+            sudo pip install "$4"
         else
             echo "You dont have pip installed"
         fi
-    elif [[ $3 == "gem" ]]; then
+    elif [[ "$3" == "gem" ]]; then
         if type gem > /dev/null; then
-            sudo gem install $4
+            sudo gem install "$4"
         else
             echo "You dont have gem installed"
         fi
-    elif [[ $3 == "js" ]]; then
-        #STUFF
+    elif [[ "$3" == "js" ]]; then
+        echo "STUFF"
     else
         echo "Sorry, im not sure how to manage that languages packages"
     fi
@@ -409,36 +413,36 @@ einsatll(){
 eremove(){
     case $EOS_DETECT in
         Ubuntu)
-            sudo apt-get remove $2
+            sudo apt-get remove "$2"
             ;;
         Fedora)
-            sudo dnf remove $2
+            sudo dnf remove "$2"
             ;;
         ARCH)
-            sudo pacman -Rs $2
+            sudo pacman -Rs "$2"
             ;;
         GENTOO)
-            #STUFF
+            echo "STUFF"
             ;;
         *)
             echo "I cannot detect your OS, please use native tools"
             ;;
     esac
 
-    if [[ $3 == "pip" ]]; then
+    if [[ "$3" == "pip" ]]; then
         if type pip > /dev/null; then
-            #STUFF
+            echo "STUFF"
         else
             echo "You dont have pip installed"
         fi
-    elif [[ $3 == "gem" ]]; then
+    elif [[ "$3" == "gem" ]]; then
         if type gem > /dev/null; then
-            #STUFF
+            echo "STUFF"
         else
             echo "You dont have gem installed"
         fi
-    elif [[ $3 == "js" ]]; then
-        #STUFF
+    elif [[ "$3" == "js" ]]; then
+        echo "STUFF"
     else
         echo "Sorry, im not sure how to manage that languages packages"
     fi
