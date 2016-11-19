@@ -2,8 +2,7 @@
 #This file is intended to be symlinked to the home dir like this:
 #ln -s $path/to/this/tmux.conf ~/.tmux.conf
 #
-#Version 1.5
-#Author: HackingInfo
+#Author: CHallsted
 #Source: https://github.com/challsted/dotfiles
 #
 #Purpose: This file is intended to be a single file dropped into the home dir for tmux users
