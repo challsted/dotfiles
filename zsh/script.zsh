@@ -1,4 +1,4 @@
-#Name:   script.zsh
+
 #Author: CHallsted
 #Source: https://github.com/challsted/dotfiles
 #
