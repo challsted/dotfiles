@@ -101,7 +101,7 @@ nnoremap gV `[v`]
 " Intelligently Remove line numbers (both kinds) with ,n add them again with ,n
 if &relativenumber  " Hacky way of finding out if you have set 'relative number', if so turn it off with ,n
   nnoremap <silent> <leader>n :set invnumber <bar> :set invrelativenumber<CR>
-else  
+else
   nnoremap <silent> <leader>n :set invnumber<CR>
 endif
 
@@ -327,4 +327,5 @@ let g:rehash256 = 1 " More like the gui 256 scheme'
 " }}}
 " }}}
 " Do not edit below line unless you know what your doing
+" -*-:- mode: vimrc; -*-;
 " vim: set foldmethod=marker foldlevel=0 :
