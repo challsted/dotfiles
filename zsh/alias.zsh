@@ -12,10 +12,6 @@ alias ll="ls -larth"  #All files, "long" with reverse time sorting and human rea
 alias lh="ls -d .*" # ONLY show hidden files/folders this is genius (stolen); added colors for terminals that dont auto do this
 alias tree="ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'" #Stolen from the Internet, makes a tree out of current dirs
 
-#SSH Stuff
-# TODO [Testing] sshx - Validate this even works
-alias sshx="ssh -c arcfour,blowfish -XC" #Add a connection and a thing you want forwarded to user this
-
 #Git Stuff
 if type git > /dev/null; then
     alias co="git checkout $2" #Checks out a branch given after co

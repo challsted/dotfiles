@@ -19,7 +19,7 @@ mkcd () {
         eval cd "\"\$$H\"";
 }
 
-# A small function to check if a given  value is a number 
+# A small function to check if a given  value is a number
 #   Bash doesn't have a clean way to do this that I can find
 # Returns "0" if the value is NOT a number
 # Returns "1" if the value is a number
@@ -93,8 +93,6 @@ ex () {
 # }}}
 # Stuff to edit other stuff easier {{{
 # Easy Config Editor (Needs Work)
-# TODO: [Enhancement] conf() Add i3wm
-# TODO: [Enhancement] conf() Add (Neo)Mutt
 conf(){
     case "$1" in
         bsp)
@@ -241,7 +239,7 @@ if type tmux > /dev/null; then
                     echo "Attempt at making a \"Quick TMux Session Manager\""
                     echo ""
                     echo "\"qtmux\"                 - Open a new session with the value given to \"QTMUX_SESSION_NAME\""
-                    echo "                              - If a session with the default name already exists, it will attach instead" 
+                    echo "                              - If a session with the default name already exists, it will attach instead"
                     echo "\"qtmux <session_name>\"  - Attach to a pre-created session OR create a session with this name"
                     echo "                              - Also kind of does a fuzzy session attach if your session names are unique"
                     echo "\"qtmux <session_id>\"    - Attach to a pre-created session based on id (starting at 1)"
@@ -319,137 +317,7 @@ if type tmux > /dev/null; then
             tmux attach-session -t "$QTMUX_SESSION_NAME"
         else
             tmux new-session -s "$QTMUX_SESSION_NAME"
-        fi    
+        fi
     }
 fi
 # }}}
-# In Progress {{{
-# WARNING!!! THE FOLLOWING IS ALL WIP AND PROBABLY WONT WORK
-#OS Specific
-# TODO [Enhancement] Has OS - Write Function to test what OS user is on
-# TODO [Dependency] e<thing> (OS Specific) - This relies on hasOS function being written
-# TODO [Testing] e<thing> (OS Specific) Need to test this on all OS's I run
-#eupdate - easy update
-#einstall - easy install
-#eremove - easy remove
-EOS_DECTIVE(){
-    export EOS_DETECT
-    EOS_DETECT=$(lsb_release -i | awk '{print "$3"}')
-}
-
-eupdate(){
-    case $EOS_DETECT in
-        Ubuntu)
-            sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get dist-upgrade -y && sudo apt-get autoremove
-            ;;
-        Fedora)
-            sudo dnf upgrade && sudo dnf update
-            ;;
-        ARCH)
-            sudo pacman -Syu
-            ;;
-        GENTOO)
-            echo "STUFF"
-            ;;
-        *)
-            echo "I cannot detect your OS, please use native tools"
-            ;;
-    esac
-    if [[ "$2" == "pip" ]]; then
-        if type pip > /dev/null; then
-            pip freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 sudo pip install --upgrade
-        else
-            echo "You dont have pip installed"
-        fi
-    elif [[ "$2" == "gem" ]]; then
-        if type gem > /dev/null; then
-            echo "STUFF"
-        else
-            echo "You dont have gem installed"
-        fi
-    elif [[ "$2" == "js" ]]; then
-        echo "STUFF"
-    else
-        echo "Sorry, im not sure how to manage that languages packages"
-    fi
-}
-
-# TODO einsatll() only allows for a single package to be installed (with dependcies) need to upgrade to allow more then 1 package passed
-einsatll(){
-    case $EOS_DETECT in
-        Ubuntu)
-            sudo apt-get insatll "$2"
-            ;;
-        Fedora)
-            sudo dnf insatll "$2"
-            ;;
-        ARCH)
-            sudo pacman -S "$2"
-            ;;
-        GENTOO)
-            echo "STUFF"
-            ;;
-        *)
-            echo "I cannot detect your OS, please use native tools"
-            ;;
-    esac
-
-    if [[ "$3" == "pip" ]]; then
-        if type pip > /dev/null; then
-            sudo pip install "$4"
-        else
-            echo "You dont have pip installed"
-        fi
-    elif [[ "$3" == "gem" ]]; then
-        if type gem > /dev/null; then
-            sudo gem install "$4"
-        else
-            echo "You dont have gem installed"
-        fi
-    elif [[ "$3" == "js" ]]; then
-        echo "STUFF"
-    else
-        echo "Sorry, im not sure how to manage that languages packages"
-    fi
-}
-
-# TODO eremove() only allows for a single package to be removed (with non-shared dependcies) need to upgrade to allow more then 1 package passed
-eremove(){
-    case $EOS_DETECT in
-        Ubuntu)
-            sudo apt-get remove "$2"
-            ;;
-        Fedora)
-            sudo dnf remove "$2"
-            ;;
-        ARCH)
-            sudo pacman -Rs "$2"
-            ;;
-        GENTOO)
-            echo "STUFF"
-            ;;
-        *)
-            echo "I cannot detect your OS, please use native tools"
-            ;;
-    esac
-
-    if [[ "$3" == "pip" ]]; then
-        if type pip > /dev/null; then
-            echo "STUFF"
-        else
-            echo "You dont have pip installed"
-        fi
-    elif [[ "$3" == "gem" ]]; then
-        if type gem > /dev/null; then
-            echo "STUFF"
-        else
-            echo "You dont have gem installed"
-        fi
-    elif [[ "$3" == "js" ]]; then
-        echo "STUFF"
-    else
-        echo "Sorry, im not sure how to manage that languages packages"
-    fi
-}
-# }}}
-# Vim: set foldmethod=marker foldlevel=0 :
