@@ -1,2 +1,13 @@
+# Ignore .project files that some IDE's like to put in here
 /.project
-/mutt/temp/
+
+# Ignore (N)Vim's Temp files and swap files
+*~
+*.swp
+*.swoA
+Session.vim
+.netrwhist
+
+# Ignore Emacs temp files
+[#]*[#]
+.\#*
